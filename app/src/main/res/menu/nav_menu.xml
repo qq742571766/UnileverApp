@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--checkableBehavior只能点击一个-->
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/error"
+            android:icon="@android:drawable/stat_sys_upload_done"
+            android:title="@string/error" />
+        <item
+            android:id="@+id/problem"
+            android:icon="@android:drawable/stat_sys_upload_done"
+            android:title="@string/problem" />
+        <item
+            android:id="@+id/answer"
+            android:icon="@android:drawable/stat_sys_upload_done"
+            android:title="@string/answer" />
+        <item
+            android:id="@+id/score"
+            android:icon="@android:drawable/stat_sys_upload_done"
+            android:title="@string/score" />
+    </group>
+</menu>

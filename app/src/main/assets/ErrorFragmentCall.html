@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html language="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+</head>
+<body>
+<form style="text-align:center" action="https://www.baidu.com/" method="get">
+    <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr align="c    enter" valign="middle">
+            <td width="20%">
+                <p>
+                    <strong>类型</strong>
+                </p>
+            </td>
+            <td width="80%">
+                <select style="width:200px" name="type" id="type">
+                    <option value="">请选择异常类型</option>
+                    <option value="问题1">问题1</option>
+                    <option value="问题2">问题2</option>
+                </select>
+            </td>
+        </tr>
+        <tr align="center" valign="middle">
+            <td width="20%">
+                <p>
+                    <strong>区域类型</strong>
+                </p>
+            </td>
+            <td width="80%">
+                <select style="width:200px" name="area_type">
+                    <option value="">请选择区域</option>
+                    <option value="问题1">问题1</option>
+                    <option value="问题2">问题2</option>
+                </select>
+            </td>
+        </tr>
+        <tr align="center" valign="middle">
+            <td width="20%">
+                <p>
+                    <strong>区域</strong>
+                </p>
+            </td>
+            <td width="80%">
+                <select style="width:200px" name="area">
+                    <option value="">请选择产线</option>
+                    <option value="问题1">问题1</option>
+                    <option value="问题2">问题2</option>
+                </select>
+            </td>
+        </tr>
+        <tr align="center" valign="middle">
+            <td width="20%">
+                <p>
+                    <strong>设备</strong>
+                </p>
+            </td>
+            <td width="80%">
+                <select style="width:200px" name="equipment">
+                    <option value="">请选择设备</option>
+                    <option value="问题1">问题1</option>
+                    <option value="问题2">问题2</option>
+                </select>
+            </td>
+        </tr>
+        <tr align="center" valign="middle">
+            <td width="20%">
+                <p>
+                    <strong>问题类型</strong>
+                </p>
+            </td>
+            <td width="80%">
+                <select style="width:200px" name="problem_types">
+                    <option value="">请选择问题类型</option>
+                    <option value="问题1">问题1</option>
+                    <option value="问题2">问题2</option>
+                </select>
+            </td>
+        </tr>
+        <tr align="center" valign="middle">
+            <td>
+                <p>
+                    <strong>问题简述</strong>
+                </p>
+            </td>
+            <td>
+                <textarea style="resize:none" rows="5" name="sketch"></textarea>
+            </td>
+        </tr>
+        <tr align="center" valign="middle">
+            <td>
+                <p>
+                    <strong>问题图片</strong>
+                </p>
+            </td>
+            <td>
+                <input type="button" value="选择图片" onclick="window.Android.picture()">
+            </td>
+        </tr>
+    </table>
+    <tr align="center" valign="middle">
+        <td>
+            <p>
+                <input type="submit" value="提交" onclick="window.Android.upload()"/>
+            </p>
+        </td>
+    </tr>
+</form>
+</body>
