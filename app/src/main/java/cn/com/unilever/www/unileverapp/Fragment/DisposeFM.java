@@ -16,7 +16,7 @@ import cn.com.unilever.www.unileverapp.R;
  * @anthor QQ:742571766
  * @time 2017/5/22 14:15
  */
-public class DisposeFM extends Fragment{
+public class DisposeFM extends Fragment {
 
     @Nullable
     @Override

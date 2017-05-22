@@ -13,4 +13,14 @@
     <string name="lv">等级</string>
     <string name="name">张三</string>
     <string name="problem_pictures">问题图片</string>
+    <string name="affirm">确认</string>
+    <string name="dispose">处理</string>
+    <string name="examine">检查</string>
+    <string name="history">历史</string>
+    <string name="_10_5">发现问题10/处理问题5</string>
+    <string name="sign">iv_arcview_main</string>
+    <string name="title">标题</string>
+    <string name="date">时间</string>
+    <string name="author">出处</string>
+    <string name="url">摘要</string>
 </resources>

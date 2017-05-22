@@ -36,6 +36,7 @@ public class FunctionActivity extends BaseFragmentActiviy {
     private AnswerFragment answerfragment;
     private ScoreFragment scorefragment;
     private ErrorCollectFragment errorcollectfragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

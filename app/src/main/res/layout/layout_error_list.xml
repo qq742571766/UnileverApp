@@ -15,7 +15,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@mipmap/ic_launcher"
+            android:contentDescription="@string/sign" />
 
         <TextView
             android:id="@+id/textView_title"
@@ -25,7 +26,7 @@
             android:layout_toEndOf="@+id/imageView_f"
             android:layout_toRightOf="@+id/imageView_f"
             android:maxLines="20"
-            android:text="标题"
+            android:text="@string/title"
             android:textColor="@android:color/black"
             android:textSize="18sp" />
 
@@ -36,7 +37,7 @@
             android:layout_alignBottom="@+id/imageView_f"
             android:layout_toEndOf="@+id/imageView_f"
             android:layout_toRightOf="@+id/imageView_f"
-            android:text="时间"
+            android:text="@string/date"
             android:textSize="12sp" />
 
         <TextView
@@ -47,7 +48,7 @@
             android:layout_alignBottom="@+id/f_date"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:text="出处"
+            android:text="@string/author"
             android:textSize="12sp" />
 
         <TextView
@@ -58,7 +59,7 @@
             android:layout_toEndOf="@+id/imageView_f"
             android:layout_toRightOf="@+id/imageView_f"
             android:maxLines="1"
-            android:text="摘要"
+            android:text="@string/url"
             android:textColor="@android:color/black"
             android:textSize="10sp" />
 

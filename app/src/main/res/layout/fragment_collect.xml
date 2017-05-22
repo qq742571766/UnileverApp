@@ -7,10 +7,10 @@
     android:orientation="vertical">
 
     <include
+        layout="@layout/layout_arcview_main"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_weight="1"
-        layout="@layout/layout_arcview_main" />
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,7 +24,7 @@
             android:layout_weight="1"
             android:background="@android:color/white"
             android:drawableTop="@mipmap/ic_launcher"
-            android:text="处理" />
+            android:text="@string/dispose" />
 
         <Button
             android:id="@+id/btn_error"
@@ -34,7 +34,7 @@
             android:layout_weight="1"
             android:background="@android:color/white"
             android:drawableTop="@mipmap/ic_launcher"
-            android:text="检查" />
+            android:text="@string/examine" />
 
         <Button
             android:id="@+id/btn_history"
@@ -43,6 +43,6 @@
             android:layout_weight="1"
             android:background="@android:color/white"
             android:drawableTop="@mipmap/ic_launcher"
-            android:text="历史" />
+            android:text="@string/history" />
     </LinearLayout>
 </LinearLayout>

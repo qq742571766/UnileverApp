@@ -22,7 +22,7 @@ public class MyApplication extends Application {
         x.Ext.setDebug(BuildConfig.DEBUG);
         AndPermission.with(this)
                 .requestCode(100)
-                .permission(Manifest.permission.INTERNET, Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CAMERA)
+                .permission(Manifest.permission.INTERNET, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
                 .start();
     }
 }

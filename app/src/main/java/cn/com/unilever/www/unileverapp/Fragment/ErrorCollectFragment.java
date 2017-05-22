@@ -32,6 +32,7 @@ public class ErrorCollectFragment extends Fragment implements View.OnClickListen
         initWidget();
         return view;
     }
+
     //获取数据
     private void init() {
         // TODO: 2017/5/22 获取数据 
@@ -55,19 +56,19 @@ public class ErrorCollectFragment extends Fragment implements View.OnClickListen
                 if (disposeFragment == null) {
                     disposeFragment = new DisposeFragment();
                 }
-                ((FunctionActivity)getActivity()).changFragment(disposeFragment);
+                ((FunctionActivity) getActivity()).changFragment(disposeFragment);
                 break;
             case R.id.btn_error:
                 if (errorFragment == null) {
                     errorFragment = new ErrorFragment();
                 }
-                ((FunctionActivity)getActivity()).changFragment(errorFragment);
+                ((FunctionActivity) getActivity()).changFragment(errorFragment);
                 break;
             case R.id.btn_history:
                 if (historyFragment == null) {
                     historyFragment = new HistoryFragment();
                 }
-                ((FunctionActivity)getActivity()).changFragment(historyFragment);
+                ((FunctionActivity) getActivity()).changFragment(historyFragment);
                 break;
         }
     }
