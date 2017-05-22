@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +14,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.File;
 
@@ -33,13 +33,12 @@ public class ErrorFragment extends Fragment {
     private final static String url = "file:///android_asset/ErrorFragmentCall.html";
     private CameraAlbumUtil util;
     private ImageView imageView;
-    private WebView webview;
     private Context context;
 
     @Override
     public void onAttach(Context context) {
         this.context = context;
-        util = new CameraAlbumUtil(getActivity());
+        util = new CameraAlbumUtil(context);
         super.onAttach(context);
     }
 
@@ -53,7 +52,7 @@ public class ErrorFragment extends Fragment {
     }
 
     private void initWidget() {
-        webview = (WebView) view.findViewById(R.id.wv_error);
+        WebView webview = (WebView) view.findViewById(R.id.wv_error);
         //Button button = (Button) view.findViewById(R.id.btn_problem_pictures);
         imageView = (ImageView) view.findViewById(R.id.iv_problem_pictures);
         WebSettings webSettings = webview.getSettings();
@@ -75,7 +74,7 @@ public class ErrorFragment extends Fragment {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 File outputImage = new File(context.getExternalCacheDir(), "headPic.PNG");
-
+                Toast.makeText(getActivity(), outputImage.toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -3,7 +3,6 @@ package cn.com.unilever.www.unileverapp.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,10 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.Toast;
 
 import cn.com.unilever.www.unileverapp.R;
-import cn.com.unilever.www.unileverapp.utils.CameraAlbumUtil;
 
 /**
  * @class 登录界面
@@ -27,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText etPassword;
     private CheckBox cbMemory;
     private Button btnLogin;
-
+    boolean islogin = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SharedPreferences sp = getSharedPreferences("islogin", Context.MODE_PRIVATE);
@@ -65,7 +63,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String password = etPassword.getText().toString();
             boolean isChecked = cbMemory.isChecked();
             Login(username, password);
-            boolean islogin = true;
             if (islogin) {
                 if (isChecked) {
                     //通过sp储存用户
@@ -84,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // TODO: 2017/5/17 登录接口
 //        Snackbar.make(this.get, "登录成功" + "用户名" + username + "密码" + password, Snackbar.LENGTH_SHORT).show();
         Intent intent = new Intent(this, FunctionActivity.class);
+        Toast.makeText(this, username+password, Toast.LENGTH_SHORT).show();
         startActivity(intent);
         this.finish();
     }

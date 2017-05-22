@@ -1,7 +1,6 @@
 package cn.com.unilever.www.unileverapp.activity;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -10,14 +9,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
-import android.widget.ImageView;
 
 import cn.com.unilever.www.unileverapp.Fragment.AnswerFragment;
-import cn.com.unilever.www.unileverapp.Fragment.ErrorFragment;
+import cn.com.unilever.www.unileverapp.Fragment.ErrorCollectFragment;
 import cn.com.unilever.www.unileverapp.Fragment.ProblemFragment;
 import cn.com.unilever.www.unileverapp.Fragment.ScoreFragment;
 import cn.com.unilever.www.unileverapp.R;
@@ -35,11 +32,10 @@ public class FunctionActivity extends BaseFragmentActiviy {
     private Toolbar mToolbar;
     private NavigationView navigationView;
     private DrawerLayout activity_function;
-    private ErrorFragment errorfragment;
     private ProblemFragment problemfragment;
     private AnswerFragment answerfragment;
     private ScoreFragment scorefragment;
-
+    private ErrorCollectFragment errorcollectfragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +45,7 @@ public class FunctionActivity extends BaseFragmentActiviy {
         //头布局
         itinToolbar();
         //进入时显示界面
-        changFragment(new ErrorFragment());
+        changFragment(new ErrorCollectFragment());
         //切换
         initNavigation();
     }
@@ -78,10 +74,10 @@ public class FunctionActivity extends BaseFragmentActiviy {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.error:
-                        if (errorfragment == null) {
-                            errorfragment = new ErrorFragment();
+                        if (errorcollectfragment == null) {
+                            errorcollectfragment = new ErrorCollectFragment();
                         }
-                        changFragment(errorfragment);
+                        changFragment(errorcollectfragment);
                         activity_function.closeDrawers();
                         break;
                     case R.id.problem:
@@ -128,6 +124,9 @@ public class FunctionActivity extends BaseFragmentActiviy {
     public void changFragment(Fragment fragment) {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
+        if (fragment instanceof ErrorCollectFragment) {
+            transaction.addToBackStack(null);
+        }
         transaction.replace(R.id.fl_commcontent_main, fragment);
         transaction.commit();
     }

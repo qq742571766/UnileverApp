@@ -24,7 +24,7 @@ import static android.app.Activity.RESULT_OK;
 public class CameraAlbumUtil {
     private static Context mContext;
     private static File outputImage;//存放摄像头拍下的图片
-    public static Uri imageUri;//图片路径的URI
+    private static Uri imageUri;//图片路径的URI
     private static final int TAKE_PHOTO = 1;//拍照
     private static final int OPEN_ALBUM_ON_NOUGAT = 2;//7.0及以上打开相册
     private static final int FINAL_RESULT_CODE = 3;//裁剪以后返回的结果码
@@ -44,10 +44,11 @@ public class CameraAlbumUtil {
         }
         if (!isOnNougat()) {
             imageUri = Uri.fromFile(outputImage);
-        } else {
-            imageUri = FileProvider.getUriForFile(mContext,
-                    PACKAGE, outputImage);
         }
+//        else {
+//            imageUri = FileProvider.getUriForFile(mContext,
+//                    PACKAGE, outputImage);
+//        }
     }
 
     /**
@@ -162,6 +163,8 @@ public class CameraAlbumUtil {
             if (isOnKiaKat()) {
                 //这个方法是处理4.4以上图片返回的Uri对象不同的处理方法
                 String url = GetImagePath.getPath(mContext, inputUri);
+                // TODO: 2017/5/22 测试 
+                assert url != null;
                 intent.setDataAndType(Uri.fromFile(new File(url)), "image/*");
             } else {
                 intent.setDataAndType(inputUri, "image/*");
