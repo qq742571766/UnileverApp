@@ -3,7 +3,6 @@ package cn.com.unilever.www.unileverapp.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.provider.DocumentsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -15,8 +14,10 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Button;
 import android.widget.ImageView;
+
+import java.io.File;
+
 import cn.com.unilever.www.unileverapp.R;
 import cn.com.unilever.www.unileverapp.config.MyConfig;
 import cn.com.unilever.www.unileverapp.utils.CameraAlbumUtil;
@@ -33,9 +34,11 @@ public class ErrorFragment extends Fragment {
     private CameraAlbumUtil util;
     private ImageView imageView;
     private WebView webview;
+    private Context context;
 
     @Override
     public void onAttach(Context context) {
+        this.context = context;
         util = new CameraAlbumUtil(getActivity());
         super.onAttach(context);
     }
@@ -51,7 +54,7 @@ public class ErrorFragment extends Fragment {
 
     private void initWidget() {
         webview = (WebView) view.findViewById(R.id.wv_error);
-//        Button button = (Button) view.findViewById(R.id.btn_problem_pictures);
+        //Button button = (Button) view.findViewById(R.id.btn_problem_pictures);
         imageView = (ImageView) view.findViewById(R.id.iv_problem_pictures);
         WebSettings webSettings = webview.getSettings();
         //设置支持javaScript脚步语言
@@ -71,6 +74,8 @@ public class ErrorFragment extends Fragment {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
+                File outputImage = new File(context.getExternalCacheDir(), "headPic.PNG");
+
             }
         });
     }
@@ -92,7 +97,6 @@ public class ErrorFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         util.takePhoto();
-                        Log.e("tagg", "takePhoto");
                     }
                 })
 
@@ -100,7 +104,6 @@ public class ErrorFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         util.openAlbum();
-                        Log.e("tagg", "openAlbum");
                     }
                 })
                 .show();

@@ -24,7 +24,7 @@ import static android.app.Activity.RESULT_OK;
 public class CameraAlbumUtil {
     private static Context mContext;
     private static File outputImage;//存放摄像头拍下的图片
-    private static Uri imageUri;//图片路径的URI
+    public static Uri imageUri;//图片路径的URI
     private static final int TAKE_PHOTO = 1;//拍照
     private static final int OPEN_ALBUM_ON_NOUGAT = 2;//7.0及以上打开相册
     private static final int FINAL_RESULT_CODE = 3;//裁剪以后返回的结果码
