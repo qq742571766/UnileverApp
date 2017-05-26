@@ -13,7 +13,7 @@ import cn.com.unilever.www.unileverapp.activity.FunctionActivity;
 import cn.com.unilever.www.unileverapp.view.ClearArcView;
 
 /**
- * @class
+ * @class 异常管理
  * @name 林郝
  * @anthor QQ:742571766
  * @time 2017/5/22 13:08
@@ -27,7 +27,7 @@ public class ErrorCollectFragment extends Fragment implements View.OnClickListen
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_collect, null);
+        view = inflater.inflate(R.layout.fragment_collect, null,false);
         init();
         initWidget();
         return view;
@@ -40,7 +40,7 @@ public class ErrorCollectFragment extends Fragment implements View.OnClickListen
 
     private void initWidget() {
         ClearArcView cav_collect = (ClearArcView) view.findViewById(R.id.cav_collect);
-        cav_collect.setAngle(23);
+        cav_collect.setAngle(50);
         Button btn_dispose = (Button) view.findViewById(R.id.btn_dispose);
         Button btn_error = (Button) view.findViewById(R.id.btn_error);
         Button btn_history = (Button) view.findViewById(R.id.btn_history);

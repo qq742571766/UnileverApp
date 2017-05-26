@@ -21,6 +21,7 @@ import java.io.IOException;
 
 import static android.app.Activity.RESULT_OK;
 
+
 public class CameraAlbumUtil {
     private static Context mContext;
     private static File outputImage;//存放摄像头拍下的图片
@@ -29,11 +30,10 @@ public class CameraAlbumUtil {
     private static final int OPEN_ALBUM_ON_NOUGAT = 2;//7.0及以上打开相册
     private static final int FINAL_RESULT_CODE = 3;//裁剪以后返回的结果码
     private static final int OPEN_ALBUM_BELOW_NOUGAT = 22;//7.0以下打开相册
-    private static final String PACKAGE = "cn.com.unilever.www.unileverapp";
 
     public CameraAlbumUtil(Context context) {
         mContext = context;
-        outputImage = new File(mContext.getExternalCacheDir(), "headPic.PNG");
+        outputImage = new File(mContext.getExternalCacheDir(), "headPic.jpg");
         try {
             if (outputImage.exists()) {
                 outputImage.delete();
@@ -42,13 +42,11 @@ public class CameraAlbumUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (!isOnNougat()) {
+        if (isOnNougat()) {
+            imageUri = FileProvider.getUriForFile(mContext, "cn.com.unilever.www.unileverapp", outputImage);
+        } else {
             imageUri = Uri.fromFile(outputImage);
         }
-//        else {
-//            imageUri = FileProvider.getUriForFile(mContext,
-//                    PACKAGE, outputImage);
-//        }
     }
 
     /**
@@ -65,9 +63,18 @@ public class CameraAlbumUtil {
      * android:resource="@xml/file_paths"/>
      * </provider>
      * 在res下新建文件夹xml，然后新建一个资源文件，根节点为paths，<external-path>
-     * 内name属性为自定义，path属性值为空表示将整个SD卡进行共享
+     * 内name属性为自定义，path属性值为空表示将整个SD卡进行共享。如果设备没有SD卡，则需要再增加其他标签
      * <paths xmlns:android="http://schemas.android.com/apk/res/android">
-     * <external-path name="my_images" path=""/>
+     * <!-- 对应/data/data//files目录 -->
+     * <files-path name="file_dir" path=""/>
+     * <!-- 对应/data/data//cache目录 -->
+     * <cache-path name="chche_dir" path=""/>
+     * <!-- 对应Environment.getExternalStorageDirectory()目录 -->
+     * <external-path name="external_storage_directory" path=""/>
+     * <!-- 对应Context.getExternalFilesDir()目录 -->
+     * <external-files-path name="camera_has_sdcard" path=""/>
+     * <!-- 对应Context.getExternalCacheDir()目录 -->
+     * <external-cache-path name="external_cache_dir" />
      * </paths>
      */
     public void takePhoto() {
@@ -105,27 +112,34 @@ public class CameraAlbumUtil {
             case TAKE_PHOTO:
                 if (resultCode == RESULT_OK) {
                     if (isOnNougat()) {
-                        Uri inputUri = FileProvider.getUriForFile(mContext,
-                                PACKAGE, outputImage);//通过FileProvider创建一个content类型的Uri
-                        startPhotoZoom(inputUri);//设置输入类型
+                        //通过FileProvider创建一个content类型的Uri
+                        Uri inputUri = FileProvider.getUriForFile(mContext, "cn.com.unilever.www.unileverapp", outputImage);//通过FileProvider创建一个content类型的Uri
+                        startPhotoZoom(inputUri);
                     } else {
                         Uri inputUri = Uri.fromFile(outputImage);
                         startPhotoZoom(inputUri);
                     }
                 }
                 break;
+
             case OPEN_ALBUM_ON_NOUGAT:
-                File imgUri = new File(GetImagePath.getPath(mContext, data.getData()));
-                Uri dataUri = FileProvider.getUriForFile(mContext,
-                        PACKAGE, imgUri);
-                startPhotoZoom(dataUri);
+                if (resultCode == RESULT_OK) {
+                    File imgUri = new File(GetImagePath.getPath(mContext, data.getData()));
+                    Uri dataUri = FileProvider.getUriForFile(mContext,
+                            "cn.com.unilever.www.unileverapp", imgUri);
+                    startPhotoZoom(dataUri);
+                }
                 break;
+
             case OPEN_ALBUM_BELOW_NOUGAT:
-                startPhotoZoom(data.getData());
+                if (resultCode == RESULT_OK) {
+                    startPhotoZoom(data.getData());
+                }
                 break;
+
             case FINAL_RESULT_CODE:
-                try {
-                    if (resultCode == RESULT_OK) {
+                if (resultCode == RESULT_OK) {
+                    try {
                         if (isOnKiaKat()) {
                             Bitmap bitmap = BitmapFactory.decodeStream(mContext.getContentResolver()
                                     .openInputStream(imageUri));
@@ -139,9 +153,10 @@ public class CameraAlbumUtil {
                                 return bitmap;
                             }
                         }
+
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
                     }
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
                 }
                 break;
         }
@@ -163,34 +178,38 @@ public class CameraAlbumUtil {
             if (isOnKiaKat()) {
                 //这个方法是处理4.4以上图片返回的Uri对象不同的处理方法
                 String url = GetImagePath.getPath(mContext, inputUri);
-                // TODO: 2017/5/22 测试 
-                assert url != null;
                 intent.setDataAndType(Uri.fromFile(new File(url)), "image/*");
             } else {
                 intent.setDataAndType(inputUri, "image/*");
             }
             intent.putExtra(MediaStore.EXTRA_OUTPUT, outPutUri);
         }
-//        设置裁剪
-//        intent.putExtra("crop", "true");
-//        intent.putExtra("aspectX", 1);
-//        intent.putExtra("aspectY", 1);
-//        intent.putExtra("outputX", 200);
-//        intent.putExtra("outputY", 200);
-//        intent.putExtra("return-data", false);
-        intent.putExtra("outputFormat", Bitmap.CompressFormat.PNG.toString());
+        // 设置裁剪
+        intent.putExtra("crop", "true");
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        intent.putExtra("outputX", 200);
+        intent.putExtra("outputY", 200);
+        intent.putExtra("return-data", false);
+        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
         //裁剪之后的图片最终以Uri形式返回到onActivityResult()方法
         ((Activity) mContext).startActivityForResult(intent, FINAL_RESULT_CODE);
     }
 
     //判断运行设备的系统版本是否高于或等于Android7.0
     private static boolean isOnNougat() {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.N;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return true;
+        }
+        return false;
     }
 
     //判断运行设备的系统版本是否高于或等于Android4.4
     private static boolean isOnKiaKat() {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            return true;
+        }
+        return false;
     }
 
     /**

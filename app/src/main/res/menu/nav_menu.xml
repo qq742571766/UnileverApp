@@ -7,16 +7,8 @@
             android:icon="@android:drawable/stat_sys_upload_done"
             android:title="@string/error" />
         <item
-            android:id="@+id/problem"
-            android:icon="@android:drawable/stat_sys_upload_done"
-            android:title="@string/problem" />
-        <item
             android:id="@+id/answer"
             android:icon="@android:drawable/stat_sys_upload_done"
             android:title="@string/answer" />
-        <item
-            android:id="@+id/score"
-            android:icon="@android:drawable/stat_sys_upload_done"
-            android:title="@string/score" />
     </group>
 </menu>

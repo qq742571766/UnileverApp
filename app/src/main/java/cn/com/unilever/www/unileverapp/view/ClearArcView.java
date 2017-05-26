@@ -15,7 +15,7 @@ public class ClearArcView extends View {
     private RectF oval;
     private Paint paint;
     private float startAngle = -90;//开始的角度
-    private float sweepAngle = 180;//扫过的角度
+    private float sweepAngle = 0;//扫过的角度
     private int width;
     private int height;
     private int state;//表示扇形的两种状态：0——后退，1——前进
@@ -75,7 +75,7 @@ public class ClearArcView extends View {
                 postInvalidate();//通知重绘
             }
         };
-        timer.schedule(task, 20, 5);
+        timer.schedule(task, 20, 50);
     }
 
     @Override

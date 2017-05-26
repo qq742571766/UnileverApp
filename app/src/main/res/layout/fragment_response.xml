@@ -5,8 +5,8 @@
     android:background="@android:color/white"
     android:orientation="vertical">
 
-    <WebView
-        android:id="@+id/wv_score"
+    <TextView
+        android:id="@+id/aaa"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

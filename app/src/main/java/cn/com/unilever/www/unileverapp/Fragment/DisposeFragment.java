@@ -18,7 +18,7 @@ import cn.com.unilever.www.unileverapp.adapter.HistoryAdapter;
 import cn.com.unilever.www.unileverapp.info.ErrorInfo;
 
 /**
- * @class
+ * @class 异常列表
  * @name 林郝
  * @anthor QQ:742571766
  * @time 2017/5/22 13:29
@@ -26,7 +26,7 @@ import cn.com.unilever.www.unileverapp.info.ErrorInfo;
 public class DisposeFragment extends Fragment {
     private View view;
     private HistoryAdapter adapter;
-    private List<ErrorInfo> list = new ArrayList<>();
+    private List<ErrorInfo> list;
 
     @Nullable
     @Override
@@ -43,7 +43,9 @@ public class DisposeFragment extends Fragment {
         return view;
     }
 
+    //数据
     private void initadapter() {
+        list = new ArrayList<>();
         ErrorInfo info = new ErrorInfo();
         info.title = "a";
         info.date = "a";

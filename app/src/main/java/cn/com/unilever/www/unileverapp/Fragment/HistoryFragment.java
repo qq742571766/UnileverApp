@@ -11,7 +11,7 @@ import android.webkit.WebView;
 import cn.com.unilever.www.unileverapp.R;
 
 /**
- * @class
+ * @class 异常历史
  * @name 林郝
  * @anthor QQ:742571766
  * @time 2017/5/22 13:29

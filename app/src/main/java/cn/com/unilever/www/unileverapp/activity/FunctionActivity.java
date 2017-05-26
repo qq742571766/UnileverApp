@@ -15,8 +15,6 @@ import android.view.MenuItem;
 
 import cn.com.unilever.www.unileverapp.Fragment.AnswerFragment;
 import cn.com.unilever.www.unileverapp.Fragment.ErrorCollectFragment;
-import cn.com.unilever.www.unileverapp.Fragment.ProblemFragment;
-import cn.com.unilever.www.unileverapp.Fragment.ScoreFragment;
 import cn.com.unilever.www.unileverapp.R;
 import cn.com.unilever.www.unileverapp.base.BaseFragmentActiviy;
 import cn.com.unilever.www.unileverapp.config.MyConfig;
@@ -32,9 +30,7 @@ public class FunctionActivity extends BaseFragmentActiviy {
     private Toolbar mToolbar;
     private NavigationView navigationView;
     private DrawerLayout activity_function;
-    private ProblemFragment problemfragment;
     private AnswerFragment answerfragment;
-    private ScoreFragment scorefragment;
     private ErrorCollectFragment errorcollectfragment;
 
     @Override
@@ -81,25 +77,11 @@ public class FunctionActivity extends BaseFragmentActiviy {
                         changFragment(errorcollectfragment);
                         activity_function.closeDrawers();
                         break;
-                    case R.id.problem:
-                        if (problemfragment == null) {
-                            problemfragment = new ProblemFragment();
-                        }
-                        changFragment(problemfragment);
-                        activity_function.closeDrawers();
-                        break;
                     case R.id.answer:
                         if (answerfragment == null) {
                             answerfragment = new AnswerFragment();
                         }
                         changFragment(answerfragment);
-                        activity_function.closeDrawers();
-                        break;
-                    case R.id.score:
-                        if (scorefragment == null) {
-                            scorefragment = new ScoreFragment();
-                        }
-                        changFragment(scorefragment);
                         activity_function.closeDrawers();
                         break;
                 }
@@ -125,7 +107,7 @@ public class FunctionActivity extends BaseFragmentActiviy {
     public void changFragment(Fragment fragment) {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
-        if (fragment instanceof ErrorCollectFragment) {
+        if (!(fragment instanceof ErrorCollectFragment)&&!(fragment instanceof AnswerFragment)) {
             transaction.addToBackStack(null);
         }
         transaction.replace(R.id.fl_commcontent_main, fragment);

@@ -14,7 +14,6 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.io.File;
 
@@ -38,7 +37,7 @@ public class ErrorFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         this.context = context;
-        util = new CameraAlbumUtil(context);
+        util = new CameraAlbumUtil(getActivity());
         super.onAttach(context);
     }
 
@@ -53,7 +52,6 @@ public class ErrorFragment extends Fragment {
 
     private void initWidget() {
         WebView webview = (WebView) view.findViewById(R.id.wv_error);
-        //Button button = (Button) view.findViewById(R.id.btn_problem_pictures);
         imageView = (ImageView) view.findViewById(R.id.iv_problem_pictures);
         WebSettings webSettings = webview.getSettings();
         //设置支持javaScript脚步语言
@@ -73,10 +71,11 @@ public class ErrorFragment extends Fragment {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                File outputImage = new File(context.getExternalCacheDir(), "headPic.PNG");
-                Toast.makeText(getActivity(), outputImage.toString(), Toast.LENGTH_SHORT).show();
+                File outputImage = new File(context.getExternalCacheDir(), "headPic.JPEG");
+//                Toast.makeText(getActivity(), outputImage.toString(), Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
     private class AndroidAndJSInterface {

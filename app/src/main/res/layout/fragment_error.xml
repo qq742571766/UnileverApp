@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="@android:color/white"
     android:orientation="vertical">
 
     <ScrollView
@@ -19,14 +19,13 @@
             <WebView
                 android:id="@+id/wv_error"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
             <ImageView
                 android:id="@+id/iv_problem_pictures"
                 android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:contentDescription="iv_problem_pictures" />
+                android:layout_height="100dp" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

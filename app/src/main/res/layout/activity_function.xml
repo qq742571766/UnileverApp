@@ -5,6 +5,7 @@
     android:id="@+id/activity_function"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context="cn.com.unilever.www.unileverapp.activity.MainActivity">
 
     <include layout="@layout/layout_commcontent_main" />

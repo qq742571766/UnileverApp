@@ -2,7 +2,7 @@
     <string name="app_name">Unilever App</string>
     <string name="error">异常填写</string>
     <string name="problem">问答发起</string>
-    <string name="answer">答题</string>
+    <string name="answer">EMAT</string>
     <string name="score">打分</string>
     <string name="refresh">刷新</string>
     <string name="title_activity_function">功能界面</string>
