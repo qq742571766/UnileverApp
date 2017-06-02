@@ -1,42 +1,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@android:color/white"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     android:orientation="vertical">
 
-    <ListView
-        android:id="@+id/lv_showSoftList"
+    <WebView
+        android:id="@+id/wv_emat"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
-
-    <LinearLayout
+        android:layout_height="494dp" />
+    <Button
+        android:id="@+id/aaaa"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:orientation="horizontal">
-
-        <CheckBox
-            android:id="@+id/cb_checkedAll_softlist"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="5dp"
-            android:layout_weight="0" />
-
-        <TextView
-            android:id="@+id/tv_uninstall"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/selector_tv_mobilequick"
-            android:clickable="true"
-            android:gravity="center"
-            android:text="开始答题"
-            android:textColor="@android:color/white" />
-    </LinearLayout>
+        android:layout_height="match_parent" />
 </LinearLayout>
