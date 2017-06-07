@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html language="en">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <script language="javascript">
 function javaCallJs(s) {
     var obj = JSON.parse(s);
@@ -25,62 +25,70 @@ function javaCallJs(s) {
         document.getElementById("span" + i).style.display = "none";
     }
 }
-</script>
+    </script>
 </head>
 <body>
 <form style="text-align:center" action="https://www.baidu.com/" method="get" onsubmit="return check()">
-    <select width="100%" name="name"> <option value="" id="name">选择回答人物</option> <option value="甲">甲</option> <option value="乙">乙</option> </select>
-    <hr style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="80%" color="#3F51B5" size="3" />
+    <ol style="list-style:none;text-align:left" >
+        <li>
+            <strong style="font-size:10px">答题人员工号</strong>
+        </li>
+        <li>
+            <textarea style="resize:none" rows="1" name="sketch"></textarea>
+        </li>
+    </ol>
+    <hr style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="80%" color="#3F51B5" size="3"/>
     <div id="div">
-        <input id="input1" name="Fruit" type="checkbox" value="1" />
+        <input id="input1" name="Fruit" type="checkbox" value="1"/>
         <span id="span1">1</span>
-        <br />
-        <input id="input2" name="Fruit" type="checkbox" value="2" />
+        <br/>
+        <input id="input2" name="Fruit" type="checkbox" value="2"/>
         <span id="span2">2</span>
-        <br />
-        <input id="input3" name="Fruit" type="checkbox" value="3" />
+        <br/>
+        <input id="input3" name="Fruit" type="checkbox" value="3"/>
         <span id="span3">3</span>
-        <br />
-        <input id="input4" name="Fruit" type="checkbox" value="4" />
+        <br/>
+        <input id="input4" name="Fruit" type="checkbox" value="4"/>
         <span id="span4">4</span>
-        <br />
-        <input id="input5" name="Fruit" type="checkbox" value="5" />
+        <br/>
+        <input id="input5" name="Fruit" type="checkbox" value="5"/>
         <span id="span5">5</span>
-        <br />
-        <input id="input6" name="Fruit" type="checkbox" value="6" />
+        <br/>
+        <input id="input6" name="Fruit" type="checkbox" value="6"/>
         <span id="span6">6</span>
-        <br />
-        <input id="input7" name="Fruit" type="checkbox" value="7" />
+        <br/>
+        <input id="input7" name="Fruit" type="checkbox" value="7"/>
         <span id="span7">7</span>
-        <br />
-        <input id="input8" name="Fruit" type="checkbox" value="9" />
+        <br/>
+        <input id="input8" name="Fruit" type="checkbox" value="9"/>
         <span id="span8">8</span>
-        <br />
-        <input id="input9" name="Fruit" type="checkbox" value="10" />
+        <br/>
+        <input id="input9" name="Fruit" type="checkbox" value="10"/>
         <span id="span9">9</span>
-        <br />
-        <input id="input10" name="Fruit" type="checkbox" value="11" />
+        <br/>
+        <input id="input10" name="Fruit" type="checkbox" value="11"/>
         <span id="span10">10</span>
-        <br />
-        <input id="input11" name="Fruit" type="checkbox" value="12" />
+        <br/>
+        <input id="input11" name="Fruit" type="checkbox" value="12"/>
         <span id="span11">11</span>
-        <br />
-        <input id="input12" name="Fruit" type="checkbox" value="13" />
+        <br/>
+        <input id="input12" name="Fruit" type="checkbox" value="13"/>
         <span id="span12">12</span>
-        <br />
-        <input id="input13" name="Fruit" type="checkbox" value="14" />
+        <br/>
+        <input id="input13" name="Fruit" type="checkbox" value="14"/>
         <span id="span13">13</span>
-        <br />
-        <input id="input14" name="Fruit" type="checkbox" value="15" />
+        <br/>
+        <input id="input14" name="Fruit" type="checkbox" value="15"/>
         <span id="span14">14</span>
-        <br />
-        <input id="input15" name="Fruit" type="checkbox" value="16" />
+        <br/>
+        <input id="input15" name="Fruit" type="checkbox" value="16"/>
         <span id="span15">15</span>
-        <br />
+        <br/>
     </div>
-    <hr style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="80%" color="#3F51B5" size="3" />
-    <input type="button" onclick="othercheck()" value="全选/反选" />
-    <br />
+    <hr style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="80%" color="#3F51B5"
+        size="3"/>
+    <input type="button" onclick="othercheck()" value="全选/反选"/>
+    <br/>
     <script>
             var CheckBox=div.getElementsByTagName('input');
 
@@ -101,10 +109,10 @@ function javaCallJs(s) {
                     else{ CheckBox[i].checked=true}
                 }
             };
-
     </script>
-    <hr style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="80%" color="#3F51B5" size="3" />
-    <input type="submit" value="开始提问" style="font-size:20px" />
+    <hr style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="80%" color="#3F51B5"
+        size="3"/>
+    <input type="submit" value="开始提问" style="font-size:20px" onclick="window.Android.upload()"/>
 </form>
 </body>
 </html>

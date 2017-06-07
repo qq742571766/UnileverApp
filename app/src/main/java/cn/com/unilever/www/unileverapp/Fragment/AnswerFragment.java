@@ -5,9 +5,11 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -90,6 +92,18 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
         //支持屏幕缩放
         webSettings.setSupportZoom(false);
         webSettings.setBuiltInZoomControls(true);
+        webView.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                String[] sourceStrArray = url.split("&Fruit=");
+                String[] name = sourceStrArray[0].split("=");
+                Log.e("ATAG", name[1] );
+                for (int i = 1; i < sourceStrArray.length; i++) {
+                    Log.e("ATAG", sourceStrArray[i] );
+                }
+                return super.shouldOverrideUrlLoading(view, url);
+            }
+        });
         timer.schedule(task, 0, 100);
         button.setOnClickListener(this);
     }

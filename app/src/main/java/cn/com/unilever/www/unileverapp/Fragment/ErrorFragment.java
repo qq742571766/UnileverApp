@@ -72,16 +72,20 @@ public class ErrorFragment extends Fragment {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 File outputImage = new File(context.getExternalCacheDir(), "headPic.JPEG");
-//                Toast.makeText(getActivity(), outputImage.toString(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), outputImage.toString(), Toast.LENGTH_SHORT).show();
             }
         });
 
     }
 
     private class AndroidAndJSInterface {
+        // TODO: 2017/6/6 未测试
         @JavascriptInterface
         public void picture() {
             chooseDagilog();
+        }
+        @JavascriptInterface
+        public void show() {
             if (MyConfig.bitmap != null) {
                 imageView.setImageBitmap(MyConfig.bitmap);
             }
