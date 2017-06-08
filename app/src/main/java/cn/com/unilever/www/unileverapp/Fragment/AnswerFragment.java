@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -100,6 +99,7 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
                 Log.e("ATAG", name[1] );
                 for (int i = 1; i < sourceStrArray.length; i++) {
                     Log.e("ATAG", sourceStrArray[i] );
+
                 }
                 return super.shouldOverrideUrlLoading(view, url);
             }

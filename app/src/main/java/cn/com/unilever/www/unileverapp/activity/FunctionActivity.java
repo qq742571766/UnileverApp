@@ -78,9 +78,9 @@ public class FunctionActivity extends BaseFragmentActiviy {
                         activity_function.closeDrawers();
                         break;
                     case R.id.answer:
-                        if (answerfragment == null) {
+//                        if (answerfragment == null) {
                             answerfragment = new AnswerFragment();
-                        }
+//                        }
                         changFragment(answerfragment);
                         activity_function.closeDrawers();
                         break;
