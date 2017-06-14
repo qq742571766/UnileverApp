@@ -18,7 +18,7 @@ import cn.com.unilever.www.unileverapp.adapter.HistoryAdapter;
 import cn.com.unilever.www.unileverapp.info.ErrorInfo;
 
 /**
- * @class 异常列表
+ * @class 待处理列表
  * @name 林郝
  * @anthor QQ:742571766
  * @time 2017/5/22 13:29

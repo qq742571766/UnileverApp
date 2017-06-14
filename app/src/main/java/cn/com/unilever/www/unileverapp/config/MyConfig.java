@@ -4,4 +4,6 @@ import android.graphics.Bitmap;
 
 public class MyConfig {
     public static Bitmap bitmap;
+    public static String[] sourceStrArray;
+    public static String[] name;
 }

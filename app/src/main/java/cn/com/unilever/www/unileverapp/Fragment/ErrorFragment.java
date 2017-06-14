@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,11 +29,12 @@ import cn.com.unilever.www.unileverapp.utils.CameraAlbumUtil;
  * @time 2017/5/17 14:24
  */
 public class ErrorFragment extends Fragment {
-    private View view;
     private final static String url = "file:///android_asset/ErrorFragmentCall.html";
+    private View view;
     private CameraAlbumUtil util;
     private ImageView imageView;
     private Context context;
+    private WebView webview;
 
     @Override
     public void onAttach(Context context) {
@@ -51,7 +53,7 @@ public class ErrorFragment extends Fragment {
     }
 
     private void initWidget() {
-        WebView webview = (WebView) view.findViewById(R.id.wv_error);
+        webview = (WebView) view.findViewById(R.id.wv_error);
         imageView = (ImageView) view.findViewById(R.id.iv_problem_pictures);
         WebSettings webSettings = webview.getSettings();
         //设置支持javaScript脚步语言
@@ -72,24 +74,20 @@ public class ErrorFragment extends Fragment {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 File outputImage = new File(context.getExternalCacheDir(), "headPic.JPEG");
-                //Toast.makeText(getActivity(), outputImage.toString(), Toast.LENGTH_SHORT).show();
             }
         });
-
-    }
-
-    private class AndroidAndJSInterface {
-        // TODO: 2017/6/6 未测试
-        @JavascriptInterface
-        public void picture() {
-            chooseDagilog();
-        }
-        @JavascriptInterface
-        public void show() {
-            if (MyConfig.bitmap != null) {
-                imageView.setImageBitmap(MyConfig.bitmap);
+        webview.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    if (keyCode == KeyEvent.KEYCODE_BACK && webview.canGoBack()) {
+                        webview.goBack();
+                        return true;
+                    }
+                }
+                return false;
             }
-        }
+        });
     }
 
     private void chooseDagilog() {
@@ -109,5 +107,24 @@ public class ErrorFragment extends Fragment {
                     }
                 })
                 .show();
+    }
+
+    private class AndroidAndJSInterface {
+        @JavascriptInterface
+        public void picture() {
+            chooseDagilog();
+        }
+
+        @JavascriptInterface
+        public void show() {
+            if (MyConfig.bitmap != null) {
+                imageView.setImageBitmap(MyConfig.bitmap);
+            }
+        }
+
+        @JavascriptInterface
+        public void upload() {
+            // TODO: 2017/6/13 上报接口(图片)
+        }
     }
 }
