@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,19 +29,13 @@ import cn.com.unilever.www.unileverapp.config.MyConfig;
  * @time 2017/6/13 10:14
  */
 public class EMATok extends Fragment implements View.OnClickListener {
-    int i = 1;
-    Timer timer = new Timer();
-    TimerTask task = new TimerTask() {
-        public void run() {
-            Message message = new Message();
-            message.what = 1;
-            handler.sendMessage(message);
-        }
-    };
+    private int i = 1;
     private View view;
     private WebView webView;
     private Button button;
-    Handler handler = new Handler() {
+    private Context context;
+    private Timer timer = new Timer();
+    private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
@@ -50,7 +45,13 @@ public class EMATok extends Fragment implements View.OnClickListener {
             super.handleMessage(msg);
         }
     };
-    private Context context;
+    private TimerTask task = new TimerTask() {
+        public void run() {
+            Message message = new Message();
+            message.what = 1;
+            handler.sendMessage(message);
+        }
+    };
 
     @Override
     public void onAttach(Context context) {
@@ -79,17 +80,26 @@ public class EMATok extends Fragment implements View.OnClickListener {
         //支持屏幕缩放
         webSettings.setSupportZoom(false);
         webSettings.setBuiltInZoomControls(true);
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                Log.d("TAG", url);
+                return super.shouldOverrideUrlLoading(view, url);
+            }
+        });
         webView.addJavascriptInterface(new AndroidAndJSInterface(), "Android");
         button = (Button) view.findViewById(R.id.btn_emat_ok);
-        timer.schedule(task, 0, 100);
+        timer.schedule(task, 0, 10);
         button.setOnClickListener(this);
         button.setVisibility(View.GONE);
     }
 
     @Override
     public void onClick(View v) {
-        String s = MyConfig.sourceStrArray[i];
-        webView.loadUrl("javascript:javaCallJs(" + "'" + s + "'" + ")");
+        if (MyConfig.sourceStrArray.length > i) {
+            String s = MyConfig.sourceStrArray[i];
+            webView.loadUrl("javascript:javaCallJs(" + "'" + s + "'" + ")");
+        }
     }
 
     @Override
@@ -99,10 +109,12 @@ public class EMATok extends Fragment implements View.OnClickListener {
         button.performClick();
     }
 
-    public class AndroidAndJSInterface {
+    private class AndroidAndJSInterface {
         @JavascriptInterface
         public void next() {
-            if (MyConfig.sourceStrArray.length >= i) {
+            // TODO: 2017/6/15 还要小于 MyConfig.cahngdu.length
+            if (MyConfig.sourceStrArray.length > i) {
+                i += 1;
                 String s = MyConfig.sourceStrArray[i];
                 webView.loadUrl("javascript:javaCallJs(" + "'" + s + "'" + ")");
             }

@@ -1,7 +1,6 @@
 package cn.com.unilever.www.unileverapp.Fragment;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,12 +16,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
-import android.widget.Toast;
 
-import org.json.JSONArray;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -40,18 +34,13 @@ import static cn.com.unilever.www.unileverapp.config.MyConfig.sourceStrArray;
  * @time 2017/5/17 14:25
  */
 public class AnswerFragment extends Fragment implements View.OnClickListener {
-    Timer timer = new Timer();
-    TimerTask task = new TimerTask() {
-        public void run() {
-            Message message = new Message();
-            message.what = 1;
-            handler.sendMessage(message);
-        }
-    };
     private View view;
     private WebView webView;
     private Button button;
-    Handler handler = new Handler() {
+    private EMATok emaTok;
+    private String s;
+    private Timer timer = new Timer();
+    private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
@@ -61,14 +50,17 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
             super.handleMessage(msg);
         }
     };
-    private String s;
-    private Context context;
-    private EMATok emaTok;
+    private TimerTask task = new TimerTask() {
+        public void run() {
+            Message message = new Message();
+            message.what = 1;
+            handler.sendMessage(message);
+        }
+    };
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        this.context = context;
     }
 
     @Nullable
@@ -80,11 +72,6 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
 
     private void initdata() {
         // TODO: 2017/6/13 获取问题内容
-        List<String> list = new ArrayList<>();
-        list.add("a");
-        list.add("b");
-        list.add("c");
-        list.add("d");
         s = "{" +
                 "\"" + "a0" + "\"" + ":" + "7" + "," +
                 "\"" + "a1" + "\"" + ":" + "\"" + "a1" + "\"" + "," +
@@ -94,6 +81,8 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
                 "\"" + "a5" + "\"" + ":" + "\"" + "a5" + "\"" + "," +
                 "\"" + "a6" + "\"" + ":" + "\"" + "a6" + "\"" + "," +
                 "\"" + "a7" + "\"" + ":" + "\"" + "a7" + "\"" + "}";
+        // TODO: 2017/6/15 将json转换成String数组,得到长度
+        MyConfig.cahngdu = new String[0];
     }
 
     private void initview() {
@@ -166,3 +155,8 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
         button.performClick();
     }
 }
+//通过
+//(题)优良
+//答题人(id)
+//考核人(id)
+//时间

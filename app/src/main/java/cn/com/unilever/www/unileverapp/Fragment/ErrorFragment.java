@@ -2,10 +2,12 @@ package cn.com.unilever.www.unileverapp.Fragment;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.icu.text.SymbolTable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,12 +17,28 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
 import java.io.File;
+import java.io.IOException;
 
 import cn.com.unilever.www.unileverapp.R;
 import cn.com.unilever.www.unileverapp.config.MyConfig;
 import cn.com.unilever.www.unileverapp.utils.CameraAlbumUtil;
+import okhttp3.Call;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+import static cn.com.unilever.www.unileverapp.config.MyConfig.name;
+import static cn.com.unilever.www.unileverapp.config.MyConfig.sourceStrArray;
 
 /**
  * @class 异常填写
@@ -35,6 +53,7 @@ public class ErrorFragment extends Fragment {
     private ImageView imageView;
     private Context context;
     private WebView webview;
+    private String[] saveError;
 
     @Override
     public void onAttach(Context context) {
@@ -86,6 +105,43 @@ public class ErrorFragment extends Fragment {
                     }
                 }
                 return false;
+            }
+        });
+        webview.setWebViewClient(new WebViewClient() {
+            private String[] saveError;
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                String[] sourceStrArray = url.split("\\?");
+                String[] one = sourceStrArray[1].split("&");
+                String saveError = "{";
+                for (int i = 0; i < one.length; i++) {
+                    String[] save = one[i].split("=");
+                    saveError += save[0] + ":" + save[1];
+                    if (i < one.length - 1) {
+                        saveError += ",";
+                    }
+                }
+                saveError += "}";
+                Log.d("AAA", saveError);
+                OkHttpUtils
+                        .get()
+                        .url("http://192.168.10.21:8080/HiperMATICMES/ErrorController.sp")
+                        .addParams("method", saveError)
+                        .build()
+                        .connTimeOut(300000)
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onError(Call call, Exception e, int id) {
+                                Log.d("AAA", id + "..." + e + "..." + call);
+                            }
+
+                            @Override
+                            public void onResponse(String response, int id) {
+                                Log.d("AAA", id + "..." + response);
+                            }
+                        });
+                return super.shouldOverrideUrlLoading(view, url);
             }
         });
     }

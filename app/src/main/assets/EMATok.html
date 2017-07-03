@@ -3,41 +3,32 @@
 <head>
     <meta charset="UTF-8"/>
     <script language="javascript">
-function javaCallJs(s) {
-    document.getElementById("problem").innerText = s;
-}
-function next(str) {
-    document.getElementById("problem").innerText = str;
-}
+        function javaCallJs(s) {
+            document.getElementById("problem").innerText = s;
+        }
+        function next(str) {
+            document.getElementById("problem").innerText = str;
+        }
+        function ok(str) {
+            document.getElementById("fulfill").innerText = str;
+        }
+
+
     </script>
 </head>
 <body>
-<form action="https://www.baidu.com/" method="get">
-    <tr align="center" valign="middle">
-        <td>
-            <p>
-                <strong height="70%" id="problem">问题</strong>
-            </p>
-        </td>
-        <td>
-            <p>
-            <form height="20%" action="" method="get">
-                <strong>问题评价</strong>
-                <input name="sex" id="excellent" type="radio" value="1"/>
-                <label for="excellent">优</label>
-                <input name="sex" id="good" type="radio" value="2"/>
-                <label for="good">良</label>
-                <input name="sex" id="difference" type="radio" value="3"/>
-                <label for="difference">差</label>
-            </form>
-            </p>
-        </td>
-        <td>
-            <p>
-            <input type="button" value="下一题" onclick="window.Android.next()">
-            </p>
-        </td>
-    </tr>
+<p>
+    <strong height="70%" id="problem">问题</strong>
+</p>
+<p>
+<p>
+    <strong>问题评价</strong>
+</p>
+<form action="file:///android_asset/EMATok.html" method="get">
+    <input name="radio" id="excellent" type="radio" value="1"/><label for="excellent">优</label><br/>
+    <input name="radio" id="good" type="radio" value="2"/><label for="good">良</label><br/>
+    <input name="radio" id="difference" type="radio" value="3"/><label for="difference">差</label><br/>
+    <input type="submit" id="fulfill" value="下一题" onclick="window.Android.next()">
 </form>
 </body>
 </html>
