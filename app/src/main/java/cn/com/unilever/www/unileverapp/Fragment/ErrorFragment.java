@@ -32,6 +32,7 @@ import java.io.IOException;
 import cn.com.unilever.www.unileverapp.R;
 import cn.com.unilever.www.unileverapp.config.MyConfig;
 import cn.com.unilever.www.unileverapp.utils.CameraAlbumUtil;
+import cn.com.unilever.www.unileverapp.utils.SystemTimeUtil;
 import okhttp3.Call;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -113,21 +114,26 @@ public class ErrorFragment extends Fragment {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 String[] sourceStrArray = url.split("\\?");
-                String[] one = sourceStrArray[1].split("&");
-                String saveError = "{";
-                for (int i = 0; i < one.length; i++) {
-                    String[] save = one[i].split("=");
-                    saveError += save[0] + ":" + save[1];
-                    if (i < one.length - 1) {
-                        saveError += ",";
-                    }
+                String[] details = sourceStrArray[1].split("&");
+                String saveError = "";
+                    for (int i = 0; i < details.length; i++) {
+                        String[] save = details[i].split("=");
+                            saveError += save[0] + "=" + save[1];
+                            if (i < details.length - 1) {
+                                saveError += "&";
+                            }
                 }
-                saveError += "}";
+                //开始时间
+                String errorDate = SystemTimeUtil.getErrorDate();
+                Log.d("AAAerrorDate", errorDate);
+                //开始日期
+                String closeDate = SystemTimeUtil.getCloseDate();
+                Log.d("AAAcloseDate", closeDate);
                 Log.d("AAA", saveError);
                 OkHttpUtils
-                        .get()
-                        .url("http://192.168.10.21:8080/HiperMATICMES/ErrorController.sp")
-                        .addParams("method", saveError)
+                        .post()
+                        .url("http://192.168.10.20:8080/HiperMES_Unilever/ematQuestion.sp?method=toAndroid")
+
                         .build()
                         .connTimeOut(300000)
                         .execute(new StringCallback() {

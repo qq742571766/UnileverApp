@@ -20,6 +20,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import cn.com.unilever.www.unileverapp.R;
+import cn.com.unilever.www.unileverapp.activity.FunctionActivity;
 import cn.com.unilever.www.unileverapp.config.MyConfig;
 
 /**
@@ -29,7 +30,7 @@ import cn.com.unilever.www.unileverapp.config.MyConfig;
  * @time 2017/6/13 10:14
  */
 public class EMATok extends Fragment implements View.OnClickListener {
-    private int i = 1;
+    private int i = 0;
     private View view;
     private WebView webView;
     private Button button;
@@ -80,14 +81,22 @@ public class EMATok extends Fragment implements View.OnClickListener {
         //支持屏幕缩放
         webSettings.setSupportZoom(false);
         webSettings.setBuiltInZoomControls(true);
+        webView.addJavascriptInterface(new AndroidAndJSInterface(), "Android");
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                Log.d("TAG", url);
+                String[] urls = url.split("=");
+                Log.d("AAA", "收到评分:" + urls[1] + ",现在是第" + i + "题");
+                if (urls[1].equals("1")) {
+                    MyConfig.ExcellentNumber += 1;
+                } else if (urls[1].equals("2")) {
+                    MyConfig.FineNumber += 1;
+                } else if (urls[1].equals("3")) {
+                    MyConfig.DadNumber += 1;
+                }
                 return super.shouldOverrideUrlLoading(view, url);
             }
         });
-        webView.addJavascriptInterface(new AndroidAndJSInterface(), "Android");
         button = (Button) view.findViewById(R.id.btn_emat_ok);
         timer.schedule(task, 0, 10);
         button.setOnClickListener(this);
@@ -96,9 +105,11 @@ public class EMATok extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (MyConfig.sourceStrArray.length > i) {
-            String s = MyConfig.sourceStrArray[i];
-            webView.loadUrl("javascript:javaCallJs(" + "'" + s + "'" + ")");
+        if (i == 0 && MyConfig.problem != null) {
+            //todo:网络异常,无数据
+            Log.d("AAA", "自动点击");
+//            String s = MyConfig.problem.get(MyConfig.sourceStrArray.get(i));
+//            webView.loadUrl("javascript:javaCallJs(" + "'" + s + "'" + ")");
         }
     }
 
@@ -112,11 +123,17 @@ public class EMATok extends Fragment implements View.OnClickListener {
     private class AndroidAndJSInterface {
         @JavascriptInterface
         public void next() {
-            // TODO: 2017/6/15 还要小于 MyConfig.cahngdu.length
-            if (MyConfig.sourceStrArray.length > i) {
+            Log.d("AAA", "i:" + i + "");
+            if (MyConfig.sourceStrArray.size() > i) {
                 i += 1;
-                String s = MyConfig.sourceStrArray[i];
+                Log.d("AAA", "数组长度" + MyConfig.sourceStrArray.size() + ",现在是第" + i + "题");
+                String s = MyConfig.problem.get(MyConfig.sourceStrArray.get(i));
                 webView.loadUrl("javascript:javaCallJs(" + "'" + s + "'" + ")");
+            }
+            if (MyConfig.sourceStrArray.size() == i) {
+                Log.d("AAA", "优:" + MyConfig.ExcellentNumber + "..." + "良:" + MyConfig.FineNumber + "..." + "差:" + MyConfig.DadNumber);
+                EMATAccomplish accomplish = new EMATAccomplish();
+                ((FunctionActivity)getActivity()).changFragment(accomplish);
             }
         }
     }

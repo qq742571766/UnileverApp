@@ -17,15 +17,20 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
 import cn.com.unilever.www.unileverapp.R;
 import cn.com.unilever.www.unileverapp.activity.FunctionActivity;
 import cn.com.unilever.www.unileverapp.config.MyConfig;
-
-import static cn.com.unilever.www.unileverapp.config.MyConfig.name;
-import static cn.com.unilever.www.unileverapp.config.MyConfig.sourceStrArray;
+import okhttp3.Call;
 
 /**
  * @class 答题
@@ -42,6 +47,24 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
     private Timer timer = new Timer();
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
+            if (msg.what == 2) {
+                try {
+                    JSONArray jsonArray = new JSONArray((String) msg.obj);
+                    s = "{" +
+                            "\"" + "a0" + "\"" + ":" + jsonArray.length() + ",";
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        s += "\"" + "a" + (i + 1) + "\"" + ":" + "\"" + jsonObject.getString("questionContent") + "\"";
+                        MyConfig.problem.add(jsonObject.getString("questionContent"));
+                        if (i < jsonArray.length() - 1) {
+                            s += ",";
+                        }
+                    }
+                    s += "}";
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
             switch (msg.what) {
                 case 1:
                     button.performClick();
@@ -71,18 +94,24 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initdata() {
-        // TODO: 2017/6/13 获取问题内容
-        s = "{" +
-                "\"" + "a0" + "\"" + ":" + "7" + "," +
-                "\"" + "a1" + "\"" + ":" + "\"" + "a1" + "\"" + "," +
-                "\"" + "a2" + "\"" + ":" + "\"" + "a2" + "\"" + "," +
-                "\"" + "a3" + "\"" + ":" + "\"" + "a3" + "\"" + "," +
-                "\"" + "a4" + "\"" + ":" + "\"" + "a4" + "\"" + "," +
-                "\"" + "a5" + "\"" + ":" + "\"" + "a5" + "\"" + "," +
-                "\"" + "a6" + "\"" + ":" + "\"" + "a6" + "\"" + "," +
-                "\"" + "a7" + "\"" + ":" + "\"" + "a7" + "\"" + "}";
-        // TODO: 2017/6/15 将json转换成String数组,得到长度
-        MyConfig.cahngdu = new String[0];
+        OkHttpUtils
+                .post()
+                .url("http://192.168.10.20:8080/HiperMES_Unilever/ematQuestion.sp?method=toAndroid")
+                .build()
+                .connTimeOut(30000)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Message msg = new Message();
+                        msg.what = 2;
+                        msg.obj = response;
+                        handler.sendMessage(msg);
+                    }
+                });
     }
 
     private void initview() {
@@ -116,22 +145,24 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                sourceStrArray = url.split("&Fruit=");
-                Log.d("AAA", "" + sourceStrArray.length);
-                name = sourceStrArray[0].split("=");
-                Log.d("AAA", "" + name.length);
-                int num = sourceStrArray.length - 1;
-                if (num != 0) {
-                    if (name.length >= 2) {
-                        if (emaTok == null) {
-                            emaTok = new EMATok();
-                        }
-                        ((FunctionActivity) getActivity()).changFragment(emaTok);
-                    } else {
-                        Snackbar.make(webView, "请输入答题人工号", Snackbar.LENGTH_SHORT).show();
-                    }
-                } else {
+                Log.d("AAA", url);
+                //选择问题序号
+                String[] urls = url.split("&Fruit=");
+                //工号
+                if (urls[0].split("=").length==2) {
+                    String kayid = urls[0].split("=")[1];
+                }else {
+                    Snackbar.make(webView, "输入工号", Snackbar.LENGTH_SHORT).show();
+                }
+                if (urls.length <= 1) {
                     Snackbar.make(webView, "请选择题目", Snackbar.LENGTH_SHORT).show();
+                } else {
+                    for (int i = 1; i < urls.length; i++) {
+                        MyConfig.sourceStrArray.add(Integer.valueOf(urls[i]));
+                        Log.d("AAA", urls[i]+"..."+MyConfig.sourceStrArray.size());
+                    }
+                    EMATok emaTok = new EMATok();
+                    ((FunctionActivity)getActivity()).changFragment(emaTok);
                 }
                 return super.shouldOverrideUrlLoading(view, url);
             }
