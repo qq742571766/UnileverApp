@@ -202,8 +202,3 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
         button.performClick();
     }
 }
-//通过
-//(题)优良
-//答题人(id)
-//考核人(id)
-//时间

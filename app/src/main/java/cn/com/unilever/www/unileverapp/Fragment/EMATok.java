@@ -24,7 +24,7 @@ import cn.com.unilever.www.unileverapp.activity.FunctionActivity;
 import cn.com.unilever.www.unileverapp.config.MyConfig;
 
 /**
- * @class
+ * @class 答题
  * @name 林郝
  * @anthor QQ:742571766
  * @time 2017/6/13 10:14
