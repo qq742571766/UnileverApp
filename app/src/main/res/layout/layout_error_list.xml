@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:background="@android:color/white"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -16,8 +16,9 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            app:srcCompat="@mipmap/ic_launcher"
-            android:contentDescription="@string/sign" />
+            android:contentDescription="@string/sign"
+            android:scaleType="fitXY"
+            app:srcCompat="@mipmap/ic_launcher" />
 
         <TextView
             android:id="@+id/textView_title"
@@ -35,9 +36,10 @@
             android:id="@+id/f_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/imageView_f"
-            android:layout_toEndOf="@+id/imageView_f"
-            android:layout_toRightOf="@+id/imageView_f"
+            android:layout_alignBaseline="@+id/textView_author_name"
+            android:layout_alignBottom="@+id/textView_author_name"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:text="@string/date"
             android:textSize="12sp" />
 
@@ -45,24 +47,12 @@
             android:id="@+id/textView_author_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/f_date"
-            android:layout_alignBottom="@+id/f_date"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
+
+            android:layout_alignBottom="@+id/imageView_f"
+            android:layout_toLeftOf="@+id/textView2"
+            android:layout_toStartOf="@+id/textView2"
             android:text="@string/author"
             android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/textView_url"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/f_date"
-            android:layout_toEndOf="@+id/imageView_f"
-            android:layout_toRightOf="@+id/imageView_f"
-            android:maxLines="1"
-            android:text="@string/url"
-            android:textColor="@android:color/black"
-            android:textSize="10sp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -70,5 +60,14 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:background="@android:color/background_dark" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/f_date"
+            android:layout_toLeftOf="@+id/f_date"
+            android:layout_toStartOf="@+id/f_date"
+            android:text="\" />
     </RelativeLayout>
 </LinearLayout>

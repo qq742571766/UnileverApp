@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,8 @@ public class DisposeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_dispose, null);
+        Toolbar toolbar = (Toolbar) ((FunctionActivity) getActivity()).findViewById(R.id.mToolbar);
+        toolbar.setTitle("异常列表");
         //适配器
         adapter = new HistoryAdapter();
         //测试数据
@@ -51,7 +54,6 @@ public class DisposeFragment extends Fragment {
         info.date = "2017/7/7";
         info.category = "异常";
         info.author_name = "admin";
-        info.url = "内容";
         info.thumbnail_pic_s = "http://img5.imgtn.bdimg.com/it/u=3145329202,154902187&fm=26&gp=0.jpg";
         list.add(info);
         ErrorInfo info2 = new ErrorInfo();
@@ -59,7 +61,6 @@ public class DisposeFragment extends Fragment {
         info2.date = "2017/7/8";
         info2.category = "异常";
         info2.author_name = "admin";
-        info2.url = "内容";
         info2.thumbnail_pic_s = "http://files.3158.cn/article/201508/3103/071978781300138.jpg";
         list.add(info2);
         ErrorInfo info3 = new ErrorInfo();
@@ -67,7 +68,6 @@ public class DisposeFragment extends Fragment {
         info3.date = "2017/7/10";
         info3.category = "整改";
         info3.author_name = "admin";
-        info3.url = "内容";
         info3.thumbnail_pic_s = "http://www.shyecheng.com.cn/upload/image/shuangmianbujijiaodai-1413894128_lit.jpg";
         list.add(info3);
 

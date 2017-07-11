@@ -3,6 +3,7 @@ package cn.com.unilever.www.unileverapp.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,9 @@ public class ErrorCollectFragment extends Fragment implements View.OnClickListen
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_collect, null,false);
+        view = inflater.inflate(R.layout.fragment_collect, null, false);
+        Toolbar toolbar = (Toolbar) ((FunctionActivity) getActivity()).findViewById(R.id.mToolbar);
+        toolbar.setTitle("异常管理");
         init();
         initWidget();
         return view;

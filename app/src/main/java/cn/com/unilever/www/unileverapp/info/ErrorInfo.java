@@ -4,13 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class ErrorInfo implements Parcelable {
-    public String thumbnail_pic_s;//图片网址
-    public String title;//标题
-    public String date;//日期
-    public String category;//类别
-    public String author_name; //作者
-    public String url;//新闻内容
-
     public static final Creator<ErrorInfo> CREATOR = new Creator<ErrorInfo>() {
         @Override
         public ErrorInfo createFromParcel(Parcel in) {
@@ -20,7 +13,6 @@ public class ErrorInfo implements Parcelable {
             info.thumbnail_pic_s = in.readString();
             info.category = in.readString();
             info.author_name = in.readString();
-            info.url = in.readString();
             return info;
         }
 
@@ -29,6 +21,11 @@ public class ErrorInfo implements Parcelable {
             return new ErrorInfo[size];
         }
     };
+    public String thumbnail_pic_s;//图片网址
+    public String title;//标题
+    public String date;//日期
+    public String category;//类别
+    public String author_name; //作者
 
     @Override
     public int describeContents() {
@@ -42,6 +39,5 @@ public class ErrorInfo implements Parcelable {
         dest.writeString(date);
         dest.writeString(category);
         dest.writeString(author_name);
-        dest.writeString(url);
     }
 }

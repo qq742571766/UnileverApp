@@ -13,16 +13,15 @@
     <strong height="70%" id="problem">问题</strong>
 </p>
 <p>
-<p>
+<form action="" method="get" style="text-align:center; bottom:10px; left:0px;right:0px;position:fixed;">
     <strong>问题评价</strong>
-</p>
-<form action="" method="get">
-    <input checked="true" name="radio" id="excellent" type="radio" value="1"/><label
-        for="excellent">优</label><br/>
-    <input name="radio" id="good" type="radio" value="2"/><label for="good">良</label><br/>
-    <input name="radio" id="difference" type="radio" value="3"/><label
-        for="difference">差</label><br/>
-    <input type="submit" id="fulfill" size="20sp" value="下一题" onclick="window.Android.next()">
+    </br>
+    <ol>
+        <a><input checked="true" name="radio" id="excellent" type="radio" value="1"/><label for="excellent">优</label></a>
+        <a><input name="radio" id="good" type="radio" value="2"/><label for="good">良</label></a>
+        <a><input name="radio" id="difference" type="radio" value="3"/><label for="difference">差</label></a></br>
+    </ol>
+    <input type="submit" id="fulfill"value="下一题" onclick="window.Android.next()">
 </form>
 </body>
 </html>

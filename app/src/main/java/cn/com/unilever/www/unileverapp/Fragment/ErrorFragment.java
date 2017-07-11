@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -30,6 +31,7 @@ import java.io.File;
 import java.io.IOException;
 
 import cn.com.unilever.www.unileverapp.R;
+import cn.com.unilever.www.unileverapp.activity.FunctionActivity;
 import cn.com.unilever.www.unileverapp.config.MyConfig;
 import cn.com.unilever.www.unileverapp.utils.CameraAlbumUtil;
 import cn.com.unilever.www.unileverapp.utils.SystemTimeUtil;
@@ -67,6 +69,8 @@ public class ErrorFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_error, null);
+        Toolbar toolbar = (Toolbar) ((FunctionActivity) getActivity()).findViewById(R.id.mToolbar);
+        toolbar.setTitle("异常填写");
         initWidget();
         //获取数据
         return view;
@@ -116,12 +120,12 @@ public class ErrorFragment extends Fragment {
                 String[] sourceStrArray = url.split("\\?");
                 String[] details = sourceStrArray[1].split("&");
                 String saveError = "";
-                    for (int i = 0; i < details.length; i++) {
-                        String[] save = details[i].split("=");
-                            saveError += save[0] + "=" + save[1];
-                            if (i < details.length - 1) {
-                                saveError += "&";
-                            }
+                for (int i = 0; i < details.length; i++) {
+                    String[] save = details[i].split("=");
+                    saveError += save[0] + "=" + save[1];
+                    if (i < details.length - 1) {
+                        saveError += "&";
+                    }
                 }
                 //开始时间
                 String errorDate = SystemTimeUtil.getErrorDate();

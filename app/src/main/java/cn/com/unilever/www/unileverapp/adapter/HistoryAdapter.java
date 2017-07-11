@@ -20,10 +20,22 @@ import cn.com.unilever.www.unileverapp.utils.ImageLoaderUtil;
 import static android.content.ContentValues.TAG;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.mViewHolder> {
+    private static ImageView views;
     private List<ErrorInfo> datas;
     private OnButtonClickListener listener = null;
     private Context context;
-    private static ImageView views;
+    private ImageLoaderUtil.OnLoadImageListener l = new ImageLoaderUtil.OnLoadImageListener() {
+        @Override
+        public void onImageLoadOK(String url, Bitmap bitmap) {
+            views.setImageBitmap(bitmap);
+        }
+
+        @Override
+        public void onImageLoadError(String url) {
+            views.setImageResource(R.mipmap.ic_launcher);
+            Toast.makeText(context, "加载出错", Toast.LENGTH_SHORT).show();
+        }
+    };
 
     public void adds(List<ErrorInfo> datas) {
         this.datas = datas;
@@ -54,26 +66,12 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.mViewHol
         holder.title.setText(bean.title);
         holder.author_name.setText(bean.author_name);
         holder.date.setText(bean.date);
-        holder.url.setText(bean.url);
         ImageLoaderUtil util = new ImageLoaderUtil(context);
         Bitmap bitmap = util.loadImage(bean.thumbnail_pic_s, l);
         if (bitmap != null) {
             holder.thumbnail_pic_s.setImageBitmap(bitmap);
         }
     }
-
-    private ImageLoaderUtil.OnLoadImageListener l = new ImageLoaderUtil.OnLoadImageListener() {
-        @Override
-        public void onImageLoadOK(String url, Bitmap bitmap) {
-            views.setImageBitmap(bitmap);
-        }
-
-        @Override
-        public void onImageLoadError(String url) {
-            views.setImageResource(R.mipmap.ic_launcher);
-            Toast.makeText(context, "加载出错", Toast.LENGTH_SHORT).show();
-        }
-    };
 
     @Override
     public int getItemCount() {
@@ -85,12 +83,19 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.mViewHol
         return 0;
     }
 
+    public void setOnButtonClickListener(OnButtonClickListener l) {
+        this.listener = l;
+    }
+
+    public interface OnButtonClickListener {
+        void OnButtonClick(ErrorInfo info);
+    }
+
     static class mViewHolder extends RecyclerView.ViewHolder {
         ImageView thumbnail_pic_s;
         TextView title;
         TextView date;
         TextView author_name;
-        TextView url;
         View newsview;
 
         mViewHolder(View itemView) {
@@ -100,16 +105,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.mViewHol
             title = (TextView) itemView.findViewById(R.id.textView_title);
             date = (TextView) itemView.findViewById(R.id.f_date);
             author_name = (TextView) itemView.findViewById(R.id.textView_author_name);
-            url = (TextView) itemView.findViewById(R.id.textView_url);
             HistoryAdapter.views = thumbnail_pic_s;
         }
-    }
-
-    public interface OnButtonClickListener {
-        void OnButtonClick(ErrorInfo info);
-    }
-
-    public void setOnButtonClickListener(OnButtonClickListener l) {
-        this.listener = l;
     }
 }

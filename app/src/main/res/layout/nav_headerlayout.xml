@@ -9,9 +9,8 @@
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_below="@+id/iv_heaPic"
+        android:layout_centerHorizontal="true"
         android:text="@string/name"
         android:textColor="@android:color/background_light"
         android:textSize="30sp" />
@@ -20,9 +19,8 @@
         android:id="@+id/tv_lv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tv_name"
+        android:layout_centerHorizontal="true"
         android:text="@string/lv"
         android:textColor="@android:color/background_light"
         android:textSize="18sp" />

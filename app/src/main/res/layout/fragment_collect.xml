@@ -15,33 +15,33 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#EEEEEF"
         android:gravity="center">
 
         <Button
             android:id="@+id/btn_dispose"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@android:color/white"
+            android:background="#EEEEEF"
             android:drawableTop="@drawable/aaa"
             android:text="@string/dispose" />
 
         <Button
             android:id="@+id/btn_error"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10sp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@android:color/white"
+            android:background="#EEEEEF"
             android:drawableTop="@drawable/bbb"
             android:text="@string/examine" />
 
         <Button
             android:id="@+id/btn_history"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@android:color/white"
+            android:background="#EEEEEF"
             android:drawableTop="@drawable/ccc"
             android:text="@string/history" />
     </LinearLayout>

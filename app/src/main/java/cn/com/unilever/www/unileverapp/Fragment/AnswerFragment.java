@@ -7,6 +7,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -34,7 +35,7 @@ import cn.com.unilever.www.unileverapp.config.MyConfig;
 import okhttp3.Call;
 
 /**
- * @class 答题
+ * @class EMAT主界面
  * @name 林郝
  * @anthor QQ:742571766
  * @time 2017/5/17 14:25
@@ -62,6 +63,8 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
                             s += ",";
                         }
                     }
+                    view.findViewById(R.id.EMATtext).setVisibility(View.GONE);
+                    view.findViewById(R.id.EMATProgressBar).setVisibility(View.GONE);
                     s += "}";
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -92,13 +95,15 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_answer, null, false);
+        Toolbar toolbar = (Toolbar) ((FunctionActivity) getActivity()).findViewById(R.id.mToolbar);
+        toolbar.setTitle("问题发起");
         return view;
     }
 
     private void initdata() {
         OkHttpUtils
                 .post()
-                .url("http://192.168.10.22:8080/HiperMES_Unilever/ematQuestion.sp?method=toAndroid")
+                .url("http://192.168.10.22:8080/HiperMES_Unilever/ematAndroid.sp?method=toAndroid")
                 .build()
                 .connTimeOut(30000)
                 .execute(new StringCallback() {
@@ -184,6 +189,8 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
         });
         timer.schedule(task, 0, 100);
         button.setOnClickListener(this);
+//        view.findViewById(R.id.EMATtext).setVisibility(View.GONE);
+//        view.findViewById(R.id.EMATProgressBar).setVisibility(View.GONE);
     }
 
     @Override

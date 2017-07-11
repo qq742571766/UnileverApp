@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +54,7 @@ public class EMATok extends Fragment implements View.OnClickListener {
             handler.sendMessage(message);
         }
     };
+    private Toolbar toolbar;
 
     @Override
     public void onAttach(Context context) {
@@ -64,6 +66,8 @@ public class EMATok extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_ematok, null, false);
+        toolbar = (Toolbar) ((FunctionActivity) getActivity()).findViewById(R.id.mToolbar);
+        toolbar.setTitle("开始答题"+i+"/"+MyConfig.sourceStrArray);
         return view;
     }
 
@@ -97,6 +101,7 @@ public class EMATok extends Fragment implements View.OnClickListener {
                     EMATAccomplish accomplish = new EMATAccomplish();
                     ((FunctionActivity) getActivity()).changFragment(accomplish);
                 }
+                toolbar.setTitle("开始答题"+i+"/"+MyConfig.sourceStrArray);
                 return super.shouldOverrideUrlLoading(view, url);
             }
         });
