@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/white"
-            android:drawableTop="@mipmap/ic_launcher"
+            android:drawableTop="@drawable/aaa"
             android:text="@string/dispose" />
 
         <Button
@@ -33,7 +33,7 @@
             android:layout_margin="10sp"
             android:layout_weight="1"
             android:background="@android:color/white"
-            android:drawableTop="@mipmap/ic_launcher"
+            android:drawableTop="@drawable/bbb"
             android:text="@string/examine" />
 
         <Button
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/white"
-            android:drawableTop="@mipmap/ic_launcher"
+            android:drawableTop="@drawable/ccc"
             android:text="@string/history" />
     </LinearLayout>
 </LinearLayout>

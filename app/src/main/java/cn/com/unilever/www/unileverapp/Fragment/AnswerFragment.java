@@ -24,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -52,6 +53,7 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
                     JSONArray jsonArray = new JSONArray((String) msg.obj);
                     s = "{" +
                             "\"" + "a0" + "\"" + ":" + jsonArray.length() + ",";
+                    MyConfig.problem = new ArrayList<String>();
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         s += "\"" + "a" + (i + 1) + "\"" + ":" + "\"" + jsonObject.getString("questionContent") + "\"";
@@ -96,7 +98,7 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
     private void initdata() {
         OkHttpUtils
                 .post()
-                .url("http://192.168.10.20:8080/HiperMES_Unilever/ematQuestion.sp?method=toAndroid")
+                .url("http://192.168.10.22:8080/HiperMES_Unilever/ematQuestion.sp?method=toAndroid")
                 .build()
                 .connTimeOut(30000)
                 .execute(new StringCallback() {
@@ -145,24 +147,37 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                Log.d("AAA", url);
                 //选择问题序号
                 String[] urls = url.split("&Fruit=");
-                //工号
-                if (urls[0].split("=").length==2) {
-                    String kayid = urls[0].split("=")[1];
-                }else {
-                    Snackbar.make(webView, "输入工号", Snackbar.LENGTH_SHORT).show();
-                }
-                if (urls.length <= 1) {
-                    Snackbar.make(webView, "请选择题目", Snackbar.LENGTH_SHORT).show();
-                } else {
-                    for (int i = 1; i < urls.length; i++) {
-                        MyConfig.sourceStrArray.add(Integer.valueOf(urls[i]));
-                        Log.d("AAA", urls[i]+"..."+MyConfig.sourceStrArray.size());
+                Log.d("AAA", urls.length + "");
+                //file:///android_asset/EMATCall.html?id=eeddd&name=sssss,1,2,3
+                String[] message = urls[0].split("&");
+                ////file:///android_asset/EMATCall.html?id=eeddd,name=sssss
+                String[] ids = message[0].split("=");
+                ////file:///android_asset/EMATCall.html?id,eeddd
+                String[] names = message[1].split("=");
+                //name,sssss
+                if (ids.length == 2 && ids[1] != null) {
+                    MyConfig.id = ids[0];
+                    if (names.length == 2 && names[1] != null) {
+                        MyConfig.name = names[1];
+                        if (urls.length <= 1) {
+                            Snackbar.make(webView, "请选择题目", Snackbar.LENGTH_SHORT).show();
+                        } else {
+                            for (int i = 1; i < urls.length; i++) {
+                                if (i <= MyConfig.problem.size()) {
+                                    MyConfig.sourceStrArray.add(Integer.valueOf(urls[i]) - 1);
+                                }
+                            }
+                            Log.d("AAA", MyConfig.problem.toString() + "..." + MyConfig.sourceStrArray.toString());
+                            EMATok emaTok = new EMATok();
+                            ((FunctionActivity) getActivity()).changFragment(emaTok);
+                        }
+                    } else {
+                        Snackbar.make(webView, "输入姓名", Snackbar.LENGTH_SHORT).show();
                     }
-                    EMATok emaTok = new EMATok();
-                    ((FunctionActivity)getActivity()).changFragment(emaTok);
+                } else {
+                    Snackbar.make(webView, "输入工号", Snackbar.LENGTH_SHORT).show();
                 }
                 return super.shouldOverrideUrlLoading(view, url);
             }
@@ -181,6 +196,7 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onStart() {
         super.onStart();
+        MyConfig.sourceStrArray = new ArrayList<Integer>();
         initdata();
         initview();
         button.performClick();

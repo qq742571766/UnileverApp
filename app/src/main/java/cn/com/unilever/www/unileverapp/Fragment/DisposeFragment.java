@@ -47,28 +47,28 @@ public class DisposeFragment extends Fragment {
     private void initadapter() {
         list = new ArrayList<>();
         ErrorInfo info = new ErrorInfo();
-        info.title = "a";
-        info.date = "a";
-        info.category = "a";
-        info.author_name = "a";
-        info.url = "a";
-        info.thumbnail_pic_s = "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png";
+        info.title = "半成品丽料架,空箱与实物混放";
+        info.date = "2017/7/7";
+        info.category = "异常";
+        info.author_name = "admin";
+        info.url = "内容";
+        info.thumbnail_pic_s = "http://img5.imgtn.bdimg.com/it/u=3145329202,154902187&fm=26&gp=0.jpg";
         list.add(info);
         ErrorInfo info2 = new ErrorInfo();
-        info2.title = "b";
-        info2.date = "b";
-        info2.category = "b";
-        info2.author_name = "b";
-        info2.url = "b";
-        info2.thumbnail_pic_s = "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png";
+        info2.title = "箱子高度";
+        info2.date = "2017/7/8";
+        info2.category = "异常";
+        info2.author_name = "admin";
+        info2.url = "内容";
+        info2.thumbnail_pic_s = "http://files.3158.cn/article/201508/3103/071978781300138.jpg";
         list.add(info2);
         ErrorInfo info3 = new ErrorInfo();
-        info3.title = "c";
-        info3.date = "c";
-        info3.category = "c";
-        info3.author_name = "c";
-        info3.url = "c";
-        info3.thumbnail_pic_s = "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png";
+        info3.title = "边线6s";
+        info3.date = "2017/7/10";
+        info3.category = "整改";
+        info3.author_name = "admin";
+        info3.url = "内容";
+        info3.thumbnail_pic_s = "http://www.shyecheng.com.cn/upload/image/shuangmianbujijiaodai-1413894128_lit.jpg";
         list.add(info3);
 
     }

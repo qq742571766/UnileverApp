@@ -86,13 +86,16 @@ public class EMATok extends Fragment implements View.OnClickListener {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 String[] urls = url.split("=");
-                Log.d("AAA", "收到评分:" + urls[1] + ",现在是第" + i + "题");
                 if (urls[1].equals("1")) {
                     MyConfig.ExcellentNumber += 1;
                 } else if (urls[1].equals("2")) {
                     MyConfig.FineNumber += 1;
                 } else if (urls[1].equals("3")) {
                     MyConfig.DadNumber += 1;
+                }
+                if (MyConfig.sourceStrArray.size() == i) {
+                    EMATAccomplish accomplish = new EMATAccomplish();
+                    ((FunctionActivity) getActivity()).changFragment(accomplish);
                 }
                 return super.shouldOverrideUrlLoading(view, url);
             }
@@ -105,11 +108,10 @@ public class EMATok extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (i == 0 && MyConfig.problem != null) {
+        if (MyConfig.problem != null && MyConfig.sourceStrArray.size() > i) {
             //todo:网络异常,无数据
-            Log.d("AAA", "自动点击");
-//            String s = MyConfig.problem.get(MyConfig.sourceStrArray.get(i));
-//            webView.loadUrl("javascript:javaCallJs(" + "'" + s + "'" + ")");
+            String s = MyConfig.problem.get(MyConfig.sourceStrArray.get(i));
+            webView.loadUrl("javascript:javaCallJs(" + "'" + s + "'" + ")");
         }
     }
 
@@ -123,17 +125,8 @@ public class EMATok extends Fragment implements View.OnClickListener {
     private class AndroidAndJSInterface {
         @JavascriptInterface
         public void next() {
-            Log.d("AAA", "i:" + i + "");
             if (MyConfig.sourceStrArray.size() > i) {
-                i += 1;
-                Log.d("AAA", "数组长度" + MyConfig.sourceStrArray.size() + ",现在是第" + i + "题");
-                String s = MyConfig.problem.get(MyConfig.sourceStrArray.get(i));
-                webView.loadUrl("javascript:javaCallJs(" + "'" + s + "'" + ")");
-            }
-            if (MyConfig.sourceStrArray.size() == i) {
-                Log.d("AAA", "优:" + MyConfig.ExcellentNumber + "..." + "良:" + MyConfig.FineNumber + "..." + "差:" + MyConfig.DadNumber);
-                EMATAccomplish accomplish = new EMATAccomplish();
-                ((FunctionActivity)getActivity()).changFragment(accomplish);
+                i++;
             }
         }
     }
