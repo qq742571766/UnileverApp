@@ -54,6 +54,7 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
         public void handleMessage(Message msg) {
             if (msg.what == 2) {
                 try {
+                    webView.loadUrl("file:///android_asset/EMATCall.html");
                     JSONArray jsonArray = new JSONArray((String) msg.obj);
                     s = "{" +
                             "\"" + "a0" + "\"" + ":" + jsonArray.length() + ",";
@@ -65,6 +66,11 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
                         if (i < jsonArray.length() - 1) {
                             s += ",";
                         }
+                    }
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
                     view.findViewById(R.id.EMATtext).setVisibility(View.GONE);
                     view.findViewById(R.id.EMATProgressBar).setVisibility(View.GONE);
@@ -106,7 +112,7 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
     private void initdata() {
         OkHttpUtils
                 .post()
-                .url("http://192.168.10.22:8080/HiperMES_Unilever/ematAndroid.sp?method=toAndroid")
+                .url("http://192.168.10.23:8080/HiperMES_Unilever/ematAndroid.sp?method=toAndroid")
                 .build()
                 .connTimeOut(30000)
                 .execute(new StringCallback() {
@@ -136,7 +142,7 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
         //设置客户端-不跳转到默认浏览器中
         webView.setWebViewClient(new WebViewClient());
         //加载网络资源
-        webView.loadUrl("file:///android_asset/EMATCall.html");
+        webView.loadUrl("http://192.168.10.23:8080/HiperMES/login.sp?method=appLogin&loginName=admin&password=admin");
         //支持屏幕缩放
         webSettings.setSupportZoom(false);
         webSettings.setBuiltInZoomControls(true);
@@ -166,10 +172,10 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
                 String[] names = message[1].split("=");
                 //name,sssss
                 if (ids.length == 2 && ids[1] != null) {
-                    MyConfig.id = ids[0];
+                    MyConfig.id = ids[1];
                     if (names.length == 2 && names[1] != null) {
                         try {
-                            MyConfig.name =URLDecoder.decode(names[1],"UTF-8");
+                            MyConfig.name = URLDecoder.decode(names[1], "UTF-8");
                         } catch (UnsupportedEncodingException e) {
                             e.printStackTrace();
                         }

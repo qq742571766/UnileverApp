@@ -98,7 +98,11 @@ public class EMATok extends Fragment implements View.OnClickListener {
                     //通过sp储存答案
                     SharedPreferences sp = context.getSharedPreferences("grade", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sp.edit();
-                    editor.putString(i + "", urls[1]);
+                    if (urls[1] != null) {
+                        editor.putString(i + "", urls[1]);
+                    } else {
+                        editor.putString(i + "", "此题未作答");
+                    }
                     Log.d("AAA", i + urls[1]);
                     editor.apply();
                 }
@@ -139,6 +143,7 @@ public class EMATok extends Fragment implements View.OnClickListener {
                 i++;
             }
         }
+
         @JavascriptInterface
 
         public void last() {

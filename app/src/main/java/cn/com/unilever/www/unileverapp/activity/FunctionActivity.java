@@ -1,6 +1,8 @@
 package cn.com.unilever.www.unileverapp.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -12,6 +14,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import cn.com.unilever.www.unileverapp.Fragment.AnswerFragment;
 import cn.com.unilever.www.unileverapp.Fragment.ErrorCollectFragment;
@@ -19,6 +23,7 @@ import cn.com.unilever.www.unileverapp.R;
 import cn.com.unilever.www.unileverapp.base.BaseFragmentActiviy;
 import cn.com.unilever.www.unileverapp.config.MyConfig;
 import cn.com.unilever.www.unileverapp.utils.CameraAlbumUtil;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * @class 功能界面
@@ -27,6 +32,7 @@ import cn.com.unilever.www.unileverapp.utils.CameraAlbumUtil;
  * @time 2017/5/17 11:32
  */
 public class FunctionActivity extends BaseFragmentActiviy {
+    View headerLayout;
     private Toolbar mToolbar;
     private NavigationView navigationView;
     private DrawerLayout activity_function;
@@ -61,6 +67,14 @@ public class FunctionActivity extends BaseFragmentActiviy {
             actionBar.setDisplayHomeAsUpEnabled(true);//Display：展示显示 HomeAsUp：左边的按钮 此条属性就是设置左边按钮能否被显示
             actionBar.setHomeAsUpIndicator(R.drawable.home_as_up);//设置HomeAsUp的图片
         }
+        headerLayout = navigationView.getHeaderView(0);
+        SharedPreferences sp = getSharedPreferences("logininformation", Context.MODE_PRIVATE);
+        String userKey = sp.getString("userKey", null);
+        String username = sp.getString("username", null);
+        TextView tv_name = (TextView) headerLayout.findViewById(R.id.tv_name);
+        tv_name.setText(username);
+        TextView tv_id = (TextView) headerLayout.findViewById(R.id.tv_lv);
+        tv_id.setText(userKey);
     }
 
     private void initNavigation() {
@@ -79,7 +93,7 @@ public class FunctionActivity extends BaseFragmentActiviy {
                         break;
                     case R.id.answer:
 //                        if (answerfragment == null) {
-                            answerfragment = new AnswerFragment();
+                        answerfragment = new AnswerFragment();
 //                        }
                         changFragment(answerfragment);
                         activity_function.closeDrawers();
@@ -107,7 +121,7 @@ public class FunctionActivity extends BaseFragmentActiviy {
     public void changFragment(Fragment fragment) {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
-        if (!(fragment instanceof ErrorCollectFragment)&&!(fragment instanceof AnswerFragment)) {
+        if (!(fragment instanceof ErrorCollectFragment) && !(fragment instanceof AnswerFragment)) {
             transaction.addToBackStack(null);
         }
         transaction.replace(R.id.fl_commcontent_main, fragment);
