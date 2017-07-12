@@ -34,7 +34,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:gravity="center"
-        android:text="答题人:"
+        android:text="答题数:"
         android:textColor="@android:color/black"
         android:textSize="15sp" />
 
@@ -46,7 +46,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:gravity="center"
-        android:text="李四"
+        android:text="0"
         android:textColor="@android:color/black"
         android:textSize="15sp" />
 
@@ -58,7 +58,7 @@
         android:layout_alignRight="@+id/textView5"
         android:layout_below="@+id/textView5"
         android:gravity="center"
-        android:text="答题总数:"
+        android:text="优:"
         android:textColor="@android:color/black"
         android:textSize="15sp" />
 
@@ -82,7 +82,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView7"
         android:gravity="center"
-        android:text="优:"
+        android:text="良:"
         android:textColor="@android:color/black"
         android:textSize="15sp" />
 
@@ -106,7 +106,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView9"
         android:gravity="center"
-        android:text="良:"
+        android:text="差:"
         android:textColor="@android:color/black"
         android:textSize="15sp" />
 
@@ -130,7 +130,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView11"
         android:gravity="center"
-        android:text="差:"
+        android:text="未回答:"
         android:textColor="@android:color/black"
         android:textSize="15sp" />
 

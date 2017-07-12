@@ -17,6 +17,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -25,6 +26,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -165,7 +168,11 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
                 if (ids.length == 2 && ids[1] != null) {
                     MyConfig.id = ids[0];
                     if (names.length == 2 && names[1] != null) {
-                        MyConfig.name = names[1];
+                        try {
+                            MyConfig.name =URLDecoder.decode(names[1],"UTF-8");
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
                         if (urls.length <= 1) {
                             Snackbar.make(webView, "请选择题目", Snackbar.LENGTH_SHORT).show();
                         } else {

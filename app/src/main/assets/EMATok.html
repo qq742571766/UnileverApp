@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<html language="en">
+<html language="cn">
 <head>
-    <meta charset="UTF-8"/>
+    <Connector port="8080" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="8443" URIEncoding="UTF-8" />
+    <meta name="content-type" content="text/html; charset=UTF-8">
     <script language="javascript">
         function javaCallJs(s) {
             document.getElementById("problem").innerText = s;
@@ -9,19 +12,16 @@
     </script>
 </head>
 <body>
-<p>
-    <strong height="70%" id="problem">问题</strong>
-</p>
-<p>
-<form action="" method="get" style="text-align:center; bottom:10px; left:0px;right:0px;position:fixed;">
-    <strong>问题评价</strong>
-    </br>
-    <ol>
-        <a><input checked="true" name="radio" id="excellent" type="radio" value="1"/><label for="excellent">优</label></a>
-        <a><input name="radio" id="good" type="radio" value="2"/><label for="good">良</label></a>
-        <a><input name="radio" id="difference" type="radio" value="3"/><label for="difference">差</label></a></br>
-    </ol>
-    <input type="submit" id="fulfill"value="下一题" onclick="window.Android.next()">
+<p> </p>
+<form action="" method="get" style="text-align:center">
+    <strong height="70%" id="problem" style="left:15px;right:15px">问题</strong>
+    <br />
+    <br />
+    <strong height="70%" >请作答:</strong>
+    <br />
+    <input type="textarea" style="resize:none;height: 120px;" rows="5" name="answer" />
+    <input type="submit" id="last" value="上一题" onclick="window.Android.last()" style="text-align:center; bottom:15px; left:15px;position:fixed;" />
+    <input type="submit" id="next" value="下一题" onclick="window.Android.next()" style="text-align:center; bottom:15px; right:15px;position:fixed;" />
 </form>
 </body>
 </html>

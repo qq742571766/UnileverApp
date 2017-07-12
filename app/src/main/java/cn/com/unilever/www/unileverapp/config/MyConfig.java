@@ -20,4 +20,6 @@ public class MyConfig {
     public static int FineNumber = 0;
     //差
     public static int DadNumber = 0;
+    //无
+    public static int abbr = 0;
 }

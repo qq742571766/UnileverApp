@@ -26,17 +26,18 @@ import cn.com.unilever.www.unileverapp.activity.FunctionActivity;
 import cn.com.unilever.www.unileverapp.config.MyConfig;
 
 /**
- * @class 答题
+ * @class 评分界面
  * @name 林郝
  * @anthor QQ:742571766
- * @time 2017/6/13 10:14
+ * @time 2017/7/11 17:32
  */
-public class EMATok extends Fragment implements View.OnClickListener {
+class GradeFragment extends Fragment implements View.OnClickListener {
     private int i = 0;
     private View view;
     private WebView webView;
     private Button button;
     private Context context;
+    private String s;
     private Timer timer = new Timer();
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
@@ -56,7 +57,6 @@ public class EMATok extends Fragment implements View.OnClickListener {
         }
     };
     private Toolbar toolbar;
-    private String s;
 
     @Override
     public void onAttach(Context context) {
@@ -67,14 +67,21 @@ public class EMATok extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_ematok, null, false);
-        toolbar = (Toolbar) ((FunctionActivity) getActivity()).findViewById(R.id.mToolbar);
-        toolbar.setTitle("开始答题" + (i + 1) + "/" + MyConfig.sourceStrArray.size());
+        view = inflater.inflate(R.layout.fragment_grade, null, false);
+        Toolbar toolbar = (Toolbar) ((FunctionActivity) getActivity()).findViewById(R.id.mToolbar);
+        toolbar.setTitle("评分");
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        initview();
+        button.performClick();
+    }
+
     private void initview() {
-        webView = (WebView) view.findViewById(R.id.wv_emat_ok);
+        webView = (WebView) view.findViewById(R.id.wv_grade);
         WebSettings webSettings = webView.getSettings();
         //设置支持javaScript脚步语言
         webSettings.setJavaScriptEnabled(true);
@@ -83,7 +90,7 @@ public class EMATok extends Fragment implements View.OnClickListener {
         //设置客户端-不跳转到默认浏览器中
         webView.setWebViewClient(new WebViewClient());
         //加载网络资源
-        webView.loadUrl("file:///android_asset/EMATok.html");
+        webView.loadUrl("file:///android_asset/EMATGrade.html");
         //支持屏幕缩放
         webSettings.setSupportZoom(false);
         webSettings.setBuiltInZoomControls(true);
@@ -92,25 +99,21 @@ public class EMATok extends Fragment implements View.OnClickListener {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 String[] urls = url.split("=");
-                if (urls.length == 1) {
-                    MyConfig.abbr++;
-                } else {
-                    //通过sp储存答案
-                    SharedPreferences sp = context.getSharedPreferences("grade", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sp.edit();
-                    editor.putString(i + "", urls[1]);
-                    Log.d("AAA", i + urls[1]);
-                    editor.apply();
+                if (urls[1].equals("1")) {
+                    MyConfig.ExcellentNumber += 1;
+                } else if (urls[1].equals("2")) {
+                    MyConfig.FineNumber += 1;
+                } else if (urls[1].equals("3")) {
+                    MyConfig.DadNumber += 1;
                 }
                 if (MyConfig.sourceStrArray.size() == i) {
-                    GradeFragment grade = new GradeFragment();
-                    ((FunctionActivity) getActivity()).changFragment(grade);
+                    EMATAccomplish accomplish = new EMATAccomplish();
+                    ((FunctionActivity) getActivity()).changFragment(accomplish);
                 }
-                toolbar.setTitle("开始答题" + (i + 1) + "/" + MyConfig.sourceStrArray.size());
                 return super.shouldOverrideUrlLoading(view, url);
             }
         });
-        button = (Button) view.findViewById(R.id.btn_emat_ok);
+        button = (Button) view.findViewById(R.id.btn_grade);
         timer.schedule(task, 0, 10);
         button.setOnClickListener(this);
         button.setVisibility(View.GONE);
@@ -119,17 +122,14 @@ public class EMATok extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (MyConfig.problem != null && MyConfig.sourceStrArray.size() > i) {
-            //todo:网络异常,无数据
             s = MyConfig.problem.get(MyConfig.sourceStrArray.get(i));
+            //题
             webView.loadUrl("javascript:javaCallJs(" + "'" + s + "'" + ")");
+            //答案
+            SharedPreferences sp = context.getSharedPreferences("grade", Context.MODE_PRIVATE);
+            String ss = sp.getString((i+1) + "", null);
+            webView.loadUrl("javascript:javaCallJ(" + "'" + ss + "'" + ")");
         }
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        initview();
-        button.performClick();
     }
 
     private class AndroidAndJSInterface {
@@ -140,7 +140,6 @@ public class EMATok extends Fragment implements View.OnClickListener {
             }
         }
         @JavascriptInterface
-
         public void last() {
             if (MyConfig.sourceStrArray.size() > i) {
                 i--;

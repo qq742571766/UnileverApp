@@ -21,11 +21,11 @@ import cn.com.unilever.www.unileverapp.R;
  * @time 2017/5/17 11:32
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    boolean islogin = true;
     private EditText etUsername;
     private EditText etPassword;
     private CheckBox cbMemory;
     private Button btnLogin;
-    boolean islogin = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,9 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void Login(String username, String password) {
         // TODO: 2017/5/17 登录接口
-//        Snackbar.make(this.get, "登录成功" + "用户名" + username + "密码" + password, Snackbar.LENGTH_SHORT).show();
         Intent intent = new Intent(this, FunctionActivity.class);
-        Toast.makeText(this, username + password, Toast.LENGTH_SHORT).show();
         startActivity(intent);
         this.finish();
     }
