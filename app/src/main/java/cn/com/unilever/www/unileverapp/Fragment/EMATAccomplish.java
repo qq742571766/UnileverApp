@@ -27,6 +27,9 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
 import cn.com.unilever.www.unileverapp.R;
 import cn.com.unilever.www.unileverapp.activity.FunctionActivity;
 import cn.com.unilever.www.unileverapp.activity.MainActivity;
@@ -50,9 +53,15 @@ public class EMATAccomplish extends Fragment implements View.OnClickListener {
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             if (msg.what == 3) {
-                String url = "http://192.168.10.23:8080/HiperMES/ematAndroid.sp?method=addAndroidSave&answer_user=" + MyConfig.name +
+                String url = "http://192.168.10.21:8080/HiperMES/ematAndroid.sp?method=addAndroidSave&answer_user=" + MyConfig.name +
                         "&answer_user_id=" + MyConfig.id + "&ask_uesr_id=" + userKey + "&question_num=" + MyConfig.sourceStrArray.size() +
                         "&test_time=" + SystemTimeUtil.getErrorDate() + "&test_result=" + pass;
+                Log.d("AAA", url);
+                try {
+                    url = URLDecoder.decode(url, "UTF-8");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
                 webView.loadUrl(url);
             }
         }
@@ -70,8 +79,14 @@ public class EMATAccomplish extends Fragment implements View.OnClickListener {
         view = inflater.inflate(R.layout.fragment_accomplish, null, false);
         Toolbar toolbar = (Toolbar) ((FunctionActivity) getActivity()).findViewById(R.id.mToolbar);
         toolbar.setTitle("评分");
-        initview();
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        initview();
+        initdata();
+        super.onStart();
     }
 
     private void initview() {
@@ -100,10 +115,17 @@ public class EMATAccomplish extends Fragment implements View.OnClickListener {
         //设置客户端-不跳转到默认浏览器中
         webView.setWebViewClient(new WebViewClient());
         //加载网络资源
-        webView.loadUrl("http://192.168.10.23:8080/HiperMES/login.sp?method=appLogin&loginName=admin&password=admin");
+        webView.loadUrl("http://192.168.10.21:8080/HiperMES/login.sp?method=appLogin&loginName=admin&password=admin");
         //支持屏幕缩放
         webSettings.setSupportZoom(false);
         webSettings.setBuiltInZoomControls(true);
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+
+                return super.shouldOverrideUrlLoading(view, url);
+            }
+        });
     }
 
 
@@ -129,5 +151,22 @@ public class EMATAccomplish extends Fragment implements View.OnClickListener {
         Message msg = new Message();
         msg.what = 3;
         handler.sendMessage(msg);
+    }
+
+    private void initdata() {
+        OkHttpUtils
+                .post()
+                .url("http://192.168.10.21:8080/HiperMES/login.sp?method=appLogin&loginName=admin&password=admin")
+                .build()
+                .connTimeOut(30000)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                    }
+                });
     }
 }

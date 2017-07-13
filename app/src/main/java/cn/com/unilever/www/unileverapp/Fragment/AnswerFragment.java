@@ -17,7 +17,6 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -47,7 +46,6 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
     private View view;
     private WebView webView;
     private Button button;
-    private EMATok emaTok;
     private String s;
     private Timer timer = new Timer();
     private Handler handler = new Handler() {
@@ -112,7 +110,7 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
     private void initdata() {
         OkHttpUtils
                 .post()
-                .url("http://192.168.10.23:8080/HiperMES_Unilever/ematAndroid.sp?method=toAndroid")
+                .url("http://192.168.10.21:8080/HiperMES/ematAndroid.sp?method=toAndroid")
                 .build()
                 .connTimeOut(30000)
                 .execute(new StringCallback() {
@@ -142,7 +140,7 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
         //设置客户端-不跳转到默认浏览器中
         webView.setWebViewClient(new WebViewClient());
         //加载网络资源
-        webView.loadUrl("http://192.168.10.23:8080/HiperMES/login.sp?method=appLogin&loginName=admin&password=admin");
+        webView.loadUrl("http://192.168.10.21:8080/HiperMES/login.sp?method=login");
         //支持屏幕缩放
         webSettings.setSupportZoom(false);
         webSettings.setBuiltInZoomControls(true);
@@ -172,7 +170,11 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
                 String[] names = message[1].split("=");
                 //name,sssss
                 if (ids.length == 2 && ids[1] != null) {
-                    MyConfig.id = ids[1];
+                    try {
+                        MyConfig.id = URLDecoder.decode(ids[1], "UTF-8");
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
                     if (names.length == 2 && names[1] != null) {
                         try {
                             MyConfig.name = URLDecoder.decode(names[1], "UTF-8");
@@ -199,11 +201,15 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
                 }
                 return super.shouldOverrideUrlLoading(view, url);
             }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+
+                super.onPageFinished(view, url);
+            }
         });
         timer.schedule(task, 0, 100);
         button.setOnClickListener(this);
-//        view.findViewById(R.id.EMATtext).setVisibility(View.GONE);
-//        view.findViewById(R.id.EMATProgressBar).setVisibility(View.GONE);
     }
 
     @Override
@@ -217,8 +223,8 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
     public void onStart() {
         super.onStart();
         MyConfig.sourceStrArray = new ArrayList<Integer>();
-        initdata();
         initview();
+        initdata();
         button.performClick();
     }
 }

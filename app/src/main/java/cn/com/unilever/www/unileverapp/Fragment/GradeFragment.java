@@ -17,6 +17,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -127,7 +128,7 @@ class GradeFragment extends Fragment implements View.OnClickListener {
             webView.loadUrl("javascript:javaCallJs(" + "'" + s + "'" + ")");
             //答案
             SharedPreferences sp = context.getSharedPreferences("grade", Context.MODE_PRIVATE);
-            String ss = sp.getString((i+1) + "", null);
+            String ss = sp.getString((i + 1) + "", null);
             webView.loadUrl("javascript:javaCallJ(" + "'" + ss + "'" + ")");
         }
     }
@@ -139,10 +140,15 @@ class GradeFragment extends Fragment implements View.OnClickListener {
                 i++;
             }
         }
+
         @JavascriptInterface
         public void last() {
             if (MyConfig.sourceStrArray.size() > i) {
                 i--;
+                if (i < 0) {
+                    Toast.makeText(context, "无上一题", Toast.LENGTH_SHORT).show();
+                    i++;
+                }
             }
         }
     }

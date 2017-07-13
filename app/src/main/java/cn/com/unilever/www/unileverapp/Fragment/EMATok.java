@@ -17,6 +17,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -145,10 +146,13 @@ public class EMATok extends Fragment implements View.OnClickListener {
         }
 
         @JavascriptInterface
-
         public void last() {
             if (MyConfig.sourceStrArray.size() > i) {
                 i--;
+                if (i<0){
+                    Toast.makeText(context, "无上一题", Toast.LENGTH_SHORT).show();
+                    i++;
+                }
             }
         }
     }
