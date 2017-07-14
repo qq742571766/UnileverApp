@@ -14,13 +14,12 @@ import cn.com.unilever.www.unileverapp.activity.FunctionActivity;
 import cn.com.unilever.www.unileverapp.config.MyConfig;
 
 /**
- * @class
+ * @class 主管/员工
  * @name 林郝
  * @anthor QQ:742571766
  * @time 2017/7/14 10:00
  */
 class RankFragment extends Fragment implements View.OnClickListener {
-
     private View view;
     private ManagerclassifyFragment managerclassifyFragment;
     private ErrorFragment errorFragment;

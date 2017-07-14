@@ -124,7 +124,6 @@ public class EMATok extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (MyConfig.problem != null && MyConfig.sourceStrArray.size() > i) {
-            //todo:网络异常,无数据
             s = MyConfig.problem.get(MyConfig.sourceStrArray.get(i));
             webView.loadUrl("javascript:javaCallJs(" + "'" + s + "'" + ")");
         }

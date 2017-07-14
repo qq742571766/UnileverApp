@@ -23,13 +23,13 @@ import static android.app.Activity.RESULT_OK;
 
 
 public class CameraAlbumUtil {
-    private static Context mContext;
-    private static File outputImage;//存放摄像头拍下的图片
-    private static Uri imageUri;//图片路径的URI
     private static final int TAKE_PHOTO = 1;//拍照
     private static final int OPEN_ALBUM_ON_NOUGAT = 2;//7.0及以上打开相册
     private static final int FINAL_RESULT_CODE = 3;//裁剪以后返回的结果码
     private static final int OPEN_ALBUM_BELOW_NOUGAT = 22;//7.0以下打开相册
+    public static File outputImage;//存放摄像头拍下的图片
+    private static Context mContext;
+    private static Uri imageUri;//图片路径的URI
 
     public CameraAlbumUtil(Context context) {
         mContext = context;
@@ -46,63 +46,6 @@ public class CameraAlbumUtil {
             imageUri = FileProvider.getUriForFile(mContext, "cn.com.unilever.www.unileverapp", outputImage);
         } else {
             imageUri = Uri.fromFile(outputImage);
-        }
-    }
-
-    /**
-     * 选择拍照作为头像
-     * 需在<application>标签内注册一个<provider>,其中authorities属性为自定义，
-     * <meta-data>标签内resource属性指定了Uri的共享路径，引用了一个自定义资源。
-     * <provider
-     * android:name="android.support.v4.content.FileProvider"
-     * android:authorities="com.zlin.myapp.myfileprovider"
-     * android:exported="false"
-     * android:grantUriPermissions="true">
-     * <meta-data
-     * android:name="android.support.FILE_PROVIDER_PATHS"
-     * android:resource="@xml/file_paths"/>
-     * </provider>
-     * 在res下新建文件夹xml，然后新建一个资源文件，根节点为paths，<external-path>
-     * 内name属性为自定义，path属性值为空表示将整个SD卡进行共享。如果设备没有SD卡，则需要再增加其他标签
-     * <paths xmlns:android="http://schemas.android.com/apk/res/android">
-     * <!-- 对应/data/data//files目录 -->
-     * <files-path name="file_dir" path=""/>
-     * <!-- 对应/data/data//cache目录 -->
-     * <cache-path name="chche_dir" path=""/>
-     * <!-- 对应Environment.getExternalStorageDirectory()目录 -->
-     * <external-path name="external_storage_directory" path=""/>
-     * <!-- 对应Context.getExternalFilesDir()目录 -->
-     * <external-files-path name="camera_has_sdcard" path=""/>
-     * <!-- 对应Context.getExternalCacheDir()目录 -->
-     * <external-cache-path name="external_cache_dir" />
-     * </paths>
-     */
-    public void takePhoto() {
-        //启动相机程序
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        //通过MediaStore.EXTRA_OUTPUT这个Key告诉相机我想把数据保存到photoUri这个位置
-        if (isOnNougat()) {//7.0及以上
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-        } else {
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-        }
-        ((Activity) mContext).startActivityForResult(intent, TAKE_PHOTO);
-    }
-
-    //相册
-    public void openAlbum() {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("image/*");
-        if (isOnNougat()) {//如果大于等于7.0使用FileProvider
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            ((Activity) mContext).startActivityForResult(intent, OPEN_ALBUM_ON_NOUGAT);
-        } else {
-            ((Activity) mContext).startActivityForResult(intent, OPEN_ALBUM_BELOW_NOUGAT);
         }
     }
 
@@ -210,6 +153,63 @@ public class CameraAlbumUtil {
             return true;
         }
         return false;
+    }
+
+    /**
+     * 选择拍照作为头像
+     * 需在<application>标签内注册一个<provider>,其中authorities属性为自定义，
+     * <meta-data>标签内resource属性指定了Uri的共享路径，引用了一个自定义资源。
+     * <provider
+     * android:name="android.support.v4.content.FileProvider"
+     * android:authorities="com.zlin.myapp.myfileprovider"
+     * android:exported="false"
+     * android:grantUriPermissions="true">
+     * <meta-data
+     * android:name="android.support.FILE_PROVIDER_PATHS"
+     * android:resource="@xml/file_paths"/>
+     * </provider>
+     * 在res下新建文件夹xml，然后新建一个资源文件，根节点为paths，<external-path>
+     * 内name属性为自定义，path属性值为空表示将整个SD卡进行共享。如果设备没有SD卡，则需要再增加其他标签
+     * <paths xmlns:android="http://schemas.android.com/apk/res/android">
+     * <!-- 对应/data/data//files目录 -->
+     * <files-path name="file_dir" path=""/>
+     * <!-- 对应/data/data//cache目录 -->
+     * <cache-path name="chche_dir" path=""/>
+     * <!-- 对应Environment.getExternalStorageDirectory()目录 -->
+     * <external-path name="external_storage_directory" path=""/>
+     * <!-- 对应Context.getExternalFilesDir()目录 -->
+     * <external-files-path name="camera_has_sdcard" path=""/>
+     * <!-- 对应Context.getExternalCacheDir()目录 -->
+     * <external-cache-path name="external_cache_dir" />
+     * </paths>
+     */
+    public void takePhoto() {
+        //启动相机程序
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        //通过MediaStore.EXTRA_OUTPUT这个Key告诉相机我想把数据保存到photoUri这个位置
+        if (isOnNougat()) {//7.0及以上
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        } else {
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+        }
+        ((Activity) mContext).startActivityForResult(intent, TAKE_PHOTO);
+    }
+
+    //相册
+    public void openAlbum() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("image/*");
+        if (isOnNougat()) {//如果大于等于7.0使用FileProvider
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            ((Activity) mContext).startActivityForResult(intent, OPEN_ALBUM_ON_NOUGAT);
+        } else {
+            ((Activity) mContext).startActivityForResult(intent, OPEN_ALBUM_BELOW_NOUGAT);
+        }
     }
 
     /**

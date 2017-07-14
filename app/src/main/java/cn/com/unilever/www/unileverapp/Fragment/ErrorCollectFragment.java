@@ -31,14 +31,8 @@ public class ErrorCollectFragment extends Fragment implements View.OnClickListen
         view = inflater.inflate(R.layout.fragment_collect, null, false);
         Toolbar toolbar = (Toolbar) ((FunctionActivity) getActivity()).findViewById(R.id.mToolbar);
         toolbar.setTitle("异常管理");
-        init();
         initWidget();
         return view;
-    }
-
-    //获取数据
-    private void init() {
-        // TODO: 2017/5/22 获取数据 
     }
 
     private void initWidget() {
@@ -62,7 +56,6 @@ public class ErrorCollectFragment extends Fragment implements View.OnClickListen
                 ((FunctionActivity) getActivity()).changFragment(disposeFragment);
                 break;
             case R.id.btn_error:
-                // TODO: 2017/7/14 主管上报
                 if (rankFragment == null) {
                     rankFragment = new RankFragment();
                 }

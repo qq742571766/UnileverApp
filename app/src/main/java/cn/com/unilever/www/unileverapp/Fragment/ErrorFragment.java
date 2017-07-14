@@ -1,6 +1,5 @@
 package cn.com.unilever.www.unileverapp.Fragment;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +16,6 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ImageView;
-
-import java.io.File;
 
 import cn.com.unilever.www.unileverapp.R;
 import cn.com.unilever.www.unileverapp.activity.FunctionActivity;
@@ -37,25 +32,21 @@ public class ErrorFragment extends Fragment {
     private final static String url = "file:///android_asset/ErrorFragmentCall.html";
     private View view;
     private CameraAlbumUtil util;
-    private ImageView imageView;
-    private Context context;
     private WebView webview;
-    private String[] saveError;
-    private boolean aa = true;
+    private boolean on_off = true;
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
-            if (msg.what == 1 && aa) {
+            if (msg.what == 1 && on_off) {
+                Log.d("TAG", "handleMessage: ");
                 webview.loadUrl(url);
-                aa = false;
+                on_off = false;
             }
         }
     };
-    @Override
-    public void onAttach(Context context) {
-        this.context = context;
-        util = new CameraAlbumUtil(getActivity());
-        super.onAttach(context);
+
+    public ErrorFragment() {
     }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -66,42 +57,24 @@ public class ErrorFragment extends Fragment {
         //获取数据
         return view;
     }
+
     private void initWidget() {
         webview = (WebView) view.findViewById(R.id.wv_error);
-        imageView = (ImageView) view.findViewById(R.id.iv_problem_pictures);
         WebSettings webSettings = webview.getSettings();
-        //设置支持javaScript脚步语言
+        //设置支持javaScript脚本语言
         webSettings.setJavaScriptEnabled(true);
         //支持缩放按钮-前提是页面要支持才显示
         webSettings.setBuiltInZoomControls(true);
         //设置客户端-不跳转到默认浏览器中
         webview.setWebViewClient(new WebViewClient());
         //加载网络资源
-        webview.loadUrl("http://192.168.10.20:8080/HiperMES/login.sp?method=appLogin&loginName=admin&password=admin");
+        webview.loadUrl(MyConfig.loginurl);
         //支持屏幕缩放
         webSettings.setSupportZoom(false);
         webSettings.setBuiltInZoomControls(true);
         //设置支持js调用java
         webview.addJavascriptInterface(new AndroidAndJSInterface(), "Android");
-        webview.setWebViewClient(new WebViewClient() {
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-                File outputImage = new File(context.getExternalCacheDir(), "headPic.JPEG");
-            }
-        });
-        webview.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (event.getAction() == KeyEvent.ACTION_DOWN) {
-                    if (keyCode == KeyEvent.KEYCODE_BACK && webview.canGoBack()) {
-                        webview.goBack();
-                        return true;
-                    }
-                }
-                return false;
-            }
-        });
+        //页面监听
         webview.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
@@ -113,6 +86,7 @@ public class ErrorFragment extends Fragment {
             }
         });
     }
+
     private void chooseDagilog() {
         new AlertDialog.Builder(getActivity())
                 .setTitle("选择头像")
@@ -131,19 +105,11 @@ public class ErrorFragment extends Fragment {
                 })
                 .show();
     }
+
     private class AndroidAndJSInterface {
         @JavascriptInterface
         public void picture() {
             chooseDagilog();
-        }
-        @JavascriptInterface
-        public void show() {
-            if (MyConfig.bitmap != null) {
-                imageView.setImageBitmap(MyConfig.bitmap);
-            }
-        }
-        @JavascriptInterface
-        public void upload() {
         }
     }
 }

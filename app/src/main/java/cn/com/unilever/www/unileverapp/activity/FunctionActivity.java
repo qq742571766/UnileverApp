@@ -3,7 +3,9 @@ package cn.com.unilever.www.unileverapp.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -12,10 +14,17 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.TextView;
+
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 import cn.com.unilever.www.unileverapp.Fragment.AnswerFragment;
 import cn.com.unilever.www.unileverapp.Fragment.ErrorCollectFragment;
@@ -70,6 +79,7 @@ public class FunctionActivity extends BaseFragmentActiviy {
         SharedPreferences sp = getSharedPreferences("logininformation", Context.MODE_PRIVATE);
         String userKey = sp.getString("userKey", null);
         String username = sp.getString("username", null);
+        Log.d("TAG", userKey + "..." + username);
         TextView tv_name = (TextView) headerLayout.findViewById(R.id.tv_name);
         tv_name.setText(username);
         TextView tv_id = (TextView) headerLayout.findViewById(R.id.tv_lv);
@@ -91,9 +101,7 @@ public class FunctionActivity extends BaseFragmentActiviy {
                         activity_function.closeDrawers();
                         break;
                     case R.id.answer:
-//                        if (answerfragment == null) {
                         answerfragment = new AnswerFragment();
-//                        }
                         changFragment(answerfragment);
                         activity_function.closeDrawers();
                         break;
@@ -130,5 +138,7 @@ public class FunctionActivity extends BaseFragmentActiviy {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         MyConfig.bitmap = CameraAlbumUtil.onActivityResult(requestCode, resultCode, data);
+        WebView webView = (WebView) findViewById(R.id.wv_error);
+        webView.loadUrl("JavaScript:setImag('" + CameraAlbumUtil.outputImage.getAbsolutePath() + "')");
     }
 }

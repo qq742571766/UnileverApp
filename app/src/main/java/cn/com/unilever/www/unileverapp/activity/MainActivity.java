@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -38,10 +39,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText etPassword;
     private CheckBox cbMemory;
     private Button btnLogin;
+    private ProgressDialog progressDialog;
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             if (msg.what == 1) {
-                //{"message":null,"result":true,"permissions":[],"user":{"username":"admin","userKey":2,"name":"admin"}}
                 String response = (String) msg.obj;
                 try {
                     //json解析
@@ -62,7 +63,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         //跳转
                         Intent intent = new Intent(MainActivity.this, FunctionActivity.class);
                         startActivity(intent);
+                        progressDialog.dismiss();
                         MainActivity.this.finish();
+                    } else {
+                        Snackbar.make(etUsername, "登录失败,请检查登录信息", Snackbar.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -117,6 +121,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     editor.putBoolean("isChecked", true);
                     editor.putString("username", username);
                     editor.putString("password", password);
+                    Log.d("TAG", username + password);
                     editor.apply();
                 }
             }
@@ -130,11 +135,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .build()
                 .connTimeOut(10000)
                 .execute(new StringCallback() {
-                    private ProgressDialog progressDialog;
-
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        Snackbar.make(btnLogin, "登录信息有误请核对" + e.getMessage(), Snackbar.LENGTH_SHORT).show();
+                        Log.d("TAG", "登录错误:" + e);
+                        Snackbar.make(btnLogin, "登录失败请检查网络" + e.getMessage(), Snackbar.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -143,17 +147,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         progressDialog.setMessage("正在登陆中");
                         progressDialog.setCanceledOnTouchOutside(false);
                         progressDialog.show();
+                        Log.d("TAG", "登录成功");
                         super.onBefore(request, id);
                     }
 
                     @Override
                     public void onAfter(int id) {
                         super.onAfter(id);
-                        progressDialog.dismiss();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
+                        Log.d("TAG", "登录响应完成");
                         Message msg = new Message();
                         msg.what = 1;
                         msg.obj = response;
