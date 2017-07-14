@@ -7,20 +7,36 @@
     <meta name="Keywords" content="">
     <meta name="Description" content="">
 </head>
-<body>
-<form style="text-align:center" action="" method="get">
+<script type="text/javascript">
+
+        function javaCallJs() {
+    var myDate = new Date();
+    myDate.toLocaleString(); //获取日期与时间
+    myDate.toLocaleDateString();     //获取当前日期
+    document.getElementById("input").innerText = ( myDate.toLocaleString());
+    document.getElementById("input1").innerText = (myDate.toLocaleDateString());
+    document.getElementById("input").style.display = "none";
+    document.getElementById("input1").style.display = "none";
+}
+
+</script>
+<body onload="javaCallJs()">
+<form style="text-align:center"
+      action="http://192.168.10.20:8080/HiperMES/ErrorController.sp?method=saveError" method="post">
     <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+        <input id="input" name="CloseTime"  type="text" style="display:none"/>
+        <input id="input1" name="CloseDate" type="text" style="display:none"/>
         <tr align="center" valign="middle">
             <td width="20%">
                 <p>
-                    <strong>异常类型</strong>
+                    <strong>类型</strong>
                 </p>
             </td>
             <td width="80%">
-                <select style="width:200px" name="errorType">
+                <select style="width:200px" name="yc">
                     <option value="">请选择异常类型</option>
-                    <option value="1">问题1</option>
-                    <option value="2">问题2</option>
+                    <option value="AM">AM</option>
+                    <option value="PM">PM</option>
                 </select>
             </td>
         </tr>
@@ -31,10 +47,14 @@
                 </p>
             </td>
             <td width="80%">
-                <select style="width:200px" name="area_type">
+                <select style="width:200px" name="EnvironmentType">
                     <option value="">请选择区域</option>
-                    <option value="1">问题1</option>
-                    <option value="2">问题2</option>
+                    <option value="1">能源</option>
+                    <option value="2">废弃物</option>
+                    <option value="3">危险废弃物</option>
+                    <option value="4">化学品</option>
+                    <option value="5">水</option>
+                    <option value="6">污水</option>
                 </select>
             </td>
         </tr>
@@ -45,10 +65,18 @@
                 </p>
             </td>
             <td width="80%">
-                <select style="width:200px" name="area">
+                <select style="width:200px" name="Area">
                     <option value="">请选择产线</option>
-                    <option value="1">问题1</option>
-                    <option value="2">问题2</option>
+                    <option value="预配">预配</option>
+                    <option value="烧料">烧料</option>
+                    <option value="灌装">灌装</option>
+                    <option value="4">包装</option>
+                    <option value="5">码板</option>
+                    <option value="6">5T 坦克</option>
+                    <option value="7">罐区</option>
+                    <option value="8">卡波站</option>
+                    <option value="9">公共区域</option>
+                    <option value="10">测试2</option>
                 </select>
             </td>
         </tr>
@@ -59,10 +87,11 @@
                 </p>
             </td>
             <td width="80%">
-                <select style="width:200px" name="factory">
+                <select style="width:200px" name="Factory">
                     <option value="">请选择设备</option>
-                    <option value="1">问题1</option>
-                    <option value="2">问题2</option>
+                    <option value="8005">8005</option>
+                    <option value="8006">8006</option>
+                    <option value="8007">8007</option>
                 </select>
             </td>
         </tr>
@@ -73,10 +102,10 @@
                 </p>
             </td>
             <td width="80%">
-                <select style="width:200px" name="problem_types">
-                    <option value="">请选择问题类型</option>
-                    <option value="1">问题1</option>
-                    <option value="2">问题2</option>
+                <select style="width:200px" name="ErrorType">
+                    <option value="">请选择异常类型</option>
+                    <option value="1">小停机</option>
+                    <option value="2">故障</option>
                 </select>
             </td>
         </tr>
@@ -87,7 +116,7 @@
                 </p>
             </td>
             <td>
-                <textarea style="resize:none" rows="5" name="errorContent"></textarea>
+                <textarea style="resize:none" rows="5" name="ErrorContent"></textarea>
             </td>
         </tr>
         <tr align="center" valign="middle">
@@ -102,10 +131,10 @@
             </td>
         </tr>
     </table>
-        <td>
-            <p>
-                <input type="submit" value="提交" onclick="window.Android.upload()"/>
-            </p>
-        </td>
+    <td>
+        <p>
+            <input type="submit" value="提交" onclick="window.Android.upload()"/>
+        </p>
+    </td>
 </form>
 </body>

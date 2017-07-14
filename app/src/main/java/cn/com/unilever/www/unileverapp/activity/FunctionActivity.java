@@ -23,7 +23,6 @@ import cn.com.unilever.www.unileverapp.R;
 import cn.com.unilever.www.unileverapp.base.BaseFragmentActiviy;
 import cn.com.unilever.www.unileverapp.config.MyConfig;
 import cn.com.unilever.www.unileverapp.utils.CameraAlbumUtil;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * @class 功能界面

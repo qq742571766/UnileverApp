@@ -3,54 +3,52 @@
 <head>
     <meta name="content-type" content="text/html; charset=UTF-8">
     <script language="javascript">
-function javaCallJs(s) {
-    var obj = JSON.parse(s);
-    document.getElementById("span1").innerText = (obj.a1);
-    document.getElementById("span2").innerText = (obj.a2);
-    document.getElementById("span3").innerText = (obj.a3);
-    document.getElementById("span4").innerText = (obj.a4);
-    document.getElementById("span5").innerText = (obj.a5);
-    document.getElementById("span6").innerText = (obj.a6);
-    document.getElementById("span7").innerText = (obj.a7);
-    document.getElementById("span8").innerText = (obj.a8);
-    document.getElementById("span9").innerText = (obj.a9);
-    document.getElementById("span10").innerText = (obj.a10);
-    document.getElementById("span11").innerText = (obj.a11);
-    document.getElementById("span12").innerText = (obj.a12);
-    document.getElementById("span13").innerText = (obj.a13);
-    document.getElementById("span14").innerText = (obj.a14);
-    document.getElementById("span15").innerText = (obj.a15);
-    for (var i = obj.a0 + 1; i < 20; i++) {
-        document.getElementById("input" + i).style.display = "none";
-        document.getElementById("span" + i).style.display = "none";
-    }
-}
-function beforeSubmit(form){
-if(form.id.value==''){
-alert('答题人员工号');
-form.id.focus();
-return false;
-}
-if(form.name.value==''){
-alert('答题人员姓名');
-form.name.focus();
-return false;
-}
-return true;
-}
-
+        function javaCallJs(s) {
+            var obj = JSON.parse(s);
+            document.getElementById("span1").innerText = (obj.a1);
+            document.getElementById("span2").innerText = (obj.a2);
+            document.getElementById("span3").innerText = (obj.a3);
+            document.getElementById("span4").innerText = (obj.a4);
+            document.getElementById("span5").innerText = (obj.a5);
+            document.getElementById("span6").innerText = (obj.a6);
+            document.getElementById("span7").innerText = (obj.a7);
+            document.getElementById("span8").innerText = (obj.a8);
+            document.getElementById("span9").innerText = (obj.a9);
+            document.getElementById("span10").innerText = (obj.a10);
+            document.getElementById("span11").innerText = (obj.a11);
+            document.getElementById("span12").innerText = (obj.a12);
+            document.getElementById("span13").innerText = (obj.a13);
+            document.getElementById("span14").innerText = (obj.a14);
+            document.getElementById("span15").innerText = (obj.a15);
+            for (var i = obj.a0 + 1; i < 20; i++) {
+                document.getElementById("input" + i).style.display = "none";
+                document.getElementById("span" + i).style.display = "none";
+            }
+        }
+        function beforeSubmit(form) {
+            if (form.id.value == '') {
+                alert('答题人员工号');
+                form.id.focus();
+                return false;
+            }
+            if (form.name.value == '') {
+                alert('答题人员姓名');
+                form.name.focus();
+                return false;
+            }
+            return true;
+        }
     </script>
 </head>
 <body>
 <form style="list-style:none;text-align:left" method="get" name="form"
       onSubmit="return beforeSubmit(this);">
     <ol style="list-style:none;text-align:left">
-        <li><strong style="font-size:14px">答题人员工号</strong> <textarea style="resize:none" rows="1"
-                                                                     name="id"></textarea></li>
+        <li><strong style="font-size:14px">答题人员工号</strong> <textarea style="resize:none" rows="1" name="id" onKeyUp="value=value.replace(/[\W]/g,'')"></textarea>
+        </li>
     </ol>
     <ol style="list-style:none;text-align:left">
-        <li><strong style="font-size:14px">答题人员姓名</strong> <textarea style="resize:none" rows="1"
-                                                                     name="name"></textarea></li>
+        <li><strong style="font-size:14px">答题人员姓名</strong> <textarea style="resize:none" rows="1" name="name"></textarea></li>
     </ol>
     <hr style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" color="#3F51B5" size="3"/>
     <div id="div" style="text-align:left">
@@ -121,26 +119,32 @@ return true;
         <span>全选</span>
     </ol>
     <script>
-            var CheckBox=div.getElementsByTagName('input');
+        var CheckBox = div.getElementsByTagName('input');
 
-            //全选
-            function CheckAll(){
-                for(i=0;i<CheckBox.length;i++){CheckBox[i].checked=true;};
+        //全选
+        function CheckAll() {
+            for (i = 0; i < CheckBox.length; i++) {
+                CheckBox[i].checked = true;
             };
+        };
 
-            //不选
-            function UnCheck(){
-                for(i=0;i<CheckBox.length;i++){CheckBox[i].checked=false;};
-                };
+        //不选
+        function UnCheck() {
+            for (i = 0; i < CheckBox.length; i++) {
+                CheckBox[i].checked = false;
+            };
+        };
 
-            //反选
-            function othercheck(){
-                for(i=0;i<CheckBox.length;i++){
-                    if(CheckBox[i].checked==true){ CheckBox[i].checked=false;}
-                    else{ CheckBox[i].checked=true}
+        //反选
+        function othercheck() {
+            for (i = 0; i < CheckBox.length; i++) {
+                if (CheckBox[i].checked == true) {
+                    CheckBox[i].checked = false;
+                } else {
+                    CheckBox[i].checked = true
                 }
-            };
-
+            }
+        };
     </script>
     <input type="submit" value="开始提问" style="font-size:20px;width:100%;height:100%;"
            onclick="window.Android.upload()"/>

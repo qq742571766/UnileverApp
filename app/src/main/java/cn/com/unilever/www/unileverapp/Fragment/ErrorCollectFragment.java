@@ -22,8 +22,8 @@ import cn.com.unilever.www.unileverapp.view.ClearArcView;
 public class ErrorCollectFragment extends Fragment implements View.OnClickListener {
     private View view;
     private DisposeFragment disposeFragment;
-    private ErrorFragment errorFragment;
     private HistoryFragment historyFragment;
+    private RankFragment rankFragment;
 
     @Nullable
     @Override
@@ -62,10 +62,11 @@ public class ErrorCollectFragment extends Fragment implements View.OnClickListen
                 ((FunctionActivity) getActivity()).changFragment(disposeFragment);
                 break;
             case R.id.btn_error:
-                if (errorFragment == null) {
-                    errorFragment = new ErrorFragment();
+                // TODO: 2017/7/14 主管上报
+                if (rankFragment == null) {
+                    rankFragment = new RankFragment();
                 }
-                ((FunctionActivity) getActivity()).changFragment(errorFragment);
+                ((FunctionActivity) getActivity()).changFragment(rankFragment);
                 break;
             case R.id.btn_history:
                 if (historyFragment == null) {

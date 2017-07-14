@@ -2,8 +2,9 @@ package cn.com.unilever.www.unileverapp.Fragment;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.icu.text.SymbolTable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -18,30 +19,13 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
-import android.widget.Toast;
-
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
-
-import org.xutils.common.Callback;
-import org.xutils.http.RequestParams;
-import org.xutils.x;
 
 import java.io.File;
-import java.io.IOException;
 
 import cn.com.unilever.www.unileverapp.R;
 import cn.com.unilever.www.unileverapp.activity.FunctionActivity;
 import cn.com.unilever.www.unileverapp.config.MyConfig;
 import cn.com.unilever.www.unileverapp.utils.CameraAlbumUtil;
-import cn.com.unilever.www.unileverapp.utils.SystemTimeUtil;
-import okhttp3.Call;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-
-import static cn.com.unilever.www.unileverapp.config.MyConfig.name;
-import static cn.com.unilever.www.unileverapp.config.MyConfig.sourceStrArray;
 
 /**
  * @class 异常填写
@@ -57,14 +41,21 @@ public class ErrorFragment extends Fragment {
     private Context context;
     private WebView webview;
     private String[] saveError;
-
+    private boolean aa = true;
+    private Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            if (msg.what == 1 && aa) {
+                webview.loadUrl(url);
+                aa = false;
+            }
+        }
+    };
     @Override
     public void onAttach(Context context) {
         this.context = context;
         util = new CameraAlbumUtil(getActivity());
         super.onAttach(context);
     }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -75,7 +66,6 @@ public class ErrorFragment extends Fragment {
         //获取数据
         return view;
     }
-
     private void initWidget() {
         webview = (WebView) view.findViewById(R.id.wv_error);
         imageView = (ImageView) view.findViewById(R.id.iv_problem_pictures);
@@ -87,7 +77,7 @@ public class ErrorFragment extends Fragment {
         //设置客户端-不跳转到默认浏览器中
         webview.setWebViewClient(new WebViewClient());
         //加载网络资源
-        webview.loadUrl(url);
+        webview.loadUrl("http://192.168.10.20:8080/HiperMES/login.sp?method=appLogin&loginName=admin&password=admin");
         //支持屏幕缩放
         webSettings.setSupportZoom(false);
         webSettings.setBuiltInZoomControls(true);
@@ -113,49 +103,16 @@ public class ErrorFragment extends Fragment {
             }
         });
         webview.setWebViewClient(new WebViewClient() {
-            private String[] saveError;
-
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                String[] sourceStrArray = url.split("\\?");
-                String[] details = sourceStrArray[1].split("&");
-                String saveError = "";
-                for (int i = 0; i < details.length; i++) {
-                    String[] save = details[i].split("=");
-                    saveError += save[0] + "=" + save[1];
-                    if (i < details.length - 1) {
-                        saveError += "&";
-                    }
-                }
-                //开始时间
-                String errorDate = SystemTimeUtil.getErrorDate();
-                Log.d("AAAerrorDate", errorDate);
-                //开始日期
-                String closeDate = SystemTimeUtil.getCloseDate();
-                Log.d("AAAcloseDate", closeDate);
-                Log.d("AAA", saveError);
-                OkHttpUtils
-                        .post()
-                        .url("http://192.168.10.20:8080/HiperMES_Unilever/ematQuestion.sp?method=toAndroid")
-
-                        .build()
-                        .connTimeOut(300000)
-                        .execute(new StringCallback() {
-                            @Override
-                            public void onError(Call call, Exception e, int id) {
-                                Log.d("AAA", id + "..." + e + "..." + call);
-                            }
-
-                            @Override
-                            public void onResponse(String response, int id) {
-                                Log.d("AAA", id + "..." + response);
-                            }
-                        });
-                return super.shouldOverrideUrlLoading(view, url);
+            public void onPageFinished(WebView view, String url) {
+                Log.d("AAA", url);
+                Message msg = new Message();
+                msg.what = 1;
+                handler.sendMessage(msg);
+                super.onPageFinished(view, url);
             }
         });
     }
-
     private void chooseDagilog() {
         new AlertDialog.Builder(getActivity())
                 .setTitle("选择头像")
@@ -174,23 +131,19 @@ public class ErrorFragment extends Fragment {
                 })
                 .show();
     }
-
     private class AndroidAndJSInterface {
         @JavascriptInterface
         public void picture() {
             chooseDagilog();
         }
-
         @JavascriptInterface
         public void show() {
             if (MyConfig.bitmap != null) {
                 imageView.setImageBitmap(MyConfig.bitmap);
             }
         }
-
         @JavascriptInterface
         public void upload() {
-            // TODO: 2017/6/13 上报接口(图片)
         }
     }
 }

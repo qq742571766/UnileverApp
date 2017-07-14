@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <Button
+        android:id="@+id/SMAT"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="SMAT" />
+
+    <Button
+        android:id="@+id/DAC"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/SMAT"
+        android:layout_alignRight="@+id/SMAT"
+        android:layout_below="@+id/SMAT"
+        android:layout_marginTop="50dp"
+        android:text="DAC" />
+
+    <Button
+        android:id="@+id/EMAT"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/DAC"
+        android:layout_alignRight="@+id/DAC"
+        android:layout_below="@+id/DAC"
+        android:layout_marginTop="50dp"
+        android:text="EMAT" />
+
+    <Button
+        android:id="@+id/TAG"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/EMAT"
+        android:layout_alignStart="@+id/EMAT"
+        android:layout_below="@+id/EMAT"
+        android:layout_marginTop="50dp"
+        android:text="TAG" />
+</RelativeLayout>
