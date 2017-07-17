@@ -56,7 +56,7 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
                     JSONArray jsonArray = new JSONArray((String) msg.obj);
                     s = "{" +
                             "\"" + "a0" + "\"" + ":" + jsonArray.length() + ",";
-                    MyConfig.problem = new ArrayList<String>();
+                    MyConfig.problem = new ArrayList<>();
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         s += "\"" + "a" + (i + 1) + "\"" + ":" + "\"" + jsonObject.getString("questionContent") + "\"";
@@ -102,7 +102,7 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_answer, null, false);
-        Toolbar toolbar = (Toolbar) ((FunctionActivity) getActivity()).findViewById(R.id.mToolbar);
+        Toolbar toolbar = (Toolbar)getActivity().findViewById(R.id.mToolbar);
         toolbar.setTitle("问题发起");
         return view;
     }
@@ -222,7 +222,7 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onStart() {
         super.onStart();
-        MyConfig.sourceStrArray = new ArrayList<Integer>();
+        MyConfig.sourceStrArray = new ArrayList<>();
         initview();
         initdata();
         button.performClick();

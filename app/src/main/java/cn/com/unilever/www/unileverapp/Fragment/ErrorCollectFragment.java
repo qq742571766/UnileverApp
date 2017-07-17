@@ -29,7 +29,7 @@ public class ErrorCollectFragment extends Fragment implements View.OnClickListen
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_collect, null, false);
-        Toolbar toolbar = (Toolbar) ((FunctionActivity) getActivity()).findViewById(R.id.mToolbar);
+        Toolbar toolbar = (Toolbar)getActivity().findViewById(R.id.mToolbar);
         toolbar.setTitle("异常管理");
         initWidget();
         return view;

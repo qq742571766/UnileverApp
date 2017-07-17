@@ -12,13 +12,11 @@ import java.util.Locale;
 public class SystemTimeUtil {
     public static String getErrorDate() {
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss", Locale.getDefault());
-        String date = sDateFormat.format(new java.util.Date());
-        return date;
+        return sDateFormat.format(new java.util.Date());
     }
 
     public static String getCloseDate() {
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-        String date = sDateFormat.format(new java.util.Date());
-        return date;
+        return sDateFormat.format(new java.util.Date());
     }
 }

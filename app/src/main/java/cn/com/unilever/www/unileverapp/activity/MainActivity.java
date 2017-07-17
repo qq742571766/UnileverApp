@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     @Override
                     public void onBefore(Request request, int id) {
-                        progressDialog = new ProgressDialog(MainActivity.this, ProgressDialog.THEME_DEVICE_DEFAULT_DARK);
+                        progressDialog = new ProgressDialog(MainActivity.this, 4);
                         progressDialog.setMessage("正在登陆中");
                         progressDialog.setCanceledOnTouchOutside(false);
                         progressDialog.show();

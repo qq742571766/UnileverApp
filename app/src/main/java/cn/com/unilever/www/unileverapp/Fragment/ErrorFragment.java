@@ -18,7 +18,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import cn.com.unilever.www.unileverapp.R;
-import cn.com.unilever.www.unileverapp.activity.FunctionActivity;
 import cn.com.unilever.www.unileverapp.config.MyConfig;
 import cn.com.unilever.www.unileverapp.utils.CameraAlbumUtil;
 
@@ -48,7 +47,7 @@ public class ErrorFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_error, null);
-        Toolbar toolbar = (Toolbar) ((FunctionActivity) getActivity()).findViewById(R.id.mToolbar);
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.mToolbar);
         toolbar.setTitle("异常填写");
         initWidget();
         //获取数据

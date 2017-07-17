@@ -21,7 +21,6 @@ import java.io.IOException;
 
 import static android.app.Activity.RESULT_OK;
 
-
 public class CameraAlbumUtil {
     private static final int TAKE_PHOTO = 1;//拍照
     private static final int OPEN_ALBUM_ON_NOUGAT = 2;//7.0及以上打开相册
@@ -121,6 +120,7 @@ public class CameraAlbumUtil {
             if (isOnKiaKat()) {
                 //这个方法是处理4.4以上图片返回的Uri对象不同的处理方法
                 String url = GetImagePath.getPath(mContext, inputUri);
+                assert url != null;
                 intent.setDataAndType(Uri.fromFile(new File(url)), "image/*");
             } else {
                 intent.setDataAndType(inputUri, "image/*");
@@ -141,18 +141,12 @@ public class CameraAlbumUtil {
 
     //判断运行设备的系统版本是否高于或等于Android7.0
     private static boolean isOnNougat() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            return true;
-        }
-        return false;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.N;
     }
 
     //判断运行设备的系统版本是否高于或等于Android4.4
     private static boolean isOnKiaKat() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            return true;
-        }
-        return false;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
     }
 
     /**

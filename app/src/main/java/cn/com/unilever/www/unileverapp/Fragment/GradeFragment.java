@@ -8,7 +8,6 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +37,6 @@ class GradeFragment extends Fragment implements View.OnClickListener {
     private WebView webView;
     private Button button;
     private Context context;
-    private String s;
     private Timer timer = new Timer();
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
@@ -57,7 +55,6 @@ class GradeFragment extends Fragment implements View.OnClickListener {
             handler.sendMessage(message);
         }
     };
-    private Toolbar toolbar;
 
     @Override
     public void onAttach(Context context) {
@@ -69,7 +66,7 @@ class GradeFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_grade, null, false);
-        Toolbar toolbar = (Toolbar) ((FunctionActivity) getActivity()).findViewById(R.id.mToolbar);
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.mToolbar);
         toolbar.setTitle("评分");
         return view;
     }
@@ -100,12 +97,16 @@ class GradeFragment extends Fragment implements View.OnClickListener {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 String[] urls = url.split("=");
-                if (urls[1].equals("1")) {
-                    MyConfig.ExcellentNumber += 1;
-                } else if (urls[1].equals("2")) {
-                    MyConfig.FineNumber += 1;
-                } else if (urls[1].equals("3")) {
-                    MyConfig.DadNumber += 1;
+                switch (urls[1]) {
+                    case "1":
+                        MyConfig.ExcellentNumber += 1;
+                        break;
+                    case "2":
+                        MyConfig.FineNumber += 1;
+                        break;
+                    case "3":
+                        MyConfig.DadNumber += 1;
+                        break;
                 }
                 if (MyConfig.sourceStrArray.size() == i) {
                     EMATAccomplish accomplish = new EMATAccomplish();
@@ -123,7 +124,7 @@ class GradeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (MyConfig.problem != null && MyConfig.sourceStrArray.size() > i) {
-            s = MyConfig.problem.get(MyConfig.sourceStrArray.get(i));
+            String s = MyConfig.problem.get(MyConfig.sourceStrArray.get(i));
             //题
             webView.loadUrl("javascript:javaCallJs(" + "'" + s + "'" + ")");
             //答案

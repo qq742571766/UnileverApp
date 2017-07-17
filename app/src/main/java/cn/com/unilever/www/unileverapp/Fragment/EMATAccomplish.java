@@ -1,14 +1,11 @@
 package cn.com.unilever.www.unileverapp.Fragment;
 
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -24,19 +21,13 @@ import android.widget.TextView;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
 import cn.com.unilever.www.unileverapp.R;
-import cn.com.unilever.www.unileverapp.activity.FunctionActivity;
-import cn.com.unilever.www.unileverapp.activity.MainActivity;
 import cn.com.unilever.www.unileverapp.config.MyConfig;
 import cn.com.unilever.www.unileverapp.utils.SystemTimeUtil;
 import okhttp3.Call;
-import okhttp3.Request;
 
 /**
  * @class EMAT提交
@@ -77,7 +68,7 @@ public class EMATAccomplish extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_accomplish, null, false);
-        Toolbar toolbar = (Toolbar) ((FunctionActivity) getActivity()).findViewById(R.id.mToolbar);
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.mToolbar);
         toolbar.setTitle("评分");
         return view;
     }
@@ -119,13 +110,6 @@ public class EMATAccomplish extends Fragment implements View.OnClickListener {
         //支持屏幕缩放
         webSettings.setSupportZoom(false);
         webSettings.setBuiltInZoomControls(true);
-        webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-
-                return super.shouldOverrideUrlLoading(view, url);
-            }
-        });
     }
 
 

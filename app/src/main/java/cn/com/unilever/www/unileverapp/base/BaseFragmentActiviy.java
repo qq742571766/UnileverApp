@@ -36,7 +36,6 @@ public class BaseFragmentActiviy extends AppCompatActivity {
             } else {
                 handleResult(frag, requestCode, resultCode, data);
             }
-            return;
         }
 
     }
