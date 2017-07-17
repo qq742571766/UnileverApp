@@ -20,6 +20,7 @@ import okhttp3.OkHttpClient;
  * @time 2017/5/17 11:32
  */
 public class MyApplication extends Application {
+
     @Override
     public void onCreate() {
         super.onCreate();

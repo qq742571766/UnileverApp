@@ -1,21 +1,36 @@
 package cn.com.unilever.www.unileverapp.Fragment;
 
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.JavascriptInterface;
+import android.webkit.ValueCallback;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
+
+import java.io.File;
+import java.io.IOException;
 
 import cn.com.unilever.www.unileverapp.R;
 import cn.com.unilever.www.unileverapp.config.MyConfig;
@@ -28,7 +43,11 @@ import cn.com.unilever.www.unileverapp.utils.CameraAlbumUtil;
  * @time 2017/5/17 14:24
  */
 public class ErrorFragment extends Fragment {
-    private final static String url = "file:///android_asset/ErrorFragmentCall.html";
+    //D:\demo\UnileverApp\app\src\main\assets\H50B7ECBA\www\index.html
+    private final static String url = "file:///android_asset/H50B7ECBA/www/index.html";
+    ValueCallback<Uri> mUploadMessage;
+    ValueCallback<Uri[]> mFilePathCallback;
+    private WebView mWebView;
     private View view;
     private CameraAlbumUtil util;
     private WebView webview;
@@ -36,12 +55,18 @@ public class ErrorFragment extends Fragment {
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             if (msg.what == 1 && on_off) {
-                Log.d("TAG", "handleMessage: ");
                 webview.loadUrl(url);
                 on_off = false;
             }
         }
     };
+    private Context context;
+
+    @Override
+    public void onAttach(Context context) {
+        this.context = context;
+        super.onAttach(context);
+    }
 
     @Nullable
     @Override
