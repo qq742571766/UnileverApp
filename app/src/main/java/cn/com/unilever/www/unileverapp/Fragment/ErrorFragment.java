@@ -44,9 +44,6 @@ public class ErrorFragment extends Fragment {
         }
     };
 
-    public ErrorFragment() {
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -89,7 +86,7 @@ public class ErrorFragment extends Fragment {
 
     private void chooseDagilog() {
         new AlertDialog.Builder(getActivity())
-                .setTitle("选择头像")
+                .setTitle("选择相片")
                 .setPositiveButton("相机", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

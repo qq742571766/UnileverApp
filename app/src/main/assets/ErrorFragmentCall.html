@@ -1,150 +1,195 @@
 <!DOCTYPE html>
 <html language="cn">
 <head>
-    <meta name="content-type" content="text/html; charset=UTF-8">
-    <meta name="Generator" content="EditPlus®">
-    <meta name="Author" content="">
-    <meta name="Keywords" content="">
-    <meta name="Description" content="">
+    <meta name="content-type" content="text/html; charset=UTF-8" />
+    <style type="text/css">
+                /* SELECT W/IMAGE */
+        select#selectTravelCity {
+            width: 14em;
+            height: 3.2em;
+            padding: 0.2em 0.4em 0.2em 0.4em;
+            vertical - align: middle;
+            border: 1px solid#e9e9e9; - moz - border - radius: 0.2em; - webkit - border - radius: 0.2em;
+            border - radius: 0.2em;
+            box - shadow: inset 0 0 3px#a0a0a0; - webkit - appearance: none; - moz - appearance: none;
+            appearance: none;
+            /* sample image from the webinfocentral.com */
+            background: url(http: //webinfocentral.com/Images/favicon.ico) 95% / 10% no-repeat #fdfdfd;
+            font - family: Arial, Calibri, Tahoma, Verdana; font - size: 1.1em; color: #000099; cursor: pointer;
+        }
+        select#selectTravelCity option {
+            font - size: 1em;
+            padding: 0.2em 0.4em 0.2em 0.4em;
+        }
+        select#selectTravelCity option[selected] {
+            font - weight: bold
+        }
+        select#selectTravelCity option: nth - child(even) {
+            background - color: #f5f5f5;
+        }
+        select#selectTravelCity: hover {
+            color: #101010;
+            border: 1px solid#cdcdcd;
+        }
+        select#selectTravelCity: focus {
+            box - shadow: 0 0 2px 1px#404040;
+        }
+
+        /*SELECT W/DOWN-ARROW*/
+        select#selectPointOfInterest {
+            width: 185pt;
+            height: 40pt;
+            line - height: 40pt;
+            padding - right: 20pt;
+            text - indent: 4pt;
+            text - align: left;
+            vertical - align: middle;
+            box - shadow: inset 0 0 3px#606060;
+            border: 1px solid#acacac; - moz - border - radius: 6px; - webkit - border - radius: 6px;
+            border - radius: 6px; - webkit - appearance: none; - moz - appearance: none;
+            appearance: none;
+            font - family: Arial,
+            Calibri,
+            Tahoma,
+            Verdana;
+            font - size: 18pt;
+            font - weight: 500;
+            color: #000099;
+            cursor: pointer;
+            outline: none;
+        }
+        select#selectPointOfInterest option {
+            padding: 4px 10px 4px 10px;
+            font - size: 11pt;
+            font - weight: normal;
+        }
+        select#selectPointOfInterest option[selected] {
+            font - weight: bold
+        }
+        select#selectPointOfInterest option: nth - child(even) {
+            background - color: #f5f5f5;
+        }
+        select#selectPointOfInterest: hover {
+            font - weight: 700;
+        }
+        select#selectPointOfInterest: focus {
+            box - shadow: inset 0 0 5px#000099;
+            font - weight: 600;
+        }
+
+        /*LABEL FOR SELECT*/
+        label#lblSelect {
+            position: relative;
+            display: inline - block;
+        }
+        /*DOWNWARD ARROW (25bc)*/
+        label#lblSelect: :after {
+            content: "\25bc";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 20pt;
+            line - height: 40pt;
+            vertical - align: middle;
+            text - align: center;
+            background: #000099;
+            color: #fefefe; - moz - border - radius: 0 6px 6px 0; - webkit - border - radius: 0 6px 6px 0;
+            border - radius: 0 6px 6px 0;
+            pointer - events: none;
+        }
+        input[type = text] {
+            text - indent: 4pt;
+            text - align: left;
+            vertical - align: middle;
+            box - shadow: inset 0 0 3px#606060;
+            border: 1px solid#acacac; - moz - border - radius: 6px; - webkit - border - radius: 6px;
+            border - radius: 6px; - webkit - appearance: none; - moz - appearance: none;
+            appearance: none;
+            font - family: Arial,
+            Calibri,
+            Tahoma,
+            Verdana;
+            font - size: 18pt;
+            font - weight: 500;
+            color: #000099;
+            cursor: pointer;
+            outline: none;
+        }
+        input#button1 {
+            /* General Propertoes */
+            height: 34px;
+            width: 250px;
+            border: 1px solid#858fa6;
+            background: #4a5775;
+            /* CSS3 Styling */
+            background: -moz - linear - gradient(top, #606c88, #3f4c6b);
+            background: -webkit - gradient(linear, left top, left bottom, from(#606c88), to(#3f4c6b)); - moz - border - radius: 5px; - webkit - border - radius: 5px;
+            border - radius: 5px; - moz - box - shadow: 0px 0px 5px#000; - webkit - box - shadow: 0px 0px 5px#000;
+            box - shadow: 0px 0px 5px#000;
+            /* Text Styling */
+            font - family: 'AirstreamRegular',
+            Georgia,
+            'Times New Roman',
+            serif;
+            color: #e5edff;
+            text - shadow: 0px 0px 5px rgba(0, 0, 0, 0.75);
+            font - size: 30px;
+        }
+        /* Pseudo-classes for interactivity */
+        input#button1: hover,
+        input#button1: focus {
+            border - color: #adbad9;
+        }
+        input#button1: active {
+            background: -moz - linear - gradient(bottom, #606c88, #3f4c6b);
+            background: -webkit - gradient(linear, left bottom, left top, from(#606c88), to(#3f4c6b));
+            text - shadow: 0px 0px 2px#000;
+        }
+    </style>
+    <script>
+        function sendInfoToAndroid(){
+            window.Android.picture();
+        }
+        function setImag(path){
+            document.getElementById("img").src=""+path
+        }
+    </script>
 </head>
-<script>
-	function sendInfoToAndroid(){
-		window.Android.picture();
-	}
-	function setImag(path){
-		document.getElementById("img").src=""+path
-	}
-</script>
 <body onload="javaCallJs()">
 <form style="text-align:center" method="post">
-    <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <select style="resize:none;width:80%;" name="ErrorType" id="selectTravelCity"> <option value="1">类型</option> <option value="安全">安全</option> <option value="环境">环境</option> <option value="AM">AM</option> <option value="PM">PM</option> </select>
+    <br />
+    <select style="resize:none;width:80%;" name="AbnormalRegion" id="selectTravelCity"> <option value="1">区域类型</option> <option value="预配">预配</option> <option value="烧料">烧料</option> <option value="灌装">灌装</option> <option value="4">包装</option> <option value="5">码板</option> <option value="6">5T 坦克</option> <option value="7">罐区</option> <option value="8">卡波站</option> <option value="9">公共区域</option> <option value="10">测试2</option> </select>
+    <br />
+    <select style="resize:none;width:80%;" name="ProductionLine" id="selectTravelCity"> <option value="1">区域</option> <option value="1#10ton">1#10ton&quot;</option> <option value="2#10ton">2#10ton&quot;</option> <option value="3#10ton">3#10ton&quot;</option> <option value="4#8ton">4#8ton&quot;</option> <option value="5#10ton">5#10ton&quot;</option> <option value="6#10ton">6#10ton&quot;</option> <option value="7#10ton">7#10ton&quot;</option> <option value="8#10ton">8#10ton&quot;</option> </select>
+    <br />
+    <select style="resize:none;width:80%;" name="OLESubClass2" id="selectTravelCity"> <option value="1">设备</option> <option value="理瓶机">理瓶机</option> <option value="BTU">BTU</option> <option value="理盖机">理盖机</option> <option value="灌装机">灌装机</option> <option value="开箱机">开箱机</option> <option value="装箱机">装箱机</option> <option value="封箱机">封箱机</option> </select>
+    <br />
+    <select style="resize:none;width:80%;" name="ErrorType" id="selectTravelCity"> <option value="1">问题类型</option> <option value="锐边">锐边</option> <option value="不正确的安装">不正确的安装</option> <option value="不适合的工具/无工具">不适合的工具/无工具</option> <option value="缺乏维护">缺乏维护</option> <option value="区域受限">区域受限</option> <option value="操作困难">操作困难</option> <option value="不足的照">不足的照</option> <option value="缺少标准流程">缺少标准流程</option> <option value="天气/气候状况">天气/气候状况</option> <option value="不足的照明">不足的照明</option> <option value="缺少标准流程">缺少标准流程</option> <option value="不适合的PPE">不适合的PPE</option> <option value="其他">其他</option> </select>
+    <br />
+    <table width="100%" height="100%">
+        <tbody>
         <tr align="center" valign="middle">
-            <td width="20%">
-                <p>
-                    <strong>类型</strong>
-                </p>
-            </td>
-            <td width="80%">
-                <select style="width:200px" name="ErrorType">
-                    <option value="1">请选择异常类型</option>
-                    <option value="安全">安全</option>
-                    <option value="环境">环境</option>
-                    <option value="AM">AM</option>
-                    <option value="PM">PM</option>
-                </select>
-            </td>
         </tr>
         <tr align="center" valign="middle">
-            <td width="20%">
-                <p>
-                    <strong>区域类型</strong>
-                </p>
-            </td>
-            <td width="80%">
-                <select style="width:200px" name="AbnormalRegion">
-                    <option value="1">请选择产线</option>
-                    <option value="预配">预配</option>
-                    <option value="烧料">烧料</option>
-                    <option value="灌装">灌装</option>
-                    <option value="4">包装</option>
-                    <option value="5">码板</option>
-                    <option value="6">5T 坦克</option>
-                    <option value="7">罐区</option>
-                    <option value="8">卡波站</option>
-                    <option value="9">公共区域</option>
-                    <option value="10">测试2</option>
-                </select>
-            </td>
         </tr>
         <tr align="center" valign="middle">
-            <td width="20%">
-                <p>
-                    <strong>区域</strong>
-                </p>
-            </td>
-            <td width="80%">
-                <select style="width:200px" name="ProductionLine">
-                    <option value="1">请选择产线</option>
-                    <option value="1#10ton">1#10ton"</option>
-                    <option value="2#10ton">2#10ton"</option>
-                    <option value="3#10ton">3#10ton"</option>
-                    <option value="4#8ton">4#8ton"</option>
-                    <option value="5#10ton">5#10ton"</option>
-                    <option value="6#10ton">6#10ton"</option>
-                    <option value="7#10ton">7#10ton"</option>
-                    <option value="8#10ton">8#10ton"</option>
-                </select>
-            </td>
         </tr>
         <tr align="center" valign="middle">
-            <td width="20%">
-                <p>
-                    <strong>设备</strong>
-                </p>
-            </td>
-            <td width="80%">
-                <select style="width:200px" name="OLESubClass2">
-                    <option value="1">请选择设备</option>
-                    <option value="理瓶机">理瓶机</option>
-                    <option value="BTU">BTU</option>
-                    <option value="理盖机">理盖机</option>
-                    <option value="灌装机">灌装机</option>
-                    <option value="开箱机">开箱机</option>
-                    <option value="装箱机">装箱机</option>
-                    <option value="封箱机">封箱机</option>
-                </select>
-            </td>
         </tr>
         <tr align="center" valign="middle">
-            <td width="20%">
-                <p>
-                    <strong>问题类型</strong>
-                </p>
-            </td>
-            <td width="80%">
-                <select style="width:200px" name="ErrorType">
-                    <option value="1">请选择异常类型</option>
-                    <option value="锐边">锐边</option>
-                    <option value="不正确的安装">不正确的安装</option>
-                    <option value="不适合的工具/无工具">不适合的工具/无工具</option>
-                    <option value="缺乏维护">缺乏维护</option>
-                    <option value="区域受限">区域受限</option>
-                    <option value="操作困难">操作困难</option>
-                    <option value="不足的照">不足的照</option>
-                    <option value="缺少标准流程">缺少标准流程</option>
-                    <option value="天气/气候状况">天气/气候状况</option>
-                    <option value="不足的照明">不足的照明</option>
-                    <option value="缺少标准流程">缺少标准流程</option>
-                    <option value="不适合的PPE">不适合的PPE</option>
-                    <option value="其他">其他</option>
-                </select>
-            </td>
         </tr>
         <tr align="center" valign="middle">
-            <td>
-                <p>
-                    <strong>问题简述</strong>
-                </p>
-            </td>
-            <td>
-                <textarea style="resize:none" rows="5" name="ErrorContent"></textarea>
-            </td>
+            <td> <input name="ErrorContent" style="resize:none;height: 200px;width:80%;" type="text" maxlength="20" value="问题简述" onfocus="if (value =='问题简述'){value =''}" onblur="if (value ==''){value='问题简述'}" /> </td>
         </tr>
         <tr align="center" valign="middle">
-            <td>
-                <p>
-                    <strong>问题图片</strong>
-                </p>
-            </td>
-            <td>
-                <img id="img" src="pf.png" width="60px" height="60px" onclick="sendInfoToAndroid()">
-            </td>
+            <td> <img id="img" src="pf.png" width="60px" height="60px" onclick="sendInfoToAndroid()" /> </td>
         </tr>
+        </tbody>
     </table>
-    <td>
-        <p>
-            <input type="submit" value="提交" onclick="window.Android.upload()"/>
-        </p>
-    </td>
+    <br />
+    <p> <input type="submit" style="resize:none;width:80%;height:20px" value="提交" onclick="window.Android.upload()" /> </p>
 </form>
 </body>
+</html>
