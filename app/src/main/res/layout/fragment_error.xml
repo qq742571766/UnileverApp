@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical">
-
     <WebView
         android:id="@+id/wv_error"
         android:layout_width="match_parent"

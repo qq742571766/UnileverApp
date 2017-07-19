@@ -45,18 +45,23 @@ import cn.com.unilever.www.unileverapp.utils.CameraAlbumUtil;
 public class ErrorFragment extends Fragment {
     //D:\demo\UnileverApp\app\src\main\assets\H50B7ECBA\www\index.html
     private final static String url = "file:///android_asset/H50B7ECBA/www/index.html";
-    ValueCallback<Uri> mUploadMessage;
-    ValueCallback<Uri[]> mFilePathCallback;
-    private WebView mWebView;
     private View view;
     private CameraAlbumUtil util;
     private WebView webview;
     private boolean on_off = true;
+    private boolean on_off_Photo = true;
+    private boolean on_off_Album = true;
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             if (msg.what == 1 && on_off) {
                 webview.loadUrl(url);
                 on_off = false;
+            } else if (msg.what == 2 && on_off_Photo) {
+                util.takePhoto();
+                on_off_Photo = false;
+            } else if (msg.what == 3 && on_off_Album) {
+                util.openAlbum();
+                on_off_Album = false;
             }
         }
     };
@@ -88,11 +93,12 @@ public class ErrorFragment extends Fragment {
         webSettings.setBuiltInZoomControls(true);
         //设置客户端-不跳转到默认浏览器中
         webview.setWebViewClient(new WebViewClient());
+//        webview.setInitialScale(90);
         //加载网络资源
-        webview.loadUrl(MyConfig.loginurl);
+        webview.loadUrl(url);
         //支持屏幕缩放
-        webSettings.setSupportZoom(false);
-        webSettings.setBuiltInZoomControls(true);
+        webSettings.setSupportZoom(true);
+        webSettings.setBuiltInZoomControls(false);
         //设置支持js调用java
         webview.addJavascriptInterface(new AndroidAndJSInterface(), "Android");
         //页面监听
@@ -109,19 +115,26 @@ public class ErrorFragment extends Fragment {
     }
 
     private void chooseDagilog() {
+        util = new CameraAlbumUtil(getActivity());
         new AlertDialog.Builder(getActivity())
                 .setTitle("选择相片")
                 .setPositiveButton("相机", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        util.takePhoto();
+//                        util.takePhoto();
+                        Message msg = new Message();
+                        msg.what = 2;
+                        handler.sendMessage(msg);
                     }
                 })
 
                 .setNegativeButton("相册", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        util.openAlbum();
+//                        util.openAlbum();
+                        Message msg = new Message();
+                        msg.what = 3;
+                        handler.sendMessage(msg);
                     }
                 })
                 .show();
@@ -133,4 +146,5 @@ public class ErrorFragment extends Fragment {
             chooseDagilog();
         }
     }
+
 }
