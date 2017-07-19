@@ -943,14 +943,14 @@ p {
 .mui-btn,
 button,
 input[type=text],
-input[type=reset],
-input[type=submit] {
+input[type=submit],
+input[type=datetime-local] {
 	font-size: 14px;
 	font-weight: 400;
 	line-height: 1.42;
 	position: relative;
 	display: inline-block;
-	margin-bottom: 0;
+	margin: 2px;
 	padding: 6px 12px;
 	cursor: pointer;
 	-webkit-transition: all;
@@ -1163,11 +1163,9 @@ input[type=submit]:enabled:active {
 }
 
 .mui-btn-block {
-	text-align: center;
 	font-size: 18px;
 	display: block;
 	width: 100%;
-	margin-bottom: 10px;
 	padding: 15px 0
 }
 
@@ -1191,7 +1189,6 @@ input[type=submit]:enabled:active {
 .mui-btn-block .mui-badge {
 	position: absolute;
 	right: 0;
-	margin-right: 10px
 }
 
 .mui-btn .mui-icon {
@@ -1241,8 +1238,6 @@ input[type=submit]:enabled:active {
 	right: 0;
 	left: 0;
 	height: 44px;
-	/*padding-right: 10px;
-	padding-left: 10px;*/
 	border-bottom: 0;
 	background-color: #f7f7f7;
 	-webkit-box-shadow: 0 0 1px rgba(0, 0, 0, .85);
@@ -1305,13 +1300,6 @@ input[type=submit]:enabled:active {
 	visibility: hidden;
 	height: 45px;
 	margin-top: -45px
-}
-
-.mui-bar-nav.mui-bar .mui-icon {
-	/*margin-right: -10px;
-	margin-left: -10px;
-	padding-right: 10px;
-	padding-left: 10px*/
 }
 
 .mui-title {
@@ -1397,14 +1385,6 @@ input[type=submit]:enabled:active {
 	padding: 6px 12px 7px
 }
 
-.mui-bar .mui-btn.mui-pull-right {
-	/*margin-/*left*/: 10px*/
-}
-
-.mui-bar .mui-btn.mui-pull-left {
-	/*margin-right: 10px*/
-}
-
 .mui-bar .mui-btn-link {
 	font-size: 16px;
 	line-height: 44px;
@@ -1425,22 +1405,6 @@ input[type=submit]:enabled:active {
 	margin-bottom: 0;
 	padding: 5px 0
 }
-
-/*.mui-bar .mui-btn-nav.mui-pull-left {
-	margin-left: -5px
-}
-
-.mui-bar .mui-btn-nav.mui-pull-left .mui-icon-left-nav {
-	margin-right: -3px
-}
-
-.mui-bar .mui-btn-nav.mui-pull-right {
-	margin-right: -5px
-}
-
-.mui-bar .mui-btn-nav.mui-pull-right .mui-icon-right-nav {
-	margin-left: -3px
-}*/
 
 .mui-bar .mui-btn-nav:active {
 	opacity: .3
@@ -1471,7 +1435,6 @@ input[type=submit]:enabled:active {
 
 .mui-bar .mui-title .mui-icon.mui-icon-caret {
 	top: 4px;
-	/*margin-left: -5px*/
 }
 
 .mui-bar input[type=search] {
@@ -1490,7 +1453,6 @@ input[type=submit]:enabled:active {
 .mui-bar .mui-input-row .mui-input-clear~.mui-icon-clear,
 .mui-bar .mui-input-row .mui-input-speech~.mui-icon-speech {
 	top: 0;
-	/*right: 12px*/
 }
 
 .mui-bar.mui-bar-header-secondary .mui-input-row .mui-input-clear~.mui-icon-clear,
@@ -1591,7 +1553,6 @@ input[type=submit]:enabled:active {
 	position: absolute;
 	top: -2px;
 	left: 100%;
-	/*margin-/*left*/: -10px;*/
 	padding: 1px 5px;
 	color: #fff;
 	background: red
@@ -1746,7 +1707,6 @@ input[type=submit]:enabled:active {
 	font-weight: 500;
 	line-height: 17px;
 	margin-bottom: 0;
-	/*margin-left: 44px;*/
 	color: #333
 }
 
@@ -1759,7 +1719,6 @@ input[type=submit]:enabled:active {
 	position: relative;
 	margin-top: 0;
 	margin-bottom: 0;
-	/*padding-left: 0;*/
 	list-style: none;
 	background-color: #fff
 }
@@ -1791,29 +1750,11 @@ input[type=submit]:enabled:active {
 .mui-table-view-icon .mui-table-view-cell .mui-navigate-right .mui-icon {
 	font-size: 20px;
 	margin-top: -1px;
-	/*margin-right: 5px;
-	margin-left: -5px*/
 }
 
 .mui-table-view-icon .mui-table-view-cell:after {
 	left: 40px
 }
-
-/*.mui-table-view-chevron .mui-table-view-cell {
-	padding-right: 65px
-}
-
-.mui-table-view-chevron .mui-table-view-cell>a:not(.mui-btn) {
-	margin-right: -65px
-}
-
-.mui-table-view-radio .mui-table-view-cell {
-	padding-right: 65px
-}*/
-
-/*.mui-table-view-radio .mui-table-view-cell>a:not(.mui-btn) {
-	margin-right: -65px
-}*/
 
 .mui-table-view-radio .mui-table-view-cell .mui-navigate-right:after {
 	font-size: 30px;
@@ -2018,7 +1959,6 @@ input[type=submit]:enabled:active {
 
 .mui-table-view-cell>.mui-slider-left>.mui-btn:after {
 	right: 100%;
-	/*margin-right: -1px*/
 }
 
 .mui-table-view-divider {
@@ -2073,18 +2013,9 @@ input[type=submit]:enabled:active {
 }
 
 .mui-table-view .mui-media-object {
-	/*line-height: 42px;*/
 	max-width: 42px;
 	height: 42px
 }
-
-/*.mui-table-view .mui-media-object.mui-pull-left {
-	margin-right: 10px
-}
-
-.mui-table-view .mui-media-object.mui-pull-right {
-	margin-left: 10px
-}*/
 
 .mui-table-view .mui-table-view-cell.mui-media-icon .mui-media-object {
 	line-height: 29px;

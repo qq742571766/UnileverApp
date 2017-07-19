@@ -51,7 +51,7 @@ class RankFragment extends Fragment implements View.OnClickListener {
                 ((FunctionActivity) getActivity()).changFragment(managerclassifyFragment);
                 break;
             case R.id.staff:
-                MyConfig.type = "TAG";
+                MyConfig.type = "STAFFTAG";
                 if (errorFragment == null) {
                     errorFragment = new ErrorFragment();
                 }

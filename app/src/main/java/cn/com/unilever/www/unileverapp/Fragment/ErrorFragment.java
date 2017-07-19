@@ -43,10 +43,11 @@ import cn.com.unilever.www.unileverapp.utils.CameraAlbumUtil;
  * @time 2017/5/17 14:24
  */
 public class ErrorFragment extends Fragment {
-    //D:\demo\UnileverApp\app\src\main\assets\H50B7ECBA\www\index.html
     private final static String url = "file:///android_asset/H50B7ECBA/www/index.html";
+    private final static String staff_url = "file:///android_asset/H50B7ECBA/www/staff-index.html";
     private View view;
     private CameraAlbumUtil util;
+    private Context context;
     private WebView webview;
     private boolean on_off = true;
     private boolean on_off_Photo = true;
@@ -54,7 +55,12 @@ public class ErrorFragment extends Fragment {
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             if (msg.what == 1 && on_off) {
-                webview.loadUrl(url);
+                if (MyConfig.type.equals("SMAT")||MyConfig.type.equals("DAC")||MyConfig.type.equals("EMAT")||MyConfig.type.equals("TAG")){
+                    webview.loadUrl(url);
+                }
+                if (MyConfig.type.equals("STAFFTAG")){
+                    webview.loadUrl(staff_url);
+                }
                 on_off = false;
             } else if (msg.what == 2 && on_off_Photo) {
                 util.takePhoto();
@@ -65,7 +71,6 @@ public class ErrorFragment extends Fragment {
             }
         }
     };
-    private Context context;
 
     @Override
     public void onAttach(Context context) {
