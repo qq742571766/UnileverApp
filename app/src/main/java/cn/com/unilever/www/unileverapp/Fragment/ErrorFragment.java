@@ -1,36 +1,24 @@
 package cn.com.unilever.www.unileverapp.Fragment;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.JavascriptInterface;
-import android.webkit.ValueCallback;
-import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
+import android.widget.TextView;
 
-import java.io.File;
-import java.io.IOException;
+import java.util.Objects;
 
 import cn.com.unilever.www.unileverapp.R;
 import cn.com.unilever.www.unileverapp.config.MyConfig;
@@ -55,10 +43,10 @@ public class ErrorFragment extends Fragment {
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             if (msg.what == 1 && on_off) {
-                if (MyConfig.type.equals("SMAT")||MyConfig.type.equals("DAC")||MyConfig.type.equals("EMAT")||MyConfig.type.equals("TAG")){
+                if (MyConfig.type.equals("SMAT") || MyConfig.type.equals("DAC") || MyConfig.type.equals("EMAT") || MyConfig.type.equals("TAG")) {
                     webview.loadUrl(url);
                 }
-                if (MyConfig.type.equals("STAFFTAG")){
+                if (MyConfig.type.equals("STAFFTAG")) {
                     webview.loadUrl(staff_url);
                 }
                 on_off = false;
@@ -71,6 +59,7 @@ public class ErrorFragment extends Fragment {
             }
         }
     };
+    private TextView textView;
 
     @Override
     public void onAttach(Context context) {
@@ -90,6 +79,7 @@ public class ErrorFragment extends Fragment {
     }
 
     private void initWidget() {
+        textView = (TextView) view.findViewById(R.id.error_tx);
         webview = (WebView) view.findViewById(R.id.wv_error);
         WebSettings webSettings = webview.getSettings();
         //设置支持javaScript脚本语言
@@ -100,7 +90,7 @@ public class ErrorFragment extends Fragment {
         webview.setWebViewClient(new WebViewClient());
 //        webview.setInitialScale(90);
         //加载网络资源
-        webview.loadUrl(url);
+        webview.loadUrl(MyConfig.loginurl);
         //支持屏幕缩放
         webSettings.setSupportZoom(true);
         webSettings.setBuiltInZoomControls(false);
@@ -110,11 +100,13 @@ public class ErrorFragment extends Fragment {
         webview.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
-                Log.d("AAA", url);
                 Message msg = new Message();
                 msg.what = 1;
                 handler.sendMessage(msg);
                 super.onPageFinished(view, url);
+                if (!url.equals(MyConfig.loginurl)){
+                    textView.setVisibility(View.GONE);
+                }
             }
         });
     }

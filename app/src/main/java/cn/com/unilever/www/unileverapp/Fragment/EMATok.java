@@ -84,7 +84,7 @@ public class EMATok extends Fragment implements View.OnClickListener {
         //设置客户端-不跳转到默认浏览器中
         webView.setWebViewClient(new WebViewClient());
         //加载网络资源
-        webView.loadUrl("file:///android_asset/EMATok.html");
+        webView.loadUrl("file:///android_asset/H50B7ECBA/www/EMATok.html");
         //支持屏幕缩放
         webSettings.setSupportZoom(false);
         webSettings.setBuiltInZoomControls(true);
@@ -124,8 +124,13 @@ public class EMATok extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (MyConfig.problem != null && MyConfig.sourceStrArray.size() > i) {
-            s = MyConfig.problem.get(MyConfig.sourceStrArray.get(i));
-            webView.loadUrl("javascript:javaCallJs(" + "'" + s + "'" + ")");
+            if (i < 0) {
+                Toast.makeText(context, "无上一题", Toast.LENGTH_SHORT).show();
+                i = 0;
+            } else {
+                s = MyConfig.problem.get(MyConfig.sourceStrArray.get(i));
+                webView.loadUrl("javascript:javaCallJs(" + "'" + s + "'" + ")");
+            }
         }
     }
 
@@ -147,10 +152,11 @@ public class EMATok extends Fragment implements View.OnClickListener {
         @JavascriptInterface
         public void last() {
             if (MyConfig.sourceStrArray.size() > i) {
-                i--;
-                if (i<0){
+                if (i < 0) {
                     Toast.makeText(context, "无上一题", Toast.LENGTH_SHORT).show();
-                    i++;
+                    i = 0;
+                } else {
+                    i--;
                 }
             }
         }

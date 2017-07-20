@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+    <link href="css/mui.picker.css" rel="stylesheet" />
+    <link href="css/mui.poppicker.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="css/mui.picker.min.css">
+    <script language="javascript">
+			function javaCallJs(s) {
+				document.getElementById("problem").innerText = s;
+			}
+
+			function javaCallJ(ss) {
+				document.getElementById("grade").innerText = ss;
+			}
+		</script>
+</head>
+
+<body>
+<strong style="left:20px;right:15px" class="mui-btn mui-btn-block">问题:</strong>
+<span id="problem" style="white-space: inherit;background-color:#FFFFFF;" class="mui-btn mui-btn-block">问题</span>
+<strong style="left:15px;right:15px" class="mui-btn mui-btn-block">答案:</strong>
+<strong id="grade" style="white-space: inherit;background-color:#FFFFFF;" class="mui-btn mui-btn-block">答案</strong>
+<form action="" method="get" style="text-align:center">
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <input checked="true" name="radio" id="excellent" type="radio" value="1" />
+    <label for="excellent">优</label>
+    <input name="radio" id="good" type="radio" value="2" />
+    <label for="good">良</label>
+    <input name="radio" id="difference" type="radio" value="3" />
+    <label for="difference">差</label>
+    <input type="submit" id="last" value="上一题" onclick="window.Android.last()" style="text-align:center; bottom:15px; left:15px;position:fixed;" />
+    <input type="submit" id="next" value="下一题" onclick="window.Android.next()" style="text-align:center; bottom:15px; right:15px;position:fixed;" />
+</form>
+</body>
+
+</html>

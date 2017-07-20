@@ -944,6 +944,7 @@ p {
 button,
 input[type=text],
 input[type=submit],
+input[type=checkbox],
 input[type=datetime-local] {
 	font-size: 14px;
 	font-weight: 400;
@@ -1166,7 +1167,6 @@ input[type=submit]:enabled:active {
 	font-size: 18px;
 	display: block;
 	width: 100%;
-	padding: 15px 0
 }
 
 .mui-btn .mui-badge {
@@ -1188,7 +1188,6 @@ input[type=submit]:enabled:active {
 
 .mui-btn-block .mui-badge {
 	position: absolute;
-	right: 0;
 }
 
 .mui-btn .mui-icon {
@@ -1402,8 +1401,6 @@ input[type=submit]:enabled:active {
 .mui-bar .mui-btn-block {
 	font-size: 16px;
 	top: 6px;
-	margin-bottom: 0;
-	padding: 5px 0
 }
 
 .mui-bar .mui-btn-nav:active {

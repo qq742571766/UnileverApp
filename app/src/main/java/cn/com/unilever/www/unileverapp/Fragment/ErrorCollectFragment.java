@@ -37,7 +37,7 @@ public class ErrorCollectFragment extends Fragment implements View.OnClickListen
 
     private void initWidget() {
         ClearArcView cav_collect = (ClearArcView) view.findViewById(R.id.cav_collect);
-        cav_collect.setAngle(50);
+        cav_collect.setAngle(180);
         Button btn_dispose = (Button) view.findViewById(R.id.btn_dispose);
         Button btn_error = (Button) view.findViewById(R.id.btn_error);
         Button btn_history = (Button) view.findViewById(R.id.btn_history);

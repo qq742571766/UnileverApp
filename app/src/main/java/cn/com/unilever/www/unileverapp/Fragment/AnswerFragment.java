@@ -52,7 +52,7 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
         public void handleMessage(Message msg) {
             if (msg.what == 2) {
                 try {
-                    webView.loadUrl("file:///android_asset/EMATCall.html");
+                    webView.loadUrl("file:///android_asset/H50B7ECBA/www/EMATCall.html");
                     JSONArray jsonArray = new JSONArray((String) msg.obj);
                     s = "{" +
                             "\"" + "a0" + "\"" + ":" + jsonArray.length() + ",";
@@ -71,7 +71,6 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
                         e.printStackTrace();
                     }
                     view.findViewById(R.id.EMATtext).setVisibility(View.GONE);
-                    view.findViewById(R.id.EMATProgressBar).setVisibility(View.GONE);
                     s += "}";
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -110,7 +109,7 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
     private void initdata() {
         OkHttpUtils
                 .post()
-                .url("http://192.168.10.21:8080/HiperMES/ematAndroid.sp?method=toAndroid")
+                .url("http://192.168.10.24:8080/HiperMES/ematAndroid.sp?method=toAndroid")
                 .build()
                 .connTimeOut(30000)
                 .execute(new StringCallback() {
@@ -140,7 +139,7 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
         //设置客户端-不跳转到默认浏览器中
         webView.setWebViewClient(new WebViewClient());
         //加载网络资源
-        webView.loadUrl("http://192.168.10.21:8080/HiperMES/login.sp?method=login");
+        webView.loadUrl("http://192.168.10.24:8080/HiperMES/login.sp?method=login");
         //支持屏幕缩放
         webSettings.setSupportZoom(false);
         webSettings.setBuiltInZoomControls(true);

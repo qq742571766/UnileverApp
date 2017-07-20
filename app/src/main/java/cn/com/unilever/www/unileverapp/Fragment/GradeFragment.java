@@ -88,7 +88,7 @@ class GradeFragment extends Fragment implements View.OnClickListener {
         //设置客户端-不跳转到默认浏览器中
         webView.setWebViewClient(new WebViewClient());
         //加载网络资源
-        webView.loadUrl("file:///android_asset/EMATGrade.html");
+        webView.loadUrl("file:///android_asset/H50B7ECBA/www/EMATGrade.html");
         //支持屏幕缩放
         webSettings.setSupportZoom(false);
         webSettings.setBuiltInZoomControls(true);
@@ -124,13 +124,18 @@ class GradeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (MyConfig.problem != null && MyConfig.sourceStrArray.size() > i) {
-            String s = MyConfig.problem.get(MyConfig.sourceStrArray.get(i));
-            //题
-            webView.loadUrl("javascript:javaCallJs(" + "'" + s + "'" + ")");
-            //答案
-            SharedPreferences sp = context.getSharedPreferences("grade", Context.MODE_PRIVATE);
-            String ss = sp.getString((i + 1) + "", null);
-            webView.loadUrl("javascript:javaCallJ(" + "'" + ss + "'" + ")");
+            if (i < 0) {
+                Toast.makeText(context, "无上一题", Toast.LENGTH_SHORT).show();
+                i = 0;
+            } else {
+                String s = MyConfig.problem.get(MyConfig.sourceStrArray.get(i));
+                //题
+                webView.loadUrl("javascript:javaCallJs(" + "'" + s + "'" + ")");
+                //答案
+                SharedPreferences sp = context.getSharedPreferences("grade", Context.MODE_PRIVATE);
+                String ss = sp.getString((i + 1) + "", null);
+                webView.loadUrl("javascript:javaCallJ(" + "'" + ss + "'" + ")");
+            }
         }
     }
 
@@ -145,10 +150,11 @@ class GradeFragment extends Fragment implements View.OnClickListener {
         @JavascriptInterface
         public void last() {
             if (MyConfig.sourceStrArray.size() > i) {
-                i--;
                 if (i < 0) {
                     Toast.makeText(context, "无上一题", Toast.LENGTH_SHORT).show();
-                    i++;
+                    i = 0;
+                } else {
+                    i--;
                 }
             }
         }

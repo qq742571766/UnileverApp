@@ -25,5 +25,5 @@ public class MyConfig {
     //异常类型
     public static String type;
     //登录url
-    public static String loginurl = "http://192.168.10.20:8080/HiperMES/login.sp?method=appLogin&loginName=admin&password=admin";
+    public static String loginurl = "http://192.168.10.24:8080/HiperMES/login.sp?method=appLogin&loginName=admin&password=admin";
 }
