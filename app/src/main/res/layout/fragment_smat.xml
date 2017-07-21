@@ -3,9 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+s
+    <Button
+        android:id="@+id/btn_dac"
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
 
     <WebView
-        android:id="@+id/wv_smat"
+        android:id="@+id/wv_dac"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

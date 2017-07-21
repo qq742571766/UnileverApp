@@ -39,6 +39,7 @@ public class EMATok extends Fragment implements View.OnClickListener {
     private Button button;
     private Context context;
     private Timer timer = new Timer();
+
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {

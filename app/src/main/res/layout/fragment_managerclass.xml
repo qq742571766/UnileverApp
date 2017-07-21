@@ -2,43 +2,56 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    android:paddingBottom="90dp"
+    android:paddingLeft="50dp"
+    android:paddingRight="50dp"
+    android:paddingTop="90dp">
 
     <Button
         android:id="@+id/SMAT"
-        android:layout_width="130dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="SMAT" />
+        android:background="#fafafa"
+        android:drawableTop="@drawable/lop"
+        android:text="SMAT"
+        android:textSize="25px" />
 
     <Button
         android:id="@+id/DAC"
-        android:layout_width="130dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/SMAT"
-        android:layout_alignRight="@+id/SMAT"
-        android:layout_below="@+id/SMAT"
-        android:layout_marginTop="50dp"
-        android:text="DAC" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="#fafafa"
+        android:drawableTop="@drawable/lop"
+        android:text="DAC"
+        android:textSize="25px" />
 
     <Button
         android:id="@+id/EMAT"
-        android:layout_width="130dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/DAC"
-        android:layout_alignRight="@+id/DAC"
-        android:layout_below="@+id/DAC"
-        android:layout_marginTop="50dp"
-        android:text="EMAT" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="#fafafa"
+        android:drawableTop="@drawable/lop"
+        android:text="EMAT"
+        android:textSize="25px" />
 
     <Button
         android:id="@+id/TAG"
-        android:layout_width="130dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/EMAT"
-        android:layout_alignStart="@+id/EMAT"
-        android:layout_below="@+id/EMAT"
-        android:layout_marginTop="50dp"
-        android:text="TAG" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:background="#fafafa"
+        android:drawableTop="@drawable/lop"
+        android:text="TAG"
+        android:textSize="25px" />
 </RelativeLayout>

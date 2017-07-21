@@ -48,7 +48,7 @@ public class EMATAccomplish extends Fragment implements View.OnClickListener {
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             if (msg.what == 3) {
-                String url = "http://192.168.10.21:8080/HiperMES/ematAndroid.sp?method=addAndroidSave&answer_user=" + MyConfig.name +
+                String url = "http://192.168.10.23:8080/HiperMES/ematAndroid.sp?method=addAndroidSave&answer_user=" + MyConfig.name +
                         "&answer_user_id=" + MyConfig.id + "&ask_uesr_id=" + userKey + "&question_num=" + MyConfig.sourceStrArray.size() +
                         "&test_time=" + SystemTimeUtil.getErrorDate() + "&test_result=" + pass;
                 Log.d("AAA", url);
@@ -122,7 +122,7 @@ public class EMATAccomplish extends Fragment implements View.OnClickListener {
         //设置客户端-不跳转到默认浏览器中
         webView.setWebViewClient(new WebViewClient());
         //加载网络资源
-        webView.loadUrl("http://192.168.10.21:8080/HiperMES/login.sp?method=appLogin&loginName=admin&password=admin");
+        webView.loadUrl(MyConfig.url+"/HiperMES/login.sp?method=appLogin&loginName=admin&password=admin");
         //支持屏幕缩放
         webSettings.setSupportZoom(false);
         webSettings.setBuiltInZoomControls(true);
@@ -166,6 +166,7 @@ public class EMATAccomplish extends Fragment implements View.OnClickListener {
 
                     @Override
                     public void onResponse(String response, int id) {
+                        Log.d("AAA", response);
                     }
                 });
     }

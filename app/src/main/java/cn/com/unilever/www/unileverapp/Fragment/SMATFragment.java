@@ -29,7 +29,6 @@ import cn.com.unilever.www.unileverapp.R;
 import cn.com.unilever.www.unileverapp.activity.FunctionActivity;
 import cn.com.unilever.www.unileverapp.config.MyConfig;
 import okhttp3.Call;
-
 /**
  * @class DAC观察
  * @name 林郝
@@ -73,7 +72,7 @@ class SMATFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_dac, null);
+        view = inflater.inflate(R.layout.fragment_smat, null);
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.mToolbar);
         toolbar.setTitle("DAC");
         return view;
@@ -99,7 +98,7 @@ class SMATFragment extends Fragment implements View.OnClickListener {
         //设置客户端-不跳转到默认浏览器中
         wv_dac.setWebViewClient(new WebViewClient());
         //加载网络资源
-        wv_dac.loadUrl("file:///android_asset/H50B7ECBA/www/observe.html");
+        wv_dac.loadUrl("file:///android_asset/H50B7ECBA/www/samt_page.html");
         //支持屏幕缩放
         webSettings.setSupportZoom(true);
         webSettings.setBuiltInZoomControls(false);

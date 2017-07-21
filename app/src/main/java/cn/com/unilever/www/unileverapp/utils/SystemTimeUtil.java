@@ -11,7 +11,7 @@ import java.util.Locale;
  */
 public class SystemTimeUtil {
     public static String getErrorDate() {
-        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss", Locale.getDefault());
+        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         return sDateFormat.format(new java.util.Date());
     }
 
