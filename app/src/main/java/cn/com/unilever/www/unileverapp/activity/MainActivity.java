@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void Login(String username, String password) {
         OkHttpUtils
                 .post()
-                .url("http://192.168.10.20:8080/HiperMES/login.sp?method=appLogin&loginName=" + username + "&password=" + password)
+                .url("http://192.168.10.25:8080/HiperMES/login.sp?method=appLogin&loginName=" + username + "&password=" + password)
                 .build()
                 .connTimeOut(10000)
                 .execute(new StringCallback() {

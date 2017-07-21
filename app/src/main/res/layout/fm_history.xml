@@ -3,88 +3,195 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#eeeeef"        android:orientation="vertical"
-    android:paddingTop="10dp">
+    android:background="#eeeeef"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
     <RelativeLayout
+        android:id="@+id/rl_title"
         android:layout_width="match_parent"
-        android:layout_height="105dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:background="@android:color/white">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        <ImageView
+            android:id="@+id/imageView_f"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="8dp"
+            android:contentDescription="@string/sign"
+            android:scaleType="fitXY"
+            app:srcCompat="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/textView_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/imageView_f"
+            android:layout_toEndOf="@+id/imageView_f"
+            android:layout_toRightOf="@+id/imageView_f"
+            android:maxLines="20"
+            android:text="@string/title"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/f_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView_author_name"
+            android:layout_alignBottom="@+id/textView_author_name"
+            android:layout_toEndOf="@+id/textView_author_name"
+            android:layout_toRightOf="@+id/textView_author_name"
+            android:paddingLeft="10dp"
+            android:text="@string/date"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/textView_author_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView_f"
+            android:layout_toEndOf="@+id/imageView_f"
+            android:layout_toRightOf="@+id/imageView_f"
+            android:text="@string/author"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/xiangqing1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/f_date"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:drawableRight="@android:drawable/arrow_down_float"
+            android:text="详情"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/xiangqing2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/f_date"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:drawableRight="@android:drawable/arrow_up_float"
+            android:text="详情"
+            android:textSize="12sp"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@android:color/white"
+        android:padding="3dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/errorType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="类型：" />
+
+        <TextView
+            android:id="@+id/area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/errorType"
+            android:text="区域：" />
+
+        <TextView
+            android:id="@+id/factory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/area"
+            android:text="设备：" />
+
+        <TextView
+            android:id="@+id/errorTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/factory"
+            android:text="时间：" />
+
+        <TextView
+            android:id="@+id/errorContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
+            android:layout_below="@+id/errorTime"
+            android:text="问题简述：" />
+
+        <TextView
+            android:id="@+id/tv_errorType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:paddingLeft="3dp"
-            android:paddingRight="3dp">
+            android:layout_toEndOf="@+id/errorType"
+            android:layout_toRightOf="@+id/errorType"
+            android:text="TextView" />
 
-            <ImageView
-                android:id="@+id/imageView_f"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:contentDescription="@string/sign"
-                android:scaleType="fitXY"
-                app:srcCompat="@drawable/qaaaa" />
+        <TextView
+            android:id="@+id/tv_area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_errorType"
+            android:layout_toEndOf="@+id/errorType"
+            android:layout_toRightOf="@+id/errorType"
+            android:text="TextView" />
 
-            <TextView
-                android:id="@+id/textView_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/imageView_f"
-                android:layout_toRightOf="@+id/imageView_f"
-                android:maxLines="20"
-                android:text="箱体高度异常"
-                android:textColor="@android:color/black"
-                android:textSize="18sp" />
+        <TextView
+            android:id="@+id/tv_factory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_area"
+            android:layout_toEndOf="@+id/area"
+            android:layout_toRightOf="@+id/area"
+            android:text="TextView" />
 
-            <TextView
-                android:id="@+id/f_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/imageView_f"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:text="2017/7/8"
-                android:textSize="12sp" />
+        <TextView
+            android:id="@+id/tv_errorTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/factory"
+            android:layout_toEndOf="@+id/errorTime"
+            android:layout_toRightOf="@+id/errorTime"
+            android:text="TextView" />
 
-            <TextView
-                android:id="@+id/textView_author_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/textView2"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_toLeftOf="@+id/textView2"
-                android:layout_toStartOf="@+id/textView2"
-                android:text="admin"
-                android:textSize="12sp" />
+        <TextView
+            android:id="@+id/tv_errorContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_errorTime"
+            android:layout_toEndOf="@+id/errorContent"
+            android:layout_toRightOf="@+id/errorContent"
+            android:text="TextView" />
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/f_date"
-                android:layout_marginEnd="17dp"
-                android:layout_marginRight="17dp"
-                android:layout_toLeftOf="@+id/f_date"
-                android:layout_toStartOf="@+id/f_date"
-                android:text="\" />
-        </RelativeLayout>
     </RelativeLayout>
+
     <EditText
         android:id="@+id/et"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:hint="解决方案" />
+        android:layout_height="108dp"
+        android:layout_margin="8dp"
+        android:background="@android:color/white"
+        android:gravity="top"
+        android:hint="解决方案"
+        android:padding="5dp"
+        android:singleLine="true"
+        android:textColorHint="#AAAAAA"
+        android:textSize="15dp" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:id="@+id/button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/affirm" />
+        android:layout_margin="8dp"
+        android:background="#007AFF"
+        android:text="@string/affirm"
+        android:textColor="@android:color/white" />
 </LinearLayout>

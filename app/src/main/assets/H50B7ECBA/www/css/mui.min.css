@@ -942,6 +942,8 @@ p {
 
 .mui-btn,
 button,
+span,
+strong,
 input[type=text],
 input[type=submit],
 input[type=checkbox],
@@ -949,7 +951,6 @@ input[type=datetime-local] {
 	font-size: 14px;
 	font-weight: 400;
 	line-height: 1.42;
-	position: relative;
 	display: inline-block;
 	margin: 2px;
 	padding: 6px 12px;

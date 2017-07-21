@@ -24,6 +24,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 
 import cn.com.unilever.www.unileverapp.R;
 import cn.com.unilever.www.unileverapp.activity.FunctionActivity;
@@ -47,7 +48,7 @@ public class EMATAccomplish extends Fragment implements View.OnClickListener {
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             if (msg.what == 3) {
-                String url = "http://192.168.10.24:8080/HiperMES/ematAndroid.sp?method=addAndroidSave&answer_user=" + MyConfig.name +
+                String url = "http://192.168.10.21:8080/HiperMES/ematAndroid.sp?method=addAndroidSave&answer_user=" + MyConfig.name +
                         "&answer_user_id=" + MyConfig.id + "&ask_uesr_id=" + userKey + "&question_num=" + MyConfig.sourceStrArray.size() +
                         "&test_time=" + SystemTimeUtil.getErrorDate() + "&test_result=" + pass;
                 Log.d("AAA", url);
@@ -59,6 +60,12 @@ public class EMATAccomplish extends Fragment implements View.OnClickListener {
                 webView.loadUrl(url);
 
                 Toast.makeText(context, "上传完成，等待跳转", Toast.LENGTH_SHORT).show();
+                MyConfig.sourceStrArray = null;
+                MyConfig.sourceStrArray=new ArrayList<>();
+                MyConfig.ExcellentNumber = 0;
+                MyConfig.FineNumber = 0;
+                MyConfig.DadNumber = 0;
+                MyConfig.abbr = 0;
                 if (fragment == null) {
                     fragment = new AnswerFragment();
                 }
@@ -115,7 +122,7 @@ public class EMATAccomplish extends Fragment implements View.OnClickListener {
         //设置客户端-不跳转到默认浏览器中
         webView.setWebViewClient(new WebViewClient());
         //加载网络资源
-        webView.loadUrl("http://192.168.10.24:8080/HiperMES/login.sp?method=appLogin&loginName=admin&password=admin");
+        webView.loadUrl("http://192.168.10.21:8080/HiperMES/login.sp?method=appLogin&loginName=admin&password=admin");
         //支持屏幕缩放
         webSettings.setSupportZoom(false);
         webSettings.setBuiltInZoomControls(true);
@@ -149,7 +156,7 @@ public class EMATAccomplish extends Fragment implements View.OnClickListener {
     private void initdata() {
         OkHttpUtils
                 .post()
-                .url("http://192.168.10.24:8080/HiperMES/login.sp?method=appLogin&loginName=admin&password=admin")
+                .url("http://192.168.10.21:8080/HiperMES/login.sp?method=appLogin&loginName=admin&password=admin")
                 .build()
                 .connTimeOut(30000)
                 .execute(new StringCallback() {

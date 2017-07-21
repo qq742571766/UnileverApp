@@ -109,7 +109,7 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
     private void initdata() {
         OkHttpUtils
                 .post()
-                .url("http://192.168.10.24:8080/HiperMES/ematAndroid.sp?method=toAndroid")
+                .url("http://192.168.10.21:8080/HiperMES/ematAndroid.sp?method=toAndroid")
                 .build()
                 .connTimeOut(30000)
                 .execute(new StringCallback() {
@@ -139,7 +139,7 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
         //设置客户端-不跳转到默认浏览器中
         webView.setWebViewClient(new WebViewClient());
         //加载网络资源
-        webView.loadUrl("http://192.168.10.24:8080/HiperMES/login.sp?method=login");
+        webView.loadUrl("http://192.168.10.21:8080/HiperMES/login.sp?method=login");
         //支持屏幕缩放
         webSettings.setSupportZoom(false);
         webSettings.setBuiltInZoomControls(true);

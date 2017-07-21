@@ -26,6 +26,9 @@
 			}
 
 			.div {
+				width: 100%;
+				margin-left: 5px;
+				margin-right: 5px;
 				overflow-y: visible;
 				overflow-x: visible;
 			}
@@ -33,16 +36,16 @@
 </head>
 
 <body>
-<form method="post" width="100%">
+<form id="myForm" method="post" width="100%" action="http://192.168.10.23:8080/HiperMES/ErrorController.sp?method=saveError&error_man_type=2">
 	<div style="text-align: center;">
 		<input style="margin-top: 10px;" name="image" type="image" id="img" src="pf.png" width="60px" height="60px" onclick="sendInfoToAndroid()">
 		<h5 class="mui-content-padded" style="">请选择图片</h5>
 	</div>
-	<div class="mui-content">
+	<div class="mui-content div">
 		<table width="100%">
 			<tr bgcolor="#FFFFFF">
 				<th><input readonly="true" type="text" value='类型' class="mui-btn mui-btn-block"></th>
-				<th><input style="text-align: right;" readonly="true" type="text" name='ErrorType' value='请选择' id='showUserPicker0' class="mui-btn mui-btn-block"></th>
+				<th><input required="required" style="text-align: right;" readonly="true" type="text" name='errorType' placeholder='请选择' id='showUserPicker0' class="mui-btn mui-btn-block"></th>
 				<th><img src="ccc.png" style="width: 10px;height: 17px;padding-top: 6px;padding-right: 5px;" /></th>
 			</tr>
 			<tr>
@@ -52,7 +55,7 @@
 			</tr>
 			<tr bgcolor="#FFFFFF">
 				<th><input readonly="true" type="text" value='区域类型' class="mui-btn mui-btn-block"></th>
-				<th><input style="text-align: right;" readonly="true" type="text" name='AbnormalRegion' value='请选择' id='showUserPicker1' class="mui-btn mui-btn-block"></th>
+				<th><input style="text-align: right;" readonly="true" type="text" name='area_type' placeholder='请选择' id='showUserPicker1' class="mui-btn mui-btn-block"></th>
 				<th><img src="ccc.png" style="width: 10px;height: 17px;padding-top: 6px;padding-right: 5px;" /></th>
 			</tr>
 			<tr>
@@ -62,7 +65,7 @@
 			</tr>
 			<tr bgcolor="#FFFFFF">
 				<th><input readonly="true" type="text" value='区域' class="mui-btn mui-btn-block"></th>
-				<th><input style="text-align: right;" readonly="true" type="text" name='ProductionLine' value='请选择' id='showUserPicker2' class="mui-btn mui-btn-block"></th>
+				<th><input style="text-align: right;" readonly="true" type="text" name='area' placeholder='请选择' id='showUserPicker2' class="mui-btn mui-btn-block"></th>
 				<th><img src="ccc.png" style="width: 10px;height: 17px;padding-top: 6px;padding-right: 5px;" /></th>
 			</tr>
 			<tr>
@@ -72,7 +75,7 @@
 			</tr>
 			<tr bgcolor="#FFFFFF">
 				<th><input readonly="true" type="text" value='设备' class="mui-btn mui-btn-block"></th>
-				<th><input style="text-align: right;" readonly="true" type="text" name='OLESubClass2' value='请选择' id='showUserPicker3' class="mui-btn mui-btn-block"></th>
+				<th><input style="text-align: right;" readonly="true" type="text" name='factory' placeholder='请选择' id='showUserPicker3' class="mui-btn mui-btn-block"></th>
 				<th><img src="ccc.png" style="width: 10px;height: 17px;padding-top: 6px;padding-right: 5px;" /></th>
 			</tr>
 			<tr>
@@ -82,7 +85,7 @@
 			</tr>
 			<tr bgcolor="#FFFFFF" style="margin-right: 0px;">
 				<th><input readonly="true" type="text" value='时间' class="mui-btn mui-btn-block"></th>
-				<th><input type="datetime-local" value="2015-09-24T13:59:59" style="	border: 0px solid transparent;background-color: transparent;margin: 0px" /></th>
+				<th><input type="datetime-local" value="2017-07-20T13:59" style="border: 0px solid transparent;background-color: transparent;margin: 0px" name="errorTime" /></th>
 				<th><img src="ccc.png" style="width: 10px;height: 17px;padding-top: 6px;padding-right: 5px;" /></th>
 			</tr>
 			<tr>
@@ -92,7 +95,7 @@
 			</tr>
 			<tr bgcolor="#FFFFFF">
 				<th><input readonly="true" type="text" value='班次' class="mui-btn mui-btn-block"></th>
-				<th><input style="text-align: right;" readonly="true" type="text" name='OLESubClass5' value='请选择' id='showUserPicker5' class="mui-btn mui-btn-block"></th>
+				<th><input style="text-align: right;" readonly="true" type="text" name='workerClass' placeholder='请选择' id='showUserPicker5' class="mui-btn mui-btn-block"></th>
 				<th><img src="ccc.png" style="width: 10px;height: 17px;padding-top: 6px;padding-right: 5px;" /></th>
 			</tr>
 			<tr>
@@ -102,7 +105,7 @@
 			</tr>
 			<tr bgcolor="#FFFFFF">
 				<th><input readonly="true" type="text" value='班组' class="mui-btn mui-btn-block"></th>
-				<th><input style="text-align: right;" readonly="true" type="text" name='OLESubClass6' value='请选择' id='showUserPicker6' class="mui-btn mui-btn-block"></th>
+				<th><input style="text-align: right;" readonly="true" type="text" name='workerGroup' placeholder='请选择' id='showUserPicker6' class="mui-btn mui-btn-block"></th>
 				<th><img src="ccc.png" style="width: 10px;height: 17px;padding-top: 6px;padding-right: 5px;" /></th>
 			</tr>
 			<tr>
@@ -112,7 +115,7 @@
 			</tr>
 			<tr bgcolor="#FFFFFF">
 				<th><input readonly="true" type="text" value='问题类型' class="mui-btn mui-btn-block"></th>
-				<th><input style="text-align: right;" readonly="true" autocomplete="off" type="text" name='ErrorType' value='请选择' id='showUserPicker4' class="mui-btn mui-btn-block"></th>
+				<th><input style="text-align: right;" readonly="true" autocomplete="off" type="text" name='error_question_type' placeholder='请选择' id='showUserPicker4' class="mui-btn mui-btn-block"></th>
 				<th><img src="ccc.png" style="width: 10px;height: 17px;padding-top: 6px;padding-right: 5px;" /></th>
 			</tr>
 		</table>
@@ -121,20 +124,19 @@
 				<p></p>
 			</th>
 		</tr>
-		<textarea placeholder="问题简述" class="div mui-btn-block" name="ErrorContent" style="resize:none;background-color: #FFFFFF;" maxlength="50"></textarea>
+		<textarea placeholder="问题简述" class="div" name="errorContent"
+				  style="border: 1px solid rgba(0, 0, 0,0);border-radius: 0;resize:none;background-color: #FFFFFF;margin: 0;" maxlength="50"></textarea>
 		<script src="js/mui.min.js"></script>
 		<script src="js/mui.picker.js"></script>
 		<script src="js/mui.poppicker.js"></script>
 		<script src="js/city.data.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/city.data-3.js" type="text/javascript" charset="utf-8"></script>
 	</div>
-	<p></p>
 	<div style="text-align: center">
 		<input class="mui-btn mui-btn-block" type="submit" style="resize:none;text-align:center;width: 80%;" value="提交" onclick="window.Android.upload()" />
 	</div>
 </form>
-<p></p>
-<script>
+<script type="text/javascript">
 			//----------------------
 			(function($, doc) {
 				$.init();
@@ -430,6 +432,11 @@
 				document.getElementById("select").removeAttribute("size");
 				document.getElementById("select").blur();
 				this.setAttribute("selected", "");
+			}
+
+			function selectStu() {
+				document.getElementById('myForm').action = "ctl.jsp?op=select";
+				document.getElementById("myForm").submit();
 			}
 		</script>
 </body>

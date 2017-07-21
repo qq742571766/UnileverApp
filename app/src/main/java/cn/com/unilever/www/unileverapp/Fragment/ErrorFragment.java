@@ -2,6 +2,7 @@ package cn.com.unilever.www.unileverapp.Fragment;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -9,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +19,6 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
-
-import java.util.Objects;
 
 import cn.com.unilever.www.unileverapp.R;
 import cn.com.unilever.www.unileverapp.config.MyConfig;
@@ -88,7 +88,6 @@ public class ErrorFragment extends Fragment {
         webSettings.setBuiltInZoomControls(true);
         //设置客户端-不跳转到默认浏览器中
         webview.setWebViewClient(new WebViewClient());
-//        webview.setInitialScale(90);
         //加载网络资源
         webview.loadUrl(MyConfig.loginurl);
         //支持屏幕缩放
@@ -100,12 +99,14 @@ public class ErrorFragment extends Fragment {
         webview.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
+                Log.d("AAA", url);
                 Message msg = new Message();
                 msg.what = 1;
                 handler.sendMessage(msg);
                 super.onPageFinished(view, url);
-                if (!url.equals(MyConfig.loginurl)){
+                if (url.equals(ErrorFragment.url)||url.equals(ErrorFragment.staff_url)) {
                     textView.setVisibility(View.GONE);
+
                 }
             }
         });
