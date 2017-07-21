@@ -61,7 +61,7 @@ public class EMATAccomplish extends Fragment implements View.OnClickListener {
 
                 Toast.makeText(context, "上传完成，等待跳转", Toast.LENGTH_SHORT).show();
                 MyConfig.sourceStrArray = null;
-                MyConfig.sourceStrArray=new ArrayList<>();
+                MyConfig.sourceStrArray = new ArrayList<>();
                 MyConfig.ExcellentNumber = 0;
                 MyConfig.FineNumber = 0;
                 MyConfig.DadNumber = 0;
@@ -69,7 +69,7 @@ public class EMATAccomplish extends Fragment implements View.OnClickListener {
                 if (fragment == null) {
                     fragment = new AnswerFragment();
                 }
-                ((FunctionActivity)getActivity()).changFragment(fragment);
+                ((FunctionActivity) getActivity()).changFragment(fragment);
             }
         }
     };
@@ -156,7 +156,7 @@ public class EMATAccomplish extends Fragment implements View.OnClickListener {
     private void initdata() {
         OkHttpUtils
                 .post()
-                .url("http://192.168.10.21:8080/HiperMES/login.sp?method=appLogin&loginName=admin&password=admin")
+                .url(MyConfig.url + "/HiperMES/login.sp?method=appLogin&loginName=admin&password=admin")
                 .build()
                 .connTimeOut(30000)
                 .execute(new StringCallback() {

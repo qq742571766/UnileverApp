@@ -25,6 +25,7 @@ import org.json.JSONObject;
 import org.xutils.x;
 
 import cn.com.unilever.www.unileverapp.R;
+import cn.com.unilever.www.unileverapp.config.MyConfig;
 import okhttp3.Call;
 import okhttp3.Request;
 
@@ -132,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void Login(String username, String password) {
         OkHttpUtils
                 .post()
-                .url("http://192.168.10.25:8080/HiperMES/login.sp?method=appLogin&loginName=" + username + "&password=" + password)
+                .url(MyConfig.url + "/HiperMES/login.sp?method=appLogin&loginName=" + username + "&password=" + password)
                 .build()
                 .connTimeOut(10000)
                 .execute(new StringCallback() {
@@ -148,7 +149,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         progressDialog.setMessage("正在登陆中");
                         progressDialog.setCanceledOnTouchOutside(false);
                         progressDialog.show();
-                        Log.d("TAG", "登录成功");
                         super.onBefore(request, id);
                     }
 

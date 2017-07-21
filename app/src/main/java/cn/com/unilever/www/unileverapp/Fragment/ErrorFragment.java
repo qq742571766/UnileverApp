@@ -21,6 +21,7 @@ import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import cn.com.unilever.www.unileverapp.R;
+import cn.com.unilever.www.unileverapp.activity.FunctionActivity;
 import cn.com.unilever.www.unileverapp.config.MyConfig;
 import cn.com.unilever.www.unileverapp.utils.CameraAlbumUtil;
 
@@ -43,7 +44,7 @@ public class ErrorFragment extends Fragment {
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             if (msg.what == 1 && on_off) {
-                if (MyConfig.type.equals("SMAT") || MyConfig.type.equals("DAC") || MyConfig.type.equals("EMAT") || MyConfig.type.equals("TAG")) {
+                if (MyConfig.type.equals("EMAT") || MyConfig.type.equals("TAG")) {
                     webview.loadUrl(url);
                 }
                 if (MyConfig.type.equals("STAFFTAG")) {
@@ -89,7 +90,7 @@ public class ErrorFragment extends Fragment {
         //设置客户端-不跳转到默认浏览器中
         webview.setWebViewClient(new WebViewClient());
         //加载网络资源
-        webview.loadUrl(MyConfig.loginurl);
+        webview.loadUrl(url);
         //支持屏幕缩放
         webSettings.setSupportZoom(true);
         webSettings.setBuiltInZoomControls(false);
@@ -104,7 +105,7 @@ public class ErrorFragment extends Fragment {
                 msg.what = 1;
                 handler.sendMessage(msg);
                 super.onPageFinished(view, url);
-                if (url.equals(ErrorFragment.url)||url.equals(ErrorFragment.staff_url)) {
+                if (url.equals(ErrorFragment.url) || url.equals(ErrorFragment.staff_url)) {
                     textView.setVisibility(View.GONE);
 
                 }

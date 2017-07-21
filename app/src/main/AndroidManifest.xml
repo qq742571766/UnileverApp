@@ -30,15 +30,16 @@
                 android:resource="@xml/filepaths" />
         </provider>
 
-        <activity android:name=".activity.MainActivity" />
-        <activity
-            android:name=".activity.FunctionActivity"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustResize">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.FunctionActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustResize" />
+
     </application>
 </manifest>

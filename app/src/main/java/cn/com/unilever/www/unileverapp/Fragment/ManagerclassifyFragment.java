@@ -20,7 +20,8 @@ import cn.com.unilever.www.unileverapp.config.MyConfig;
  * @time 2017/7/14 10:10
  */
 class ManagerclassifyFragment extends Fragment implements View.OnClickListener {
-
+    private SMATFragment smat;
+    private DACFragment dac;
     private View view;
     private ErrorFragment errorFragment;
 
@@ -50,20 +51,32 @@ class ManagerclassifyFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.SMAT:
                 MyConfig.type = "SMAT";
+                if (smat == null) {
+                    smat = new SMATFragment();
+                }
+                ((FunctionActivity) getActivity()).changFragment(smat);
                 break;
             case R.id.DAC:
                 MyConfig.type = "DAC";
+                if (dac == null) {
+                    dac = new DACFragment();
+                }
+                ((FunctionActivity) getActivity()).changFragment(dac);
                 break;
             case R.id.EMAT:
                 MyConfig.type = "EMAT";
+                if (errorFragment == null) {
+                    errorFragment = new ErrorFragment();
+                }
+                ((FunctionActivity) getActivity()).changFragment(errorFragment);
                 break;
             case R.id.TAG:
                 MyConfig.type = "TAG";
+                if (errorFragment == null) {
+                    errorFragment = new ErrorFragment();
+                }
+                ((FunctionActivity) getActivity()).changFragment(errorFragment);
                 break;
         }
-        if (errorFragment == null) {
-            errorFragment = new ErrorFragment();
-        }
-        ((FunctionActivity) getActivity()).changFragment(errorFragment);
     }
 }

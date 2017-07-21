@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html language="cn">
+
+<head>
+	<script language="javascript">
+			function javaCallJs(s) {
+				document.getElementById("problem").innerText = s;
+			}
+		</script>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+	<link href="css/mui.picker.css" rel="stylesheet" />
+	<link href="css/mui.poppicker.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="css/mui.picker.min.css">
+	<style>
+			.mui-btn {
+				white-space: inherit;
+				font-size: 16px;
+			}
+
+			h5.mui-content-padded:first-child {
+				margin-top: 12px !important;
+			}
+
+			.ui-alert {
+				text-align: center;
+				padding: 20px;
+				font-size: 16px;
+			}
+
+			.div {
+				width: 100%;
+				margin-right: 8px;
+				margin-left: 8px;
+				overflow-y: visible;
+				overflow-x: visible;
+			}
+		</style>
+</head>
+
+<body>
+<p> </p>
+<form action="" method="get" style="text-align:center">
+	<span class="div mui-btn" width="70%" id="problem" style="border-radius:0;resize:none;height: 200%;width:80%;border: 1px solid rgba(0, 0, 0, 0);width: 100%;background: #FFFFFF;">问题</span>
+	<br />
+	<br />
+	<br />
+	<table width="100%">
+		<tr>
+			<th>
+				<input type="submit" id="error" value="有问题" onclick="window.Android.errors()" style="width: 100px;text-align: center;" />
+			</th>
+			<th>
+				<input type="submit" id="next" value="下一题" onclick="window.Android.next()" style="width: 100px;text-align: center;" />
+			</th>
+			<th>
+				<input type="submit" id="skip" value="跳过" onclick="window.Android.skip()" style="width: 100px;text-align: center;" />
+			</th>
+		</tr>
+	</table>
+</form>
+</body>
+
+</html>

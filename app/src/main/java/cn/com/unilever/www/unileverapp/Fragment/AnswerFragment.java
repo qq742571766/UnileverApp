@@ -1,6 +1,5 @@
 package cn.com.unilever.www.unileverapp.Fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -92,16 +91,11 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
         }
     };
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_answer, null, false);
-        Toolbar toolbar = (Toolbar)getActivity().findViewById(R.id.mToolbar);
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.mToolbar);
         toolbar.setTitle("问题发起");
         return view;
     }
@@ -109,7 +103,7 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
     private void initdata() {
         OkHttpUtils
                 .post()
-                .url("http://192.168.10.21:8080/HiperMES/ematAndroid.sp?method=toAndroid")
+                .url(MyConfig.url + "/HiperMES/ematAndroid.sp?method=toAndroid")
                 .build()
                 .connTimeOut(30000)
                 .execute(new StringCallback() {
@@ -139,7 +133,7 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
         //设置客户端-不跳转到默认浏览器中
         webView.setWebViewClient(new WebViewClient());
         //加载网络资源
-        webView.loadUrl("http://192.168.10.21:8080/HiperMES/login.sp?method=login");
+        webView.loadUrl(MyConfig.url+"/HiperMES/login.sp?method=login");
         //支持屏幕缩放
         webSettings.setSupportZoom(false);
         webSettings.setBuiltInZoomControls(true);
@@ -199,12 +193,6 @@ public class AnswerFragment extends Fragment implements View.OnClickListener {
                     Snackbar.make(webView, "输入工号", Snackbar.LENGTH_SHORT).show();
                 }
                 return super.shouldOverrideUrlLoading(view, url);
-            }
-
-            @Override
-            public void onPageFinished(WebView view, String url) {
-
-                super.onPageFinished(view, url);
             }
         });
         timer.schedule(task, 0, 100);

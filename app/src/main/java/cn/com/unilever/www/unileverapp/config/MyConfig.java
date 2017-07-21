@@ -23,7 +23,9 @@ public class MyConfig {
     //无
     public static int abbr = 0;
     //异常类型
-    public static String type;
+    public static String type = "TAG";
+    //url
+    public static String url = "http://192.168.10.21:8080";
     //登录url
     public static String loginurl = "http://192.168.10.21:8080/HiperMES/login.sp?method=appLogin&loginName=admin&password=admin";
 }
